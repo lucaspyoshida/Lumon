@@ -269,8 +269,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mouseup', handleDragEnd);
 
     cardContainer.addEventListener('touchstart', handleDragStart, { passive: false });
-    cardContainer.addEventListener('touchmove', handleDragMove, { passive: false });
-    cardContainer.addEventListener('touchend', handleDragEnd);
+    document.addEventListener('touchmove', handleDragMove, { passive: false });
+    document.addEventListener('touchend', handleDragEnd);
     
     navegarPara('menu-inicial');
 });
