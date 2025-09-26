@@ -1,0 +1,241 @@
+:root {
+    --cor-primaria: #4a90e2;
+    --cor-secundaria: #50e3c2;
+    --cor-fundo: #f9f9f9;
+    --cor-texto: #333;
+    --cor-branco: #fff;
+    --cor-acerto: #7ed321;
+    --cor-erro: #f5a623;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+    -webkit-tap-highlight-color: transparent; /* Remove o brilho do toque em mobile */
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-container {
+    width: 100%;
+    height: 100%;
+    max-width: 450px; /* Limita a largura em telas maiores */
+    overflow: hidden;
+    position: relative;
+    background-color: var(--cor-fundo);
+}
+
+.tela {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: fadeIn 0.5s ease;
+}
+
+.tela.ativa {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+h1, h2 {
+    color: var(--cor-primaria);
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2rem; }
+
+button, .btn-menu, .btn-modo, .btn-nivel {
+    background-color: var(--cor-primaria);
+    color: var(--cor-branco);
+    border: none;
+    border-radius: 15px;
+    padding: 20px 30px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: 10px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+.btn-menu:nth-child(3) { background-color: #f5a623; }
+.btn-menu:nth-child(4) { background-color: #d0021b; }
+
+.btn-voltar, .btn-voltar-menu-principal {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    color: var(--cor-primaria);
+    padding: 0;
+    width: auto;
+    box-shadow: none;
+    z-index: 10;
+}
+
+#niveis-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+/* Tela de Atividade */
+#tela-atividade {
+    justify-content: flex-start;
+}
+
+.info-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    font-size: 1.2rem;
+    color: #888;
+}
+
+#card-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    perspective: 1000px; /* Essencial para o efeito 3D */
+}
+
+#progresso {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    margin: 10px;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    color: #888;
+    padding: 0;
+    width: auto;
+    box-shadow: none;
+    z-index: 10;
+}
+
+#card {
+    width: 80vw;
+    height: 60vw;
+    max-width: 300px;
+    max-height: 225px;
+    position: relative;
+    transform-style: preserve-3d; /* Permite o efeito 3D */
+    transition: transform 0.6s;
+    cursor: grab;
+}
+
+#card.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden; /* Esconde o lado de trás do elemento */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cor-branco);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    touch-action: none;
+    /* ADICIONE ESTAS LINHAS PARA IMPEDIR A SELEÇÃO DE TEXTO */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE 10+ e Edge */
+    user-select: none;         /* Padrão */
+
+}
+
+.card-face-back {
+    transform: rotateY(180deg);
+    background-color: var(--cor-secundaria);
+}
+
+#card-text, #card-answer {
+    font-size: 5rem;
+    font-weight: bold;
+}
+#card-text { color: var(--cor-texto); }
+#card-answer { color: var(--cor-branco); }
+
+
+.feedback {
+    position: absolute;
+    /* Centraliza na tela de atividade */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 6rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 100; /* Garante que fique na frente de tudo */
+    pointer-events: none; /* Impede que ele capture eventos de clique/toque */
+}
+
+.instruction {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #aaa;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+}
+.instruction.visible {
+    opacity: 1;
+}
+
+#feedback-acerto { color: var(--cor-acerto); }
+#feedback-erro { color: var(--cor-erro); }
+
+/* Tela de Resumo */
+#tela-resumo p {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+#btn-recomecar { background-color: var(--cor-secundaria); }

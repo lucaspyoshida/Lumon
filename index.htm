@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Math Kids</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4a90e2"/>
+    <link rel="apple-touch-icon" href="/images/icon-192x192.png">
+</head>
+<body>
+
+    <div class="app-container">
+
+        <section id="menu-inicial" class="tela ativa">
+            <h1>Lumon</h1>
+            <button class="btn-menu" data-activity="numeros">Números</button>
+            <button class="btn-menu" data-activity="somas">Somas</button>
+            <button class="btn-menu" data-activity="subtracoes">Subtrações</button>
+        </section>
+
+        <section id="menu-modo" class="tela">
+            <button class="btn-voltar" data-target="menu-inicial">← Voltar</button>
+            <h2 id="modo-titulo"></h2>
+            <button class="btn-modo" data-mode="sequencial">Sequencial</button>
+            <button class="btn-modo" data-mode="aleatorio">Aleatório</button>
+        </section>
+
+        <section id="menu-nivel" class="tela">
+            <button class="btn-voltar" data-target="menu-modo">← Voltar</button>
+            <h2 id="nivel-titulo"></h2>
+            <div id="niveis-container"></div>
+        </section>
+
+        <section id="tela-atividade" class="tela">
+            <div class="info-bar">
+                <span id="progresso"></span>
+                <button class="btn-voltar-menu-principal" data-target="menu-inicial">Sair</button>
+            </div>
+            
+            <div id="card-container">
+                <div id="card">
+                    <div class="card-face card-face-front">
+                        <span id="card-text"></span>
+                    </div>
+                    <div class="card-face card-face-back">
+                        <span id="card-answer"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="feedback-acerto" class="feedback">👍</div>
+            <div id="feedback-erro" class="feedback">😢</div>
+
+            <div id="flip-instruction" class="instruction">Toque no cartão para ver a resposta</div>
+        </section>
+
+        <section id="tela-resumo" class="tela">
+            <h2>Fim de Jogo!</h2>
+            <p>Acertos: <span id="resumo-acertos">0</span></p>
+            <p>Erros: <span id="resumo-erros">0</span></p>
+            <button id="btn-recomecar">Recomeçar</button>
+            <button class="btn-voltar-menu-principal" data-target="menu-inicial">Voltar ao Menu</button>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
