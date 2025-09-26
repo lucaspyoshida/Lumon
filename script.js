@@ -203,14 +203,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleDragMove(e) {
         if (!isDragging) return;
-        
+    
+        // CORREÇÃO AQUI: Impede a ação padrão do navegador IMEDIATAMENTE.
+        // Isso é crucial para um controle de gestos confiável no celular.
+        e.preventDefault();
+    
         const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
         deltaX = currentX - startX;
-        
-        if (Math.abs(deltaX) > 15) { isClick = false; }
-
+    
+        if (Math.abs(deltaX) > 15) {
+            isClick = false;
+        }
+    
+        // A lógica para mover o card visualmente continua a mesma
         if (!isClick) {
-            e.preventDefault();
             const rotation = deltaX / 20;
             cardContainer.style.transform = `translateX(${deltaX}px) rotate(${rotation}deg)`;
         }
