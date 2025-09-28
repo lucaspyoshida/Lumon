@@ -64,6 +64,23 @@
             <button class="btn-voltar-menu-principal" data-target="menu-inicial">Voltar ao Menu</button>
         </section>
 
+        <section id="tela-intervalo-customizado" class="tela">
+            <button class="btn-voltar" data-target="menu-nivel">← Voltar</button>
+            <h2 id="intervalo-titulo">Intervalo Customizado</h2>
+            
+            <div class="slider-container">
+                <label for="slider-inicio">Início: <span id="slider-inicio-valor">1</span></label>
+                <input type="range" id="slider-inicio" min="1" max="100" value="1">
+            </div>
+
+            <div class="slider-container">
+                <label for="slider-fim">Fim: <span id="slider-fim-valor">10</span></label>
+                <input type="range" id="slider-fim" min="1" max="100" value="10">
+            </div>
+
+            <button id="btn-iniciar-customizado">Iniciar Jogo</button>
+        </section>
+
     </div>
 
     <script src="script.js"></script>
