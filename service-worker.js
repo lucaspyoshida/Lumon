@@ -1,10 +1,10 @@
 const CACHE_NAME = 'math-kids-v1';
 const urlsToCache = [
-    '/',
-    '/index.html',
-    '/style.css',
-    '/script.js',
-    '/manifest.json',
+    '/Lumon/',
+    '/Lumon/index.html',
+    '/Lumon/style.css',
+    '/Lumon/script.js',
+    '/Lumon/manifest.json',
     // Adicione aqui o caminho para suas imagens
     // Ex: '/images/acerto.png',
     // Ex: '/images/erro.png'
