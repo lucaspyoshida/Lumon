@@ -1,7 +1,7 @@
 const CACHE_NAME = 'math-kids-v1';
 const urlsToCache = [
     '',
-    'index.html',
+    'index.htm',
     'style.css',
     'script.js',
     'manifest.json',
