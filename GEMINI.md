@@ -1,11 +1,12 @@
 # Project Overview
 
-This project is a simple and interactive math game for kids called "Math Kids". It's a web-based application built with HTML, CSS, and JavaScript. The game is designed to be a Progressive Web App (PWA), meaning it can be installed on a mobile device and used offline.
+This project is a simple and interactive game for kids called "Lumon". It's a web-based application built with HTML, CSS, and JavaScript. The game is designed to be a Progressive Web App (PWA), meaning it can be installed on a mobile device and used offline.
 
-The game features three main activities:
+The game features four main activities:
 *   **Numbers:** Helps kids learn to recognize numbers.
 *   **Sums:** Practice addition skills.
 *   **Subtractions:** Practice subtraction skills.
+*   **Letters:** Helps kids learn to recognize letters.
 
 For each activity, the user can choose between two modes:
 *   **Sequential:** Questions are presented in a fixed order.

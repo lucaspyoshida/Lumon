@@ -15,16 +15,17 @@
 
         <section id="menu-inicial" class="tela ativa">
             <h1>Lumon</h1>
-            <button class="btn-menu" data-activity="numeros">Números</button>
-            <button class="btn-menu" data-activity="somas">Somas</button>
-            <button class="btn-menu" data-activity="subtracoes">Subtrações</button>
+            <button class="btn-menu btn-numeros" data-activity="numeros">Números</button>
+            <button class="btn-menu btn-somas" data-activity="somas">Somas</button>
+            <button class="btn-menu btn-subtracoes" data-activity="subtracoes">Subtrações</button>
+            <button class="btn-menu btn-letras" data-activity="letras">Letras</button>
         </section>
 
         <section id="menu-modo" class="tela">
             <button class="btn-voltar" data-target="menu-inicial">← Voltar</button>
             <h2 id="modo-titulo"></h2>
-            <button class="btn-modo" data-mode="sequencial">Sequencial</button>
-            <button class="btn-modo" data-mode="aleatorio">Aleatório</button>
+            <button class="btn-modo btn-sequencial" data-mode="sequencial">Sequencial</button>
+            <button class="btn-modo btn-aleatorio" data-mode="aleatorio">Aleatório</button>
         </section>
 
         <section id="menu-nivel" class="tela">
@@ -54,6 +55,33 @@
             <div id="feedback-erro" class="feedback">😢</div>
 
             <div id="flip-instruction" class="instruction">Toque no cartão para ver a resposta</div>
+        </section>
+
+        <section id="menu-letras" class="tela">
+            <button class="btn-voltar" data-target="menu-inicial">← Voltar</button>
+            <h2 id="letras-titulo">Letras</h2>
+            <button class="btn-letras-menu btn-vogais" data-level="vogais">Vogais</button>
+            <button class="btn-letras-menu btn-palavra" data-level="palavra">Palavra</button>
+            <button class="btn-letras-menu btn-intervalo" data-level="intervalo">Intervalo Customizado</button>
+        </section>
+
+        <section id="tela-palavra" class="tela">
+            <button class="btn-voltar" data-target="menu-letras">← Voltar</button>
+            <h2>Digite uma palavra</h2>
+            <input type="text" id="input-palavra" placeholder="Digite aqui">
+            <button id="btn-iniciar-palavra">Iniciar Jogo</button>
+        </section>
+
+        <section id="tela-intervalo-letras" class="tela">
+            <button class="btn-voltar" data-target="menu-letras">← Voltar</button>
+            <h2>Selecione o intervalo</h2>
+            <div class="letras-intervalo-container">
+                <label for="select-letra-inicio">De:</label>
+                <select id="select-letra-inicio"></select>
+                <label for="select-letra-fim">Até:</label>
+                <select id="select-letra-fim"></select>
+            </div>
+            <button id="btn-iniciar-intervalo-letras">Iniciar Jogo</button>
         </section>
 
         <section id="tela-resumo" class="tela">

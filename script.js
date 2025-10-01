@@ -36,6 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const sliderFimValor = document.getElementById('slider-fim-valor');
     const btnIniciarCustomizado = document.getElementById('btn-iniciar-customizado');
 
+    // Novos seletores para a tela de letras
+    const botoesLetrasMenu = document.querySelectorAll('.btn-letras-menu');
+    const btnIniciarPalavra = document.getElementById('btn-iniciar-palavra');
+    const inputPalavra = document.getElementById('input-palavra');
+    const btnIniciarIntervaloLetras = document.getElementById('btn-iniciar-intervalo-letras');
+    const selectLetraInicio = document.getElementById('select-letra-inicio');
+    const selectLetraFim = document.getElementById('select-letra-fim');
+
     // --- ESTADO DA APLICAÇÃO ---
     let estadoAtual = {
         atividade: null, modo: null, nivel: null,
@@ -49,7 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
             { id: 'ate30', label: 'Até 30', min: 1, max: 30 }
         ],
         somas: [ { id: 'mais1', label: 'Somar +1', op: 1 }, { id: 'mais2', label: 'Somar +2', op: 2 }, { id: 'mais3', label: 'Somar +3', op: 3 }, { id: 'aleatorio10', label: 'Aleatório até 10', op: 'aleatorio' }],
-        subtracoes: [ { id: 'menos1', label: 'Subtrair -1', op: 1 }, { id: 'menos2', label: 'Subtrair -2', op: 2 }, { id: 'menos3', label: 'Subtrair -3', op: 3 }, { id: 'aleatorio10', label: 'Aleatório até 10', op: 'aleatorio' }]
+        subtracoes: [ { id: 'menos1', label: 'Subtrair -1', op: 1 }, { id: 'menos2', label: 'Subtrair -2', op: 2 }, { id: 'menos3', label: 'Subtrair -3', op: 3 }, { id: 'aleatorio10', label: 'Aleatório até 10', op: 'aleatorio' }],
+        letras: [ { id: 'vogais', label: 'Vogais' }, { id: 'palavra', label: 'Palavra' }, { id: 'intervalo', label: 'Intervalo Customizado' }]
     };
 
     // --- PERSISTÊNCIA DE DADOS ---
@@ -104,6 +113,24 @@ document.addEventListener('DOMContentLoaded', () => {
                         questoes.push(`${a} - ${b}`);
                     }
                 } else { for (let i = nivel.op; i <= base + nivel.op; i++) { questoes.push(`${i} - ${nivel.op}`); } }
+                break;
+            case 'letras':
+                switch (nivel.id) {
+                    case 'vogais':
+                        questoes = ['A', 'E', 'I', 'O', 'U'];
+                        break;
+                    case 'palavra':
+                        const palavra = inputPalavra.value.toUpperCase();
+                        questoes = [...new Set(palavra.split(''))];
+                        break;
+                    case 'intervalo':
+                        const inicio = selectLetraInicio.value.charCodeAt(0);
+                        const fim = selectLetraFim.value.charCodeAt(0);
+                        for (let i = inicio; i <= fim; i++) {
+                            questoes.push(String.fromCharCode(i));
+                        }
+                        break;
+                }
                 break;
         }
 
@@ -165,52 +192,72 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- LÓGICA DE NAVEGAÇÃO E BOTÕES ---
     botoesMenu.forEach(btn => btn.addEventListener('click', () => {
         estadoAtual.atividade = btn.dataset.activity;
-        modoTitulo.textContent = btn.textContent;
+        if (estadoAtual.atividade === 'letras') {
+            navegarPara('menu-letras');
+        } else {
+            modoTitulo.textContent = btn.textContent;
+            navegarPara('menu-modo');
+        }
+    }));
+
+    botoesLetrasMenu.forEach(btn => btn.addEventListener('click', () => {
+        estadoAtual.nivel = niveis.letras.find(n => n.id === btn.dataset.level);
+        modoTitulo.textContent = 'Letras';
         navegarPara('menu-modo');
     }));
 
     botoesModo.forEach(btn => btn.addEventListener('click', () => {
         estadoAtual.modo = btn.dataset.mode;
-        nivelTitulo.textContent = modoTitulo.textContent;
-        niveisContainer.innerHTML = ''; // Limpa os botões anteriores
-
-        // Adiciona botão para o último jogo salvo, se aplicável
-        const lastSettings = loadLastUsedSettings();
-        if (lastSettings && lastSettings.atividade === estadoAtual.atividade && lastSettings.modo === estadoAtual.modo) {
-            const btnUltimoJogo = document.createElement('button');
-            btnUltimoJogo.className = 'btn-nivel';
-            btnUltimoJogo.textContent = `Último Jogo: ${lastSettings.nivel.label}`;
-            btnUltimoJogo.style.backgroundColor = 'var(--cor-secundaria)';
-            btnUltimoJogo.onclick = () => {
-                estadoAtual.nivel = lastSettings.nivel;
+        if (estadoAtual.atividade === 'letras') {
+            if (estadoAtual.nivel.id === 'palavra') {
+                navegarPara('tela-palavra');
+            } else if (estadoAtual.nivel.id === 'intervalo') {
+                popularIntervaloLetras();
+                navegarPara('tela-intervalo-letras');
+            } else {
                 iniciarSessao();
-            };
-            niveisContainer.appendChild(btnUltimoJogo);
+            }
+        } else {
+            nivelTitulo.textContent = modoTitulo.textContent;
+            niveisContainer.innerHTML = ''; // Limpa os botões anteriores
+
+            // Adiciona botão para o último jogo salvo, se aplicável
+            const lastSettings = loadLastUsedSettings();
+            if (lastSettings && lastSettings.atividade === estadoAtual.atividade && lastSettings.modo === estadoAtual.modo) {
+                const btnUltimoJogo = document.createElement('button');
+                btnUltimoJogo.className = 'btn-nivel';
+                btnUltimoJogo.textContent = `Último Jogo: ${lastSettings.nivel.label}`;
+                btnUltimoJogo.style.backgroundColor = 'var(--cor-secundaria)';
+                btnUltimoJogo.onclick = () => {
+                    estadoAtual.nivel = lastSettings.nivel;
+                    iniciarSessao();
+                };
+                niveisContainer.appendChild(btnUltimoJogo);
+            }
+
+            // Cria botões de nível padrão
+            niveis[estadoAtual.atividade].forEach(nivel => {
+                const btnNivel = document.createElement('button');
+                btnNivel.className = 'btn-nivel';
+                btnNivel.textContent = nivel.label;
+                btnNivel.onclick = () => {
+                    estadoAtual.nivel = nivel;
+                    iniciarSessao();
+                };
+                niveisContainer.appendChild(btnNivel);
+            });
+
+            // Adiciona botão para intervalo customizado se a atividade for "números"
+            if (estadoAtual.atividade === 'numeros') {
+                const btnCustom = document.createElement('button');
+                btnCustom.className = 'btn-nivel';
+                btnCustom.textContent = 'Intervalo Customizado';
+                btnCustom.style.backgroundColor = '#f5a623';
+                btnCustom.onclick = () => navegarPara('tela-intervalo-customizado');
+                niveisContainer.appendChild(btnCustom);
+            }
+            navegarPara('menu-nivel');
         }
-
-        // Cria botões de nível padrão
-        niveis[estadoAtual.atividade].forEach(nivel => {
-            const btnNivel = document.createElement('button');
-            btnNivel.className = 'btn-nivel';
-            btnNivel.textContent = nivel.label;
-            btnNivel.onclick = () => {
-                estadoAtual.nivel = nivel;
-                iniciarSessao();
-            };
-            niveisContainer.appendChild(btnNivel);
-        });
-
-        // Adiciona botão para intervalo customizado se a atividade for "números"
-        if (estadoAtual.atividade === 'numeros') {
-            const btnCustom = document.createElement('button');
-            btnCustom.className = 'btn-nivel';
-            btnCustom.textContent = 'Intervalo Customizado';
-            btnCustom.style.backgroundColor = '#f5a623';
-            btnCustom.onclick = () => navegarPara('tela-intervalo-customizado');
-            niveisContainer.appendChild(btnCustom);
-        }
-
-        navegarPara('menu-nivel');
     }));
 
     botoesVoltar.forEach(btn => btn.addEventListener('click', () => navegarPara(btn.dataset.target)));
@@ -260,6 +307,32 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         iniciarSessao();
     });
+
+    function popularIntervaloLetras() {
+        const alfabeto = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        selectLetraInicio.innerHTML = '';
+        selectLetraFim.innerHTML = '';
+        for (const letra of alfabeto) {
+            const optionInicio = document.createElement('option');
+            optionInicio.value = letra;
+            optionInicio.textContent = letra;
+            selectLetraInicio.appendChild(optionInicio);
+
+            const optionFim = document.createElement('option');
+            optionFim.value = letra;
+            optionFim.textContent = letra;
+            selectLetraFim.appendChild(optionFim);
+        }
+        selectLetraFim.value = 'Z';
+    }
+
+    btnIniciarPalavra.addEventListener('click', () => {
+        if (inputPalavra.value) {
+            iniciarSessao();
+        }
+    });
+
+    btnIniciarIntervaloLetras.addEventListener('click', iniciarSessao);
 
 
     // --- LÓGICA DE GESTOS (SWIPE E FLIP) ---

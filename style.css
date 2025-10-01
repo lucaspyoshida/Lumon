@@ -6,6 +6,21 @@
     --cor-branco: #fff;
     --cor-acerto: #7ed321;
     --cor-erro: #f5a623;
+
+    /* Nova paleta de cores */
+    --cor-numeros: #4a90e2;
+    --cor-somas: #50e3c2;
+    --cor-subtracoes: #f5a623;
+    --cor-letras: #d0021b;
+
+    /* Nova paleta de cores para o menu de letras */
+    --cor-vogais: #9b59b6;
+    --cor-palavra: #3498db;
+    --cor-intervalo: #e67e22;
+
+    /* Nova paleta de cores para o menu de modo */
+    --cor-sequencial: #2ecc71;
+    --cor-aleatorio: #e74c3c;
 }
 
 * {
@@ -90,8 +105,17 @@ button:active {
     transform: scale(0.95);
 }
 
-.btn-menu:nth-child(3) { background-color: #f5a623; }
-.btn-menu:nth-child(4) { background-color: #d0021b; }
+.btn-numeros { background-color: var(--cor-numeros); }
+.btn-somas { background-color: var(--cor-somas); }
+.btn-subtracoes { background-color: var(--cor-subtracoes); }
+.btn-letras { background-color: var(--cor-letras); }
+
+.btn-vogais { background-color: var(--cor-vogais); }
+.btn-palavra { background-color: var(--cor-palavra); }
+.btn-intervalo { background-color: var(--cor-intervalo); }
+
+.btn-sequencial { background-color: var(--cor-sequencial); }
+.btn-aleatorio { background-color: var(--cor-aleatorio); }
 
 .btn-voltar, .btn-voltar-menu-principal {
     position: absolute;
@@ -291,4 +315,34 @@ input[type=range]::-moz-range-thumb {
 #btn-iniciar-customizado {
     background-color: var(--cor-secundaria);
     margin-top: 20px;
+}
+
+/* Estilos para o menu de Letras */
+#input-palavra {
+    width: 90%;
+    padding: 15px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.letras-intervalo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.letras-intervalo-container label {
+    font-size: 1.2rem;
+    margin: 0 10px;
+}
+
+.letras-intervalo-container select {
+    padding: 10px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border: 2px solid #ddd;
 }
