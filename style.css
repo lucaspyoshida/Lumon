@@ -83,6 +83,13 @@ h1, h2 {
     text-align: center;
 }
 
+.imgresult {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #acacac;
+}
+
 h1 { font-size: 3rem; }
 h2 { font-size: 2rem; }
 
