@@ -84,7 +84,7 @@ h1, h2 {
 }
 
 .imgresult {
-    width: 75vw;
+    width: 100px;
     height: auto;
     border-radius: 20px;
     box-shadow: 0 0 10px #acacac;
