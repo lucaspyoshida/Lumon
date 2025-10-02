@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         questoes = ['A', 'E', 'I', 'O', 'U'];
                         break;
                     case 'palavra':
-                        const palavra = inputPalavra.value.toUpperCase();
+                        const palavra = inputPalavra.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
                         questoes = [...new Set(palavra.split(''))];
                         break;
                     case 'intervalo':
