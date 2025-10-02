@@ -50,6 +50,11 @@ document.addEventListener('DOMContentLoaded', () => {
         questoes: [], questaoAtual: 0, acertos: 0, erros: 0
     };
 
+
+    const palavras = ["LAIS", "LUCAS", "MARIANA", "SPIKE"];
+    const indice = Math.floor(Math.random() * palavras.length);
+    document.getElementById("titulo-principal").innerText = palavras[indice];
+
     const niveis = {
         numeros: [
             { id: 'ate10', label: 'Até 10', min: 1, max: 10 },
