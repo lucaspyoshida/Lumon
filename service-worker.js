@@ -1,4 +1,4 @@
-const CACHE_NAME = 'math-kids-v5';
+const CACHE_NAME = 'math-kids-v6';
 const urlsToCache = [
     '',
     'index.htm',
@@ -6,6 +6,8 @@ const urlsToCache = [
     'script.js',
     'manifest.json',
     'favicon.ico',
+    '/images/feliz.png',
+    '/images/triste.png'
     // Adicione aqui o caminho para suas imagens
     // Ex: '/images/acerto.png',
     // Ex: '/images/erro.png'
