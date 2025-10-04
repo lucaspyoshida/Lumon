@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const botoesVoltar = document.querySelectorAll('.btn-voltar');
     const botoesVoltarMenuPrincipal = document.querySelectorAll('.btn-voltar-menu-principal');
     const btnRecomecar = document.getElementById('btn-recomecar');
+    const btnTreinarErros = document.getElementById('btn-treinar-erros');
     const modoTitulo = document.getElementById('modo-titulo');
     const nivelTitulo = document.getElementById('nivel-titulo');
     const niveisContainer = document.getElementById('niveis-container');
@@ -47,7 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- ESTADO DA APLICAÇÃO ---
     let estadoAtual = {
         atividade: null, modo: null, nivel: null,
-        questoes: [], questaoAtual: 0, acertos: 0, erros: 0
+        questoes: [], questaoAtual: 0, acertos: 0, erros: 0,
+        errosQuestoes: []
     };
 
 
@@ -145,9 +147,20 @@ document.addEventListener('DOMContentLoaded', () => {
         estadoAtual.questoes = questoes.slice(0, 15); // Limita a 15 questões por sessão
     }
 
-    function iniciarSessao() {
-        saveLastUsedSettings();
-        gerarQuestoes();
+    function iniciarSessao(treinarErros = false) {
+        if (!treinarErros) {
+            saveLastUsedSettings();
+            gerarQuestoes();
+            estadoAtual.errosQuestoes = [];
+        } else {
+            estadoAtual.questoes = [...estadoAtual.errosQuestoes];
+            estadoAtual.errosQuestoes = [];
+            estadoAtual.modo = 'aleatorio'; // Força o modo aleatório para o treino
+            if (estadoAtual.questoes.length > 1) {
+                estadoAtual.questoes.sort(() => Math.random() - 0.5);
+            }
+        }
+
         estadoAtual.questaoAtual = 0;
         estadoAtual.acertos = 0;
         estadoAtual.erros = 0;
@@ -187,11 +200,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function finalizarSessao() {
         resumoAcertosSpan.textContent = estadoAtual.acertos;
         resumoErrosSpan.textContent = estadoAtual.erros;
+        if (estadoAtual.erros > 0) {
+            btnTreinarErros.style.display = 'block';
+        } else {
+            btnTreinarErros.style.display = 'none';
+        }
         navegarPara('tela-resumo');
     }
 
     function resetarEstado() {
-        estadoAtual = { atividade: null, modo: null, nivel: null, questoes: [], questaoAtual: 0, acertos: 0, erros: 0 };
+        estadoAtual = { atividade: null, modo: null, nivel: null, questoes: [], questaoAtual: 0, acertos: 0, erros: 0, errosQuestoes: [] };
     }
 
     // --- LÓGICA DE NAVEGAÇÃO E BOTÕES ---
@@ -271,16 +289,9 @@ document.addEventListener('DOMContentLoaded', () => {
         navegarPara(btn.dataset.target);
     }));
 
-    btnRecomecar.addEventListener('click', () => {
-        estadoAtual.questaoAtual = 0;
-        estadoAtual.acertos = 0;
-        estadoAtual.erros = 0;
-        if (estadoAtual.modo === 'aleatorio') {
-            estadoAtual.questoes.sort(() => Math.random() - 0.5);
-        }
-        mostrarQuestao();
-        navegarPara('tela-atividade');
-    });
+    btnRecomecar.addEventListener('click', () => iniciarSessao(false));
+
+    btnTreinarErros.addEventListener('click', () => iniciarSessao(true));
 
     // --- LÓGICA DA TELA DE INTERVALO CUSTOMIZADO ---
     sliderInicio.addEventListener('input', () => {
@@ -394,6 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
             feedbackAcerto.style.opacity = 1;
         } else {
             estadoAtual.erros++;
+            estadoAtual.errosQuestoes.push(estadoAtual.questoes[estadoAtual.questaoAtual]);
             feedbackErro.style.opacity = 1;
         }
         cardContainer.style.transform = `translateX(${moveX}) rotate(${rotate})`;

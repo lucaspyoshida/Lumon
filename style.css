@@ -273,6 +273,13 @@ button:active {
 }
 #btn-recomecar { background-color: var(--cor-secundaria); }
 
+#btn-treinar-erros {
+    background-color: var(--cor-erro);
+    padding: 22px 30px; /* Um pouco maior para mais destaque */
+    display: none; /* Começa escondido */
+    margin-bottom: 15px; /* Espaçamento extra */
+}
+
 /* Tela de Intervalo Customizado */
 .slider-container {
     width: 90%;
