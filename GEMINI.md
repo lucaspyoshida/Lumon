@@ -12,7 +12,7 @@ For each activity, the user can choose between two modes:
 *   **Sequential:** Questions are presented in a fixed order.
 *   **Random:** Questions are presented in a random order.
 
-The application has a clean and intuitive user interface, with a card-based design for presenting questions. Users can swipe right for a correct answer and left for an incorrect answer.
+The application has a clean and intuitive user interface, with a card-based design for presenting questions. Users can swipe right for a correct answer and left for an incorrect answer. At the end of each round, users can review their score and choose to practice the questions they got wrong.
 
 # Building and Running
 
@@ -25,3 +25,7 @@ The code is well-structured and easy to follow. Here are some of the development
 *   **CSS:** The project uses a BEM-like naming convention for CSS classes.
 *   **JavaScript:** The JavaScript code is organized into functions that handle specific tasks, such as navigation, question generation, and user input.
 *   **Service Worker:** The project uses a service worker to cache the application's assets and provide offline functionality.
+*   **PWA:** The application is a Progressive Web App, with a manifest file and a service worker.
+*   **User Experience:** The application provides a simple and intuitive user experience, with clear instructions and feedback.
+*   **Customization:** The game allows for customization, such as selecting a custom range of numbers or letters, or creating a custom word for the "Letters" activity.
+*   **Error Training:** Users can practice the questions they answered incorrectly, reinforcing their learning.

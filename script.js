@@ -131,10 +131,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         questoes = [...new Set(palavra.split(''))];
                         break;
                     case 'intervalo':
-                        const inicio = selectLetraInicio.value.charCodeAt(0);
-                        const fim = selectLetraFim.value.charCodeAt(0);
-                        for (let i = inicio; i <= fim; i++) {
-                            questoes.push(String.fromCharCode(i));
+                        if (nivel.min && nivel.max) {
+                            const inicio = nivel.min.charCodeAt(0);
+                            const fim = nivel.max.charCodeAt(0);
+                            for (let i = inicio; i <= fim; i++) {
+                                questoes.push(String.fromCharCode(i));
+                            }
                         }
                         break;
                 }
@@ -144,7 +146,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (modo === 'aleatorio') {
             questoes.sort(() => Math.random() - 0.5);
         }
-        estadoAtual.questoes = questoes.slice(0, 15); // Limita a 15 questões por sessão
+
+        if (estadoAtual.atividade === 'letras' && estadoAtual.nivel.id === 'intervalo') {
+            estadoAtual.questoes = questoes;
+        } else {
+            estadoAtual.questoes = questoes.slice(0, 15); // Limita a 15 questões por sessão
+        }
     }
 
     function iniciarSessao(treinarErros = false) {
@@ -348,7 +355,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    btnIniciarIntervaloLetras.addEventListener('click', iniciarSessao);
+    btnIniciarIntervaloLetras.addEventListener('click', () => {
+        const inicioVal = selectLetraInicio.value;
+        const fimVal = selectLetraFim.value;
+
+        if (inicioVal.charCodeAt(0) > fimVal.charCodeAt(0)) {
+            alert("A letra de início deve ser anterior ou igual à letra de fim.");
+            return;
+        }
+
+        estadoAtual.nivel = {
+            ...estadoAtual.nivel,
+            min: inicioVal,
+            max: fimVal,
+            label: `De ${inicioVal} a ${fimVal}`
+        };
+        iniciarSessao();
+    });
 
 
     // --- LÓGICA DE GESTOS (SWIPE E FLIP) ---
