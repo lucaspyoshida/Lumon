@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { ALL_SKILLS } from '../../src/config/levels.js';
+import { ALL_SKILLS, STAGES } from '../../src/config/levels.js';
 import { createProgress, recordSession } from '../../src/core/progression.js';
 import { createDefaultState, STORAGE_KEY } from '../../src/storage/repository.js';
 
@@ -59,6 +59,86 @@ async function answerVisibleOperation(page) {
   const right = Number(match[3]);
   const answer = match[2] === '+' ? left + right : left - right;
   await page.getByRole('button', { name: String(answer), exact: true }).click();
+}
+
+async function currentQuestion(page) {
+  return page.evaluate((key) => {
+    const session = JSON.parse(localStorage.getItem(key)).activeSession;
+    return session.questions[session.currentIndex];
+  }, STORAGE_KEY);
+}
+
+async function answerCurrentQuestionCorrectly(page) {
+  const question = await currentQuestion(page);
+  if (question.response.type === 'choice') {
+    const optionIndex = await page.locator('.answer-option').evaluateAll((options, answer) => (
+      options.findIndex((option) => JSON.stringify(JSON.parse(option.dataset.value)) === JSON.stringify(answer))
+    ), question.answer);
+    expect(optionIndex).toBeGreaterThanOrEqual(0);
+    await page.locator('.answer-option').nth(optionIndex).click();
+  } else if (question.response.type === 'numeric-input') {
+    await page.getByLabel('Sua resposta').fill(String(question.answer));
+    await page.getByRole('button', { name: 'Conferir', exact: true }).click();
+  } else if (question.response.type === 'ordering') {
+    for (let targetIndex = 0; targetIndex < question.answer.length; targetIndex += 1) {
+      let order = (await page.locator('.ordering-value').allTextContents()).map(Number);
+      let currentIndex = order.indexOf(question.answer[targetIndex]);
+      while (currentIndex > targetIndex) {
+        await page.getByRole('button', {
+          name: `Mover ${question.answer[targetIndex]} uma posição para antes`,
+        }).click();
+        currentIndex -= 1;
+        order = (await page.locator('.ordering-value').allTextContents()).map(Number);
+        expect(order[currentIndex]).toBe(question.answer[targetIndex]);
+      }
+    }
+    await page.getByRole('button', { name: 'Conferir ordem' }).click();
+  } else if (question.response.type === 'self-assessment') {
+    await page.getByRole('button', { name: 'Mostrar resposta' }).click();
+    await page.getByRole('button', { name: 'Acertei' }).click();
+  } else {
+    throw new Error(`Tipo de resposta sem cobertura E2E: ${question.response.type}`);
+  }
+  await expect(page.locator('#feedback')).toContainText('Muito bem');
+}
+
+async function expectResponsiveState(page) {
+  const metrics = await page.evaluate(() => {
+    const viewportWidth = document.documentElement.clientWidth;
+    const visible = (element) => {
+      const style = getComputedStyle(element);
+      const rect = element.getBoundingClientRect();
+      return style.visibility !== 'hidden' && style.display !== 'none' && rect.width > 0 && rect.height > 0;
+    };
+    const root = document.querySelector('dialog[open]') ?? document;
+    const controls = [...root.querySelectorAll('button, select, input:not([type="file"])')].filter(visible);
+    const touchTargets = controls.filter((element) => (
+      element.matches('button, select, input[type="text"]')
+    ));
+    return {
+      clientWidth: viewportWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+      clippedControls: controls
+        .filter((element) => {
+          const rect = element.getBoundingClientRect();
+          return rect.left < -1 || rect.right > viewportWidth + 1;
+        })
+        .map((element) => `${element.tagName}:${element.textContent.trim() || element.getAttribute('aria-label') || element.id}`),
+      smallTargets: touchTargets
+        .filter((element) => {
+          const rect = element.getBoundingClientRect();
+          return Math.round(rect.height) < 48 || Math.round(rect.width) < 48;
+        })
+        .map((element) => {
+          const rect = element.getBoundingClientRect();
+          const label = element.textContent.trim() || element.getAttribute('aria-label') || element.id;
+          return `${element.tagName}:${label}:${rect.width}x${rect.height}@${viewportWidth}`;
+        }),
+    };
+  });
+  expect(metrics.scrollWidth).toBeLessThanOrEqual(metrics.clientWidth + 1);
+  expect(metrics.clippedControls).toEqual([]);
+  expect(metrics.smallTargets).toEqual([]);
 }
 
 test('primeira utilização, erro, acerto, conclusão e revisão', async ({ page }) => {
@@ -124,6 +204,29 @@ test('uma sessão representativa de cada etapa funciona do início ao fim', asyn
   }
   const stored = JSON.parse(await page.evaluate((key) => localStorage.getItem(key), STORAGE_KEY));
   expect(stored.progress.completedSessions.filter((session) => session.completed)).toHaveLength(5);
+});
+
+test('todas as habilidades renderizam e aceitam resposta correta', async ({ page }) => {
+  test.setTimeout(60_000);
+  const runtime = watchRuntime(page);
+  await installUnlockedState(page);
+  await page.goto(APP_URL);
+
+  for (let stageIndex = 0; stageIndex < STAGES.length; stageIndex += 1) {
+    const stage = STAGES[stageIndex];
+    const card = page.locator('.stage-card').nth(stageIndex);
+    for (let skillIndex = 0; skillIndex < stage.skills.length; skillIndex += 1) {
+      const skills = card.locator('.skills');
+      if (await skills.isHidden()) await card.locator('.stage-summary').click();
+      await skills.locator('.skill-button').nth(skillIndex).click();
+      await expect(page.locator('#activity-title')).toHaveText(stage.skills[skillIndex].title);
+      await answerCurrentQuestionCorrectly(page);
+      await page.keyboard.press('Escape');
+      await expect(page.locator('#home-screen')).toBeVisible();
+    }
+  }
+
+  expect(runtime.errors).toEqual([]);
 });
 
 test('domínio libera avanço e habilidade bloqueada continua sem ação', async ({ page }) => {
@@ -192,6 +295,9 @@ test('primeira carga online, atualização segura e sessão offline', async ({ p
   await page.evaluate(async () => { await window.__lumonPwa.registration.update(); });
   await expect.poll(() => page.evaluate(async () => (await caches.keys()).includes('outro-app-cache'))).toBe(true);
   expect(await page.evaluate((key) => localStorage.getItem(key), STORAGE_KEY)).toBe(beforeUpdate);
+  await page.locator('#update-banner').evaluate((banner) => { banner.hidden = false; });
+  await page.getByRole('button', { name: 'Agora não' }).click();
+  await expect(page.locator('#update-banner')).toBeHidden();
 
   await context.setOffline(true);
   await page.reload();
@@ -202,8 +308,8 @@ test('primeira carga online, atualização segura e sessão offline', async ({ p
   await context.setOffline(false);
 });
 
-test('matriz visual não tem overflow horizontal nem alvos pequenos', async ({ page }, testInfo) => {
-  await installState(page, (state) => { state.preferences.sessionLength = 5; return state; });
+test('matriz visual cobre início, atividade, feedback, resultado e responsável', async ({ page }, testInfo) => {
+  await installUnlockedState(page);
   const viewports = [
     { width: 360, height: 640 },
     { width: 390, height: 844 },
@@ -215,19 +321,44 @@ test('matriz visual não tem overflow horizontal nem alvos pequenos', async ({ p
     await page.setViewportSize(viewport);
     await page.goto(APP_URL);
     await expect(page.locator('#home-screen')).toBeVisible();
-    const metrics = await page.evaluate(() => ({
-      clientWidth: document.documentElement.clientWidth,
-      scrollWidth: document.documentElement.scrollWidth,
-      smallTargets: [...document.querySelectorAll('button:not([hidden]), select:not([hidden])')]
-        .filter((element) => {
-          const rect = element.getBoundingClientRect();
-          return rect.width > 0 && rect.height > 0 && (rect.height < 48 || rect.width < 48);
-        })
-        .map((element) => `${element.tagName}:${element.textContent.trim()}`),
-    }));
-    expect(metrics.scrollWidth).toBeLessThanOrEqual(metrics.clientWidth + 1);
-    expect(metrics.smallTargets).toEqual([]);
-    const screenshot = await page.screenshot({ fullPage: true });
-    await testInfo.attach(`home-${viewport.width}x${viewport.height}`, { body: screenshot, contentType: 'image/png' });
+    await expectResponsiveState(page);
+    await testInfo.attach(`home-${viewport.width}x${viewport.height}`, {
+      body: await page.screenshot({ fullPage: true }), contentType: 'image/png',
+    });
+
+    await page.locator('#caregiver-button').click();
+    await expect(page.locator('#caregiver-dialog')).toBeVisible();
+    await expectResponsiveState(page);
+    await page.getByRole('button', { name: 'Fechar área do responsável' }).click();
+
+    await startFirstSkill(page);
+    await expectResponsiveState(page);
+    await testInfo.attach(`activity-${viewport.width}x${viewport.height}`, {
+      body: await page.screenshot({ fullPage: true }), contentType: 'image/png',
+    });
+    if (viewport.width === 844 && viewport.height === 390) {
+      const updateBannerWidth = await page.locator('#update-banner').evaluate((banner) => {
+        banner.hidden = false;
+        return banner.getBoundingClientRect().width;
+      });
+      expect(updateBannerWidth).toBeLessThanOrEqual(480.5);
+      await expectResponsiveState(page);
+      await testInfo.attach('update-banner-844x390', {
+        body: await page.screenshot({ fullPage: false }), contentType: 'image/png',
+      });
+      await page.getByRole('button', { name: 'Agora não' }).click();
+      await expect(page.locator('#update-banner')).toBeHidden();
+    }
+    for (let index = 0; index < 5; index += 1) {
+      await answerCurrentQuestionCorrectly(page);
+      await expectResponsiveState(page);
+      await page.locator('#next-question').click();
+    }
+    await expect(page.locator('#result-screen')).toBeVisible();
+    await expectResponsiveState(page);
+    await testInfo.attach(`result-${viewport.width}x${viewport.height}`, {
+      body: await page.screenshot({ fullPage: true }), contentType: 'image/png',
+    });
+    await page.locator('#result-home').click();
   }
 });

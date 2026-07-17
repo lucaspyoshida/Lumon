@@ -38,6 +38,7 @@
   .numeric-form { display: grid; }
   .numeric-form input, .numeric-form .button { width: 100%; }
   .update-banner { align-items: stretch; flex-direction: column; }
+  .update-banner .button-row > * { flex: 1; }
 }
 
 @media (max-height: 700px) and (orientation: landscape) {

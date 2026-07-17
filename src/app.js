@@ -32,7 +32,7 @@ const elements = Object.fromEntries([
   'caregiver-dialog', 'caregiver-progress', 'session-length', 'reduced-motion', 'high-contrast',
   'record-time', 'unlock-skill', 'unlock-button', 'export-button', 'import-file', 'import-status',
   'reset-button', 'reset-dialog', 'confirm-reset', 'cancel-reset', 'screen-announcer',
-  'update-banner', 'update-button',
+  'update-banner', 'dismiss-update', 'update-button',
 ].map((id) => [id, document.getElementById(id)]));
 
 let state = loadState();
@@ -657,6 +657,9 @@ document.addEventListener('keydown', (event) => {
 elements['update-button'].addEventListener('click', () => {
   updateRequested = true;
   activateWaitingWorker(lastRegistration);
+});
+elements['dismiss-update'].addEventListener('click', () => {
+  elements['update-banner'].hidden = true;
 });
 navigator.serviceWorker?.addEventListener('controllerchange', () => {
   if (updateRequested) location.reload();

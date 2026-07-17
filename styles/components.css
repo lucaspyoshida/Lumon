@@ -99,4 +99,6 @@ select { min-height: var(--touch-target); max-width: 100%; padding: .55rem .8rem
 .caregiver-progress { display: grid; gap: .5rem; }
 .progress-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .7rem; padding: .65rem 0; border-bottom: 1px solid #e5ebe7; }
 .file-button { cursor: pointer; }
-.update-banner { position: fixed; z-index: 20; right: 1rem; bottom: 1rem; left: 1rem; display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 1rem; border-radius: 18px; color: #fff; background: var(--color-primary-dark); box-shadow: var(--shadow-soft); }
+.update-banner { position: fixed; z-index: 20; right: 1rem; bottom: 1rem; width: min(calc(100% - 2rem), 480px); display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem; border-radius: 18px; color: #fff; background: var(--color-primary-dark); box-shadow: var(--shadow-soft); }
+.update-banner .button-row { flex-wrap: nowrap; }
+.update-banner .button-quiet { color: #fff; }
