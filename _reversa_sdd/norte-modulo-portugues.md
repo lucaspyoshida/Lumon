@@ -87,6 +87,7 @@ Referências públicas consultadas:
 | USR-007 | O planejamento será multiagente, com funções especializadas. | APROVADA |
 | USR-008 | Os agentes trabalharão um de cada vez, com rastreabilidade. | APROVADA |
 | USR-009 | Ainda não está autorizada a implementação. | APROVADA |
+| USR-010 | A faixa etária principal será de 4 a 8 anos, com entrada diagnóstica por habilidade e progressão não limitada pela idade. | APROVADA |
 
 ## 5. Proposta pedagógica para Português
 
@@ -695,7 +696,6 @@ Um agente nunca reescreve silenciosamente o relatório histórico de outro. Corr
 
 | ID | Decisão pendente | Recomendação atual |
 |---|---|---|
-| PEN-001 | Faixa etária operacional | Usar alfabetização infantil com entrada diagnóstica; proposta indicativa de 4 a 8 anos |
 | PEN-002 | Aprovação das cinco etapas | Aprovar a estrutura das seções 5 e 6 antes de detalhar habilidades |
 | PEN-003 | Percentuais por etapa | Começar configurável e validar com crianças; não tratar proposta como verdade pedagógica |
 | PEN-004 | Corpus de palavras e textos | Conteúdo próprio ou devidamente licenciado, com revisão pedagógica e linguística |
