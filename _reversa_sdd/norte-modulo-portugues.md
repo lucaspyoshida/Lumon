@@ -91,6 +91,8 @@ Referências públicas consultadas:
 | USR-011 | A trilha de Português será organizada nas cinco etapas pedagógicas descritas na seção 5. | APROVADA |
 | USR-012 | Os critérios iniciais de domínio seguirão os percentuais e salvaguardas da seção 6, serão configuráveis e deverão ser validados com crianças. | APROVADA |
 | USR-013 | Na primeira versão, perfis, sessões e progresso serão armazenados somente no dispositivo; a arquitetura deverá permitir um adaptador Firebase futuro sem ativar persistência online agora. | APROVADA |
+| USR-014 | O corpus padrão será próprio do Lumon, formado prioritariamente por palavras do cotidiano infantil e conteúdo original ou com licença documentada. | APROVADA |
+| USR-015 | Quando houver internet, o produto poderá oferecer sessões temporárias com palavras relacionadas a um tema escolhido, mantendo o corpus Lumon como padrão. | APROVADA |
 
 ## 5. Proposta pedagógica para Português
 
@@ -184,6 +186,33 @@ Atividades candidatas:
 - completar resumo;
 - responder sobre texto inédito;
 - digitar resposta curta com critérios adequados à alfabetização.
+
+### Corpus padrão e modo temático online
+
+O corpus padrão será próprio do Lumon, disponível offline e formado prioritariamente por palavras de uso cotidiano de crianças de 4 a 8 anos. Palavras, frases e textos deverão ter:
+
+- objetivo pedagógico e etapa identificados;
+- autoria própria, domínio público ou licença documentada;
+- revisão linguística e pedagógica;
+- ID e versão estáveis;
+- metadados de dificuldade, estrutura silábica, tema e possíveis ambiguidades;
+- áudio e imagem vinculados somente quando aprovados.
+
+Como alternativa opcional, quando houver internet, um responsável poderá informar um tema de interesse atual da criança. O sistema buscará ou produzirá candidatos de vocabulário relacionados ao tema para uso temporário em uma sessão.
+
+Diretrizes propostas para esse modo:
+
+- o corpus Lumon continua sendo o padrão e funciona sem rede;
+- enviar somente o tema informado, nunca identidade, idade exata, histórico ou desempenho da criança;
+- retornar apenas palavras e metadados mínimos, sem copiar textos, diálogos, imagens ou áudios de terceiros;
+- quando o tema envolver obra ou personagem protegido, preferir vocabulário cotidiano relacionado ao universo do tema, sem reproduzir conteúdo proprietário;
+- filtrar linguagem imprópria, publicidade, links, instruções e conteúdo adulto;
+- não exibir resultados brutos da internet no fluxo infantil;
+- manter o pacote temporário separado do corpus editorial aprovado;
+- permitir descarte ao final da sessão e não incluí-lo automaticamente no cache offline permanente;
+- falha de rede nunca bloqueia o corpus padrão.
+
+Ainda precisam ser decididos: aprovação prévia pelo responsável, fase de entrega, duração do pacote e impacto dessas palavras no cálculo de domínio.
 
 ## 6. Sessões, domínio e revisão
 
@@ -724,9 +753,11 @@ Um agente nunca reescreve silenciosamente o relatório histórico de outro. Corr
 
 | ID | Decisão pendente | Recomendação atual |
 |---|---|---|
-| PEN-004 | Corpus de palavras e textos | Conteúdo próprio ou devidamente licenciado, com revisão pedagógica e linguística |
 | PEN-005 | Variação regional da voz | Escolher por amostra cega de pronúncia pt-BR; permitir gravação humana |
 | PEN-006 | Validação de leitura oral | Não usar reconhecimento automático na V1; decidir se haverá validação opcional por responsável |
+| PEN-016 | Aprovação do modo temático | Responsável escolhe o tema e aprova a lista antes da criança usar |
+| PEN-017 | Fase do modo temático online | Implementar depois de o corpus padrão offline estar validado |
+| PEN-018 | Efeito no domínio | Registrar prática da habilidade, mas não usar conteúdo temporário sozinho para liberar avanço |
 
 ### Bloqueiam identidade e geração visual
 
