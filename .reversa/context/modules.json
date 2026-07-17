@@ -1,0 +1,209 @@
+{
+  "generated_at": "2026-07-17T02:12:00Z",
+  "status": "complete",
+  "modules": [
+    {
+      "name": "shell-navigation",
+      "path": "index.htm, script.js",
+      "purpose": "Controlar as telas e encaminhar as escolhas do menu até a atividade.",
+      "primary_files": ["index.htm", "script.js"],
+      "functions": [
+        {
+          "name": "navegarPara",
+          "file": "script.js",
+          "params": ["idTela: string"],
+          "returns": "void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "resetarEstado",
+          "file": "script.js",
+          "params": [],
+          "returns": "void",
+          "confidence": "confirmed"
+        }
+      ],
+      "entities": [
+        {
+          "name": "Tela",
+          "fields": [
+            {"name": "id", "type": "string", "required": true},
+            {"name": "ativa", "type": "boolean (classe CSS)", "required": true}
+          ],
+          "confidence": "confirmed"
+        }
+      ],
+      "business_rules": [
+        {
+          "description": "A navegação exibe uma única tela por vez por meio da classe ativa.",
+          "location": "script.js:89-92",
+          "confidence": "confirmed"
+        }
+      ],
+      "dependencies": ["training-session", "numbers-activity", "arithmetic-activities", "letters-activity"],
+      "algorithms": ["troca de tela por classe CSS", "geração dinâmica de botões de nível"],
+      "complexity": "medium"
+    },
+    {
+      "name": "training-session",
+      "path": "script.js",
+      "purpose": "Gerenciar fila de questões, progressão, contadores e retreino de erros.",
+      "primary_files": ["script.js", "index.htm"],
+      "functions": [
+        {"name": "iniciarSessao", "file": "script.js", "params": ["treinarErros: boolean = false"], "returns": "void", "confidence": "confirmed"},
+        {"name": "mostrarQuestao", "file": "script.js", "params": [], "returns": "void", "confidence": "confirmed"},
+        {"name": "finalizarSessao", "file": "script.js", "params": [], "returns": "void", "confidence": "confirmed"},
+        {"name": "resetarEstado", "file": "script.js", "params": [], "returns": "void", "confidence": "confirmed"}
+      ],
+      "entities": [
+        {
+          "name": "EstadoAtual",
+          "fields": [
+            {"name": "atividade", "type": "string|null", "required": true},
+            {"name": "modo", "type": "string|null", "required": true},
+            {"name": "nivel", "type": "object|null", "required": true},
+            {"name": "questoes", "type": "Array<number|string>", "required": true},
+            {"name": "questaoAtual", "type": "number", "required": true},
+            {"name": "acertos", "type": "number", "required": true},
+            {"name": "erros", "type": "number", "required": true},
+            {"name": "errosQuestoes", "type": "Array<number|string>", "required": true}
+          ],
+          "confidence": "confirmed"
+        }
+      ],
+      "business_rules": [
+        {"description": "Sessões comuns contêm no máximo 15 questões, exceto intervalo de letras.", "location": "script.js:150-154", "confidence": "confirmed"},
+        {"description": "Retreino usa somente questões erradas e força modo aleatório.", "location": "script.js:162-168", "confidence": "confirmed"}
+      ],
+      "dependencies": ["gestures-feedback", "local-persistence"],
+      "algorithms": ["controle de fila", "retreino de erros", "máquina de progressão da sessão"],
+      "complexity": "high"
+    },
+    {
+      "name": "numbers-activity",
+      "path": "script.js, index.htm",
+      "purpose": "Gerar sequências de reconhecimento numérico em níveis fixos ou intervalo customizado.",
+      "primary_files": ["script.js", "index.htm"],
+      "functions": [
+        {"name": "gerarQuestoes (ramo numeros)", "file": "script.js", "params": [], "returns": "void", "confidence": "confirmed"}
+      ],
+      "entities": [
+        {
+          "name": "NivelNumerico",
+          "fields": [
+            {"name": "id", "type": "string", "required": true},
+            {"name": "label", "type": "string", "required": true},
+            {"name": "min", "type": "number", "required": true},
+            {"name": "max", "type": "number", "required": true}
+          ],
+          "confidence": "confirmed"
+        }
+      ],
+      "business_rules": [
+        {"description": "O intervalo inclui os limites mínimo e máximo.", "location": "script.js:100-104", "confidence": "confirmed"},
+        {"description": "Sliders mantêm o limite inicial menor ou igual ao final.", "location": "script.js:303-320", "confidence": "confirmed"}
+      ],
+      "dependencies": ["training-session"],
+      "algorithms": ["geração inclusiva de intervalo", "sincronização de limites dos sliders"],
+      "complexity": "medium"
+    },
+    {
+      "name": "arithmetic-activities",
+      "path": "script.js, index.htm",
+      "purpose": "Gerar exercícios de soma e subtração e revelar respostas no cartão.",
+      "primary_files": ["script.js", "index.htm", "style.css"],
+      "functions": [
+        {"name": "gerarQuestoes (ramos somas/subtracoes)", "file": "script.js", "params": [], "returns": "void", "confidence": "confirmed"},
+        {"name": "mostrarQuestao", "file": "script.js", "params": [], "returns": "void", "confidence": "confirmed"}
+      ],
+      "entities": [
+        {"name": "NivelAritmetico", "fields": [{"name": "id", "type": "string", "required": true}, {"name": "label", "type": "string", "required": true}, {"name": "op", "type": "number|'aleatorio'", "required": true}], "confidence": "confirmed"}
+      ],
+      "business_rules": [
+        {"description": "Somas aleatórias têm resultado máximo 10.", "location": "script.js:107-112", "confidence": "confirmed"},
+        {"description": "Subtrações aleatórias nunca têm resultado negativo.", "location": "script.js:116-121", "confidence": "confirmed"}
+      ],
+      "dependencies": ["training-session", "gestures-feedback"],
+      "algorithms": ["geração aleatória limitada", "avaliação de expressão", "flip de cartão"],
+      "complexity": "high"
+    },
+    {
+      "name": "letters-activity",
+      "path": "script.js, index.htm",
+      "purpose": "Gerar treinos de vogais, letras únicas de uma palavra e intervalos A-Z.",
+      "primary_files": ["script.js", "index.htm"],
+      "functions": [
+        {"name": "gerarQuestoes (ramo letras)", "file": "script.js", "params": [], "returns": "void", "confidence": "confirmed"},
+        {"name": "popularIntervaloLetras", "file": "script.js", "params": [], "returns": "void", "confidence": "confirmed"}
+      ],
+      "entities": [
+        {"name": "NivelLetras", "fields": [{"name": "id", "type": "'vogais'|'palavra'|'intervalo'", "required": true}, {"name": "label", "type": "string", "required": true}, {"name": "min", "type": "string", "required": false}, {"name": "max", "type": "string", "required": false}], "confidence": "confirmed"}
+      ],
+      "business_rules": [
+        {"description": "Palavras são normalizadas, convertidas em maiúsculas e deduplicadas.", "location": "script.js:129-132", "confidence": "confirmed"},
+        {"description": "O início do intervalo deve ser anterior ou igual ao fim.", "location": "script.js:358-365", "confidence": "confirmed"}
+      ],
+      "dependencies": ["training-session"],
+      "algorithms": ["normalização Unicode", "deduplicação com Set", "geração por código de caractere"],
+      "complexity": "medium"
+    },
+    {
+      "name": "gestures-feedback",
+      "path": "script.js, style.css, index.htm",
+      "purpose": "Interpretar gestos, registrar autoavaliação e apresentar feedback visual.",
+      "primary_files": ["script.js", "style.css", "index.htm"],
+      "functions": [
+        {"name": "handleDragStart", "file": "script.js", "params": ["e: MouseEvent|TouchEvent"], "returns": "void", "confidence": "confirmed"},
+        {"name": "handleDragMove", "file": "script.js", "params": ["e: MouseEvent|TouchEvent"], "returns": "void", "confidence": "confirmed"},
+        {"name": "handleDragEnd", "file": "script.js", "params": [], "returns": "void", "confidence": "confirmed"},
+        {"name": "registrarResposta", "file": "script.js", "params": ["direcao: 'direita'|'esquerda'"], "returns": "void", "confidence": "confirmed"}
+      ],
+      "entities": [
+        {"name": "EstadoGesto", "fields": [{"name": "isDragging", "type": "boolean", "required": true}, {"name": "isClick", "type": "boolean", "required": true}, {"name": "startX", "type": "number", "required": true}, {"name": "deltaX", "type": "number", "required": true}], "confidence": "confirmed"}
+      ],
+      "business_rules": [
+        {"description": "Arraste acima de 100 px registra resposta; direita é acerto e esquerda é erro.", "location": "script.js:405-440", "confidence": "confirmed"},
+        {"description": "Movimento acima de 20 px deixa de ser tratado como clique.", "location": "script.js:391-402", "confidence": "confirmed"}
+      ],
+      "dependencies": ["training-session"],
+      "algorithms": ["classificação clique-arraste", "animação proporcional", "avanço temporizado"],
+      "complexity": "high"
+    },
+    {
+      "name": "local-persistence",
+      "path": "script.js",
+      "purpose": "Persistir a última configuração de jogo no navegador.",
+      "primary_files": ["script.js"],
+      "functions": [
+        {"name": "saveLastUsedSettings", "file": "script.js", "params": [], "returns": "void", "confidence": "confirmed"},
+        {"name": "loadLastUsedSettings", "file": "script.js", "params": [], "returns": "object|null", "confidence": "confirmed"}
+      ],
+      "entities": [
+        {"name": "UltimaConfiguracao", "fields": [{"name": "atividade", "type": "string", "required": true}, {"name": "modo", "type": "string", "required": true}, {"name": "nivel", "type": "object", "required": true}], "confidence": "confirmed"}
+      ],
+      "business_rules": [
+        {"description": "O atalho de último jogo só aparece para a mesma atividade e o mesmo modo.", "location": "script.js:254-266", "confidence": "confirmed"}
+      ],
+      "dependencies": ["training-session", "shell-navigation"],
+      "algorithms": ["serialização JSON", "seleção condicional da última configuração"],
+      "complexity": "low"
+    },
+    {
+      "name": "pwa-offline",
+      "path": "service-worker.js, manifest.json, script.js, index.htm",
+      "purpose": "Permitir instalação PWA e funcionamento offline por cache-first.",
+      "primary_files": ["service-worker.js", "manifest.json", "script.js", "index.htm"],
+      "functions": [],
+      "entities": [
+        {"name": "CachePWA", "fields": [{"name": "name", "type": "string", "required": true}, {"name": "urls", "type": "string[]", "required": true}], "confidence": "confirmed"}
+      ],
+      "business_rules": [
+        {"description": "Recursos em cache têm prioridade sobre a rede.", "location": "service-worker.js:28-39", "confidence": "confirmed"},
+        {"description": "Caches com nome diferente do atual são removidos na ativação.", "location": "service-worker.js:43-55", "confidence": "confirmed"}
+      ],
+      "dependencies": [],
+      "algorithms": ["pré-cache atômico", "cache-first", "limpeza por allowlist"],
+      "complexity": "medium"
+    }
+  ]
+}

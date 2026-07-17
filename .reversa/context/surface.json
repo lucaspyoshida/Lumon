@@ -1,0 +1,85 @@
+{
+  "generated_at": "2026-07-17T01:53:53Z",
+  "project_root": "/Users/yoshida/Documents/Codex/2026-07-16/quai/Lumon",
+  "languages": [
+    {
+      "name": "JavaScript",
+      "extensions": [".js"],
+      "file_count": 2
+    },
+    {
+      "name": "HTML",
+      "extensions": [".htm"],
+      "file_count": 1
+    },
+    {
+      "name": "CSS",
+      "extensions": [".css"],
+      "file_count": 1
+    }
+  ],
+  "primary_language": "JavaScript",
+  "frameworks": [
+    {
+      "name": "Vanilla JavaScript",
+      "version": "browser-native",
+      "source": "script.js"
+    },
+    {
+      "name": "Progressive Web App",
+      "version": "browser-native",
+      "source": "manifest.json, service-worker.js"
+    }
+  ],
+  "package_manager": "none",
+  "entry_points": [
+    {
+      "path": "index.htm",
+      "type": "app_entry"
+    },
+    {
+      "path": "script.js",
+      "type": "client_bootstrap"
+    },
+    {
+      "path": "service-worker.js",
+      "type": "service_worker"
+    }
+  ],
+  "config_files": [
+    "manifest.json",
+    ".gitattributes"
+  ],
+  "ci_cd": [],
+  "docker": {},
+  "database_hints": [],
+  "test_framework": "none",
+  "test_file_count": 0,
+  "modules": [
+    "shell-navigation",
+    "training-session",
+    "numbers-activity",
+    "arithmetic-activities",
+    "letters-activity",
+    "gestures-feedback",
+    "local-persistence",
+    "pwa-offline"
+  ],
+  "external_integrations": [],
+  "total_files": 12,
+  "organization_suggestion": {
+    "granularity": "feature",
+    "rationale": "O sistema é uma SPA estática sem módulos em pastas, rotas de endpoint ou BDD; as fronteiras mais claras são as funcionalidades extraídas do código.",
+    "signals": [],
+    "features": [
+      "shell-navigation",
+      "training-session",
+      "numbers-activity",
+      "arithmetic-activities",
+      "letters-activity",
+      "gestures-feedback",
+      "local-persistence",
+      "pwa-offline"
+    ]
+  }
+}
