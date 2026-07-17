@@ -95,6 +95,7 @@ Referências públicas consultadas:
 | USR-015 | Quando houver internet, o produto poderá oferecer sessões temporárias com palavras relacionadas a um tema escolhido, mantendo o corpus Lumon como padrão. | APROVADA |
 | USR-016 | O modo temático ficará na Área do Responsável e exigirá revisão e confirmação da lista antes de qualquer palavra ser apresentada à criança. | APROVADA |
 | USR-017 | O modo temático online será entregue em uma segunda fase; a primeira versão deverá usar contratos extensíveis que permitam adicioná-lo sem reescrever sessões, conteúdo ou interface. | APROVADA |
+| USR-018 | Sessões temáticas registrarão prática e dificuldades, mas não liberarão avanço sozinhas; domínio exige verificação com itens aprovados do corpus Lumon. | APROVADA |
 
 ## 5. Proposta pedagógica para Português
 
@@ -250,6 +251,15 @@ Fase e provisionamento arquitetural definidos:
 - um futuro provedor temático poderá ser conectado sem modificar progressão, renderizadores ou persistência principal;
 - a funcionalidade futura deverá entrar por configuração explícita e permanecer ausente/desativada até estar completa e testada;
 - não adicionar na primeira fase endpoints, chaves, SDK, chamadas de rede, botões inativos ou implementação parcial do provedor online.
+
+Efeito no progresso definido:
+
+- acertos, erros, abandono e habilidades praticadas em sessão temática podem alimentar o histórico local;
+- resultados temáticos podem recomendar revisão e identificar dificuldade;
+- nenhuma quantidade de sessões temáticas, isoladamente, marca uma habilidade como dominada;
+- depois de bom desempenho temático, o sistema oferece verificação com itens inéditos do corpus Lumon;
+- somente a verificação aprovada participa do desbloqueio automático;
+- o histórico identifica claramente a origem dos resultados para auditoria e futura calibração.
 
 ## 6. Sessões, domínio e revisão
 
@@ -792,7 +802,7 @@ Um agente nunca reescreve silenciosamente o relatório histórico de outro. Corr
 |---|---|---|
 | PEN-005 | Variação regional da voz | Escolher por amostra cega de pronúncia pt-BR; permitir gravação humana |
 | PEN-006 | Validação de leitura oral | Não usar reconhecimento automático na V1; decidir se haverá validação opcional por responsável |
-| PEN-018 | Efeito no domínio | Registrar prática da habilidade, mas não usar conteúdo temporário sozinho para liberar avanço |
+| PEN-019 | Duração do pacote temático | Descartar ao final da sessão por padrão, com opção adulta de reutilização temporária |
 
 ### Bloqueiam identidade e geração visual
 
