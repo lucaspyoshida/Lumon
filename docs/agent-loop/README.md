@@ -3,6 +3,7 @@
 ## Norte de novas evoluções
 
 - [Módulo de Português e operação multiagente](../../_reversa_sdd/norte-modulo-portugues.md) — planejamento; implementação ainda não autorizada
+- [Skills do fluxo de Português](portugues/skills.md) — skills locais criadas para a automação multiagente
 
 ## Avaliações do supervisor
 
