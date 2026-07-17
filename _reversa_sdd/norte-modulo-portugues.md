@@ -94,6 +94,7 @@ Referências públicas consultadas:
 | USR-014 | O corpus padrão será próprio do Lumon, formado prioritariamente por palavras do cotidiano infantil e conteúdo original ou com licença documentada. | APROVADA |
 | USR-015 | Quando houver internet, o produto poderá oferecer sessões temporárias com palavras relacionadas a um tema escolhido, mantendo o corpus Lumon como padrão. | APROVADA |
 | USR-016 | O modo temático ficará na Área do Responsável e exigirá revisão e confirmação da lista antes de qualquer palavra ser apresentada à criança. | APROVADA |
+| USR-017 | O modo temático online será entregue em uma segunda fase; a primeira versão deverá usar contratos extensíveis que permitam adicioná-lo sem reescrever sessões, conteúdo ou interface. | APROVADA |
 
 ## 5. Proposta pedagógica para Português
 
@@ -237,7 +238,18 @@ Regras adicionais:
 - se futuramente houver geração online de áudio, ela ocorrerá durante a preparação adulta, será ouvida pelo responsável e ficará pronta antes do início da sessão infantil;
 - permitir apagar o pacote imediatamente na Área do Responsável.
 
-Ainda precisam ser decididos: fase de entrega, duração do pacote e impacto dessas palavras no cálculo de domínio.
+Ainda precisam ser decididos: duração do pacote e impacto dessas palavras no cálculo de domínio.
+
+Fase e provisionamento arquitetural definidos:
+
+- a primeira versão entrega somente o corpus Lumon aprovado e offline;
+- a busca temática online será implementada em uma segunda fase;
+- conteúdo editorial e pacote temporário deverão obedecer ao mesmo contrato básico de item e sessão;
+- cada pacote declarará origem (`lumon` ou `tematico`), versão, tema, validade e estado de aprovação;
+- a montagem de sessões dependerá de uma fonte de conteúdo abstrata, não de arquivos ou API específicos;
+- um futuro provedor temático poderá ser conectado sem modificar progressão, renderizadores ou persistência principal;
+- a funcionalidade futura deverá entrar por configuração explícita e permanecer ausente/desativada até estar completa e testada;
+- não adicionar na primeira fase endpoints, chaves, SDK, chamadas de rede, botões inativos ou implementação parcial do provedor online.
 
 ## 6. Sessões, domínio e revisão
 
@@ -780,7 +792,6 @@ Um agente nunca reescreve silenciosamente o relatório histórico de outro. Corr
 |---|---|---|
 | PEN-005 | Variação regional da voz | Escolher por amostra cega de pronúncia pt-BR; permitir gravação humana |
 | PEN-006 | Validação de leitura oral | Não usar reconhecimento automático na V1; decidir se haverá validação opcional por responsável |
-| PEN-017 | Fase do modo temático online | Implementar depois de o corpus padrão offline estar validado |
 | PEN-018 | Efeito no domínio | Registrar prática da habilidade, mas não usar conteúdo temporário sozinho para liberar avanço |
 
 ### Bloqueiam identidade e geração visual
