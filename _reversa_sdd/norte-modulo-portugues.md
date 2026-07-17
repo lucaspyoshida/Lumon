@@ -1,6 +1,6 @@
 # Norte do Lumon — módulo de Português e operação multiagente
 
-> **Estado:** PLANEJAMENTO — IMPLEMENTAÇÃO NÃO AUTORIZADA  
+> **Estado:** PLANEJAMENTO CONSOLIDADO — IMPLEMENTAÇÃO NÃO AUTORIZADA
 > **Data-base:** 2026-07-17  
 > **Branch de trabalho:** `feature/evolucao-pedagogica`  
 > **Produto atual:** trilha de Matemática concluída e aprovada em `STATUS.md`  
@@ -20,7 +20,7 @@ Ordem de autoridade:
 
 Uma recomendação de agente não se torna requisito até ser aprovada pelo usuário ou registrada como decisão aprovada neste documento.
 
-Enquanto o estado acima permanecer **PLANEJAMENTO — IMPLEMENTAÇÃO NÃO AUTORIZADA**:
+Enquanto a implementação permanecer **NÃO AUTORIZADA**:
 
 - não alterar código, estilos, PWA, conteúdo ou assets do aplicativo;
 - não gerar imagens finais nem áudios finais;
@@ -99,6 +99,22 @@ Referências públicas consultadas:
 | USR-019 | Haverá uma voz principal pt-BR escolhida por teste auditivo cego, com revisão humana obrigatória e gravação humana quando o TTS não for didaticamente correto. | APROVADA |
 | USR-020 | Autonomia de uma criança pré-leitora é fundamento não negociável: o fluxo infantil não pode depender de leitura nem de ajuda operacional adulta. | APROVADA |
 | USR-021 | Leitura oral usará cartão de autoavaliação infantil com botões visuais; swipe será apenas atalho e a autoavaliação não comprovará domínio sozinha. | APROVADA |
+| USR-022 | A Capivara será a mascote única do Lumon, substituindo a coruja em toda a experiência. | APROVADA |
+| USR-023 | A mascote será chamada simplesmente de **Capivara**, sem nome próprio. | APROVADA |
+| USR-024 | O agente de design decidirá medalhão, paleta final, poses e escolhas visuais dentro dos critérios infantis, de consistência, acessibilidade e validação. | APROVADA |
+| USR-025 | Animações simples em CSS estão autorizadas para tornar a experiência mais atraente, desde que sejam leves, responsivas e respeitem redução de movimento. | APROVADA |
+| USR-026 | Responsividade é requisito universal: todas as telas, estados, atividades, assets e orientações devem funcionar nas dimensões exigidas. | APROVADA |
+| USR-027 | A primeira fatia vertical será uma atividade completa da Etapa 1 com palavra, imagem, som, áudio por toque, seleção, digitação, feedback da Capivara, revisão, persistência e offline. | APROVADA |
+| USR-028 | O supervisor controla o avanço entre gates, aprova, reprova, pede retrabalho ou encerra quando o objetivo estiver comprovadamente atingido; supervisor não altera o produto. | APROVADA |
+| USR-029 | Agentes usarão comunicação padronizada por estado, entrada, handoff, evidências, critérios de aceite e próximo agente autorizado. | APROVADA |
+| USR-030 | O orquestrador rodará a cada 10 minutos como fallback de despacho, com um agente ativo por vez e proteções contra duplicidade. | APROVADA |
+| USR-031 | O pacote de áudio da Etapa 1 será preparado na configuração inicial do responsável; etapas seguintes serão baixadas/preparadas antes do primeiro uso, sem baixar toda a biblioteca de uma vez. | APROVADA |
+| USR-032 | Pacotes temáticos futuros terão validade de 7 dias, poderão ser apagados antes ou renovados explicitamente pelo responsável por mais 7 dias. | APROVADA |
+| USR-033 | Skills especialistas serão criadas e validadas depois deste Norte consolidado e antes de qualquer implementação ou orquestração formal. | APROVADA |
+| USR-034 | A primeira versão terá somente um perfil/criança local; múltiplos perfis ficam adiados para a fase Firebase/sincronização. | APROVADA |
+| USR-035 | A Área do Responsável terá acesso por pressionar e segurar por 3 segundos; ações críticas exigem confirmação adulta separada. | APROVADA |
+| USR-036 | O redesign infantil com Capivara, cores, animações leves, responsividade e autonomia pré-leitora vale para todo o app, incluindo Matemática e Português. | APROVADA |
+| USR-037 | O áudio das atividades será reproduzido por clique/toque explícito em botão grande de ouvir; autoplay não será requisito nem dependência funcional. | APROVADA |
 
 ## 5. Proposta pedagógica para Português
 
@@ -242,7 +258,13 @@ Regras adicionais:
 - se futuramente houver geração online de áudio, ela ocorrerá durante a preparação adulta, será ouvida pelo responsável e ficará pronta antes do início da sessão infantil;
 - permitir apagar o pacote imediatamente na Área do Responsável.
 
-Ainda precisam ser decididos: duração do pacote e impacto dessas palavras no cálculo de domínio.
+Validade definida:
+
+- o pacote temático futuro vale por 7 dias;
+- o responsável pode apagá-lo antes do prazo;
+- o responsável pode renová-lo explicitamente por mais 7 dias;
+- sem renovação, o pacote é descartado automaticamente;
+- o descarte do pacote não apaga o histórico sintético de prática, dificuldades e origem dos resultados.
 
 Fase e provisionamento arquitetural definidos:
 
@@ -370,7 +392,21 @@ Política de voz aprovada:
 
 Não usar reconhecimento de fala como critério de domínio na primeira versão.
 
-### 7.3 Formato, cache e desempenho propostos
+### 7.3 Reprodução por toque explícito
+
+O aplicativo não dependerá de reprodução automática de áudio. Navegadores e PWAs podem bloquear autoplay sem gesto do usuário, especialmente em mobile; por isso, autoplay não é critério de aceite.
+
+Regra aprovada:
+
+- cada atividade que usa áudio terá um botão **Ouvir** grande, óbvio e repetível;
+- o primeiro gesto esperado da criança pode ser tocar em **Ouvir**;
+- a Capivara pode apontar, demonstrar ou animar discretamente esse gesto;
+- o botão deverá funcionar por toque, mouse e teclado;
+- nenhum requisito crítico depende de áudio tocar sozinho;
+- quando ouvir for a habilidade avaliada, a indisponibilidade do áudio deverá ser tratada como estado explícito, não como falha silenciosa;
+- redução de movimento substitui animação por indicação visual estática.
+
+### 7.4 Formato, cache e desempenho propostos
 
 - MP3 mono, 24 kHz, 32 kbps; 40 kbps somente se teste auditivo justificar;
 - gerar de uma fonte sem compressão e comprimir uma única vez;
@@ -379,9 +415,19 @@ Não usar reconhecimento de fala como critério de domínio na primeira versão.
 - carregar o item atual e, no máximo, o próximo;
 - cache de áudio separado do shell da PWA;
 - pacotes por etapa, baixados sob demanda;
+- pacote da Etapa 1 preparado na configuração inicial da Área do Responsável;
+- pacote de cada etapa seguinte baixado ou preparado antes do primeiro uso da etapa;
+- não baixar toda a biblioteca de áudio na primeira inicialização;
 - marcar pacote como offline somente depois de validar todos os arquivos;
 - alternativa textual ou visual quando o áudio não for essencial;
 - quando áudio for a habilidade avaliada, informar claramente a indisponibilidade do pacote em vez de fingir funcionamento completo.
+
+Decisões de implementação delegadas ao engenheiro:
+
+- uso exato de Cache Storage, IndexedDB auxiliar ou manifesto de arquivos;
+- hashes, validação atômica, recuperação de pacote corrompido e tratamento de quota;
+- formato final do manifesto de áudio;
+- estratégia de atualização de pacote sem quebrar sessão offline.
 
 Orçamentos propostos para a primeira versão:
 
@@ -444,10 +490,13 @@ Requisitos obrigatórios:
 
 Na primeira versão:
 
+- haverá somente um perfil/criança local;
 - perfis, sessões, domínio, revisão, preferências e progresso ficam somente no dispositivo;
 - não existe conta online, login, sincronização, banco remoto ou transmissão de progresso;
 - o aplicativo continua utilizável offline;
 - exportação e importação local podem oferecer portabilidade sem servidor.
+
+Múltiplos perfis ficam fora da primeira versão. Eles serão reavaliados somente na fase Firebase/sincronização, quando também existir uma decisão específica de produto, privacidade, consentimento e segurança.
 
 A camada de persistência deverá ser acessada por um contrato de repositório, sem regras pedagógicas acopladas a `localStorage`, IndexedDB ou qualquer fornecedor. A implementação inicial será local. Uma futura implementação Firebase poderá cumprir o mesmo contrato e adicionar sincronização após decisão específica de produto, privacidade, consentimento e segurança.
 
@@ -471,6 +520,8 @@ A interface atual atende requisitos técnicos importantes, mas tem aparência ad
 
 Essa lacuna passa a ser bloqueante para a expansão do produto.
 
+O redesign infantil é global. Ele vale para todo o app, incluindo Matemática, Português, tela inicial, troca de matéria, trilhas, sessões, feedback, telas de erro, estados vazios, conclusão, Área do Responsável e PWA. A criança não deve sentir que entrou em produtos diferentes ao alternar matérias.
+
 ### 9.2 Direção proposta
 
 - projetar primeiro para a criança que ainda não sabe ler;
@@ -488,7 +539,10 @@ Essa lacuna passa a ser bloqueante para a expansão do produto.
 - acerto com microcelebração curta;
 - erro com pista e nova tentativa, nunca punição;
 - conclusão com conquista e próximo passo;
-- área do responsável separada por acesso adulto e visual neutro.
+- área do responsável separada por acesso adulto e visual neutro;
+- animações simples em CSS podem ser usadas para orientar gesto, chamar atenção e celebrar, desde que leves, sem travamento e com alternativa por `prefers-reduced-motion`;
+- nenhuma animação pode ser indispensável para compreender a tarefa;
+- todos os elementos precisam ser responsivos por padrão, sem exceção por componente, estado ou matéria.
 
 Contrato de autonomia pré-leitora:
 
@@ -502,6 +556,15 @@ Contrato de autonomia pré-leitora:
 8. não exigir que um adulto leia instruções, valide cada resposta ou conduza a navegação;
 9. separar configurações e explicações adultas do ambiente infantil;
 10. em redução de movimento, substituir animação demonstrativa por sequência estática igualmente compreensível.
+
+Área do Responsável:
+
+- acesso por pressionar e segurar por 3 segundos em controle discreto;
+- sem conta, login ou PIN obrigatório na primeira versão;
+- a barreira evita entrada acidental da criança, mas não é mecanismo de segurança forte;
+- apagar progresso, gerenciar pacotes, preparar tema futuro, importar/exportar dados e ações equivalentes exigem confirmação adulta separada;
+- nenhuma ação destrutiva pode ser acionada por toque simples;
+- o visual dessa área pode ser mais neutro e informativo, sem perder consistência com a identidade do app.
 
 Matérias propostas:
 
@@ -531,6 +594,7 @@ Componentes candidatos:
 - WCAG AA, foco visível, teclado, nomes e estados acessíveis;
 - áudio nunca é o único canal, exceto quando ouvir for a habilidade explicitamente avaliada e houver tratamento equivalente de indisponibilidade;
 - redução de movimento respeitada;
+- animações CSS limitadas a funções de orientação, feedback ou encanto infantil;
 - interface responde visualmente ao toque em menos de 100 ms;
 - transições de até 250 ms;
 - shell inicial, sem áudio, com até 500 KB transferidos comprimidos;
@@ -545,7 +609,7 @@ Componentes candidatos:
 
 ### 10.1 Decisões e proposta
 
-Está aprovado focar desenhos de capivara. Está pendente confirmar se a capivara substituirá integralmente a coruja anterior como mascote única. A recomendação dos agentes é usar uma única mascote para evitar identidade fragmentada e inventário duplicado.
+Está aprovado que a Capivara será a mascote única do Lumon, substituindo a coruja anterior em todo o app. A mascote será chamada simplesmente de **Capivara**, sem nome próprio.
 
 Conceito proposto:
 
@@ -577,6 +641,8 @@ Estilo:
 | Português secundária | `#F27B62` |
 
 Os tons exatos da interface permanecem em CSS. Textura não pode alterar visualmente a identidade das cores essenciais da personagem.
+
+A paleta final, o uso do medalhão, acessórios e variações por matéria são decisões do agente de design/artista, validadas pelo supervisor contra contraste, consistência, atratividade infantil, responsividade e ausência de dependência exclusiva de cor. Essas escolhas não precisam voltar ao usuário salvo se mudarem a identidade central aprovada.
 
 ### 10.3 Contrato do asset visual
 
@@ -619,7 +685,7 @@ Orçamentos propostos:
 Gates do piloto:
 
 - P0a: model sheet com vistas, expressões e poses;
-- aprovação humana da personagem;
+- validação do design e aprovação do supervisor contra este Norte;
 - P0b: boas-vindas, ouvir, acerto, nova tentativa e conclusão;
 - validação de consistência, emoção, recortes, transparência e peso;
 - P0c: ícone PWA e marcador de trilha;
@@ -637,7 +703,7 @@ O processo usará um modelo híbrido:
 - o programador implementa;
 - o supervisor final testa e decide, sem alterar o produto.
 
-Skills candidatas, ainda não criadas:
+Skills aprovadas para criação e validação após este Norte consolidado, antes de qualquer implementação ou orquestração formal:
 
 | Agente | Skill | Responsabilidade estável |
 |---|---|---|
@@ -662,9 +728,50 @@ Uma skill deve conter apenas conhecimento e processo estáveis:
 
 Skills não devem simular personalidades nem armazenar conversas longas.
 
+A criação das skills não autoriza alteração do produto. Cada skill deverá ser validada como instrução de processo antes de ser usada por um agente formal.
+
 ## 12. Ordem de execução dos agentes
 
 Somente um agente poderá estar em execução por vez.
+
+Estados obrigatórios:
+
+- `PRONTO`;
+- `EM_EXECUCAO`;
+- `EM_REVISAO`;
+- `APROVADO`;
+- `RETRABALHO`;
+- `BLOQUEADO`;
+- `AGUARDA_USUARIO`;
+- `CONCLUIDO`.
+
+Cada ativação de agente deverá registrar:
+
+- agente e skill;
+- objetivo;
+- commit de entrada;
+- entradas consultadas;
+- escopo permitido;
+- entregáveis;
+- critérios de aceite;
+- proibições;
+- próximo gate.
+
+Cada handoff deverá registrar:
+
+- agente executor;
+- `run_id`;
+- commit de entrada e saída;
+- trabalho feito;
+- artefatos;
+- decisões aplicadas;
+- evidências;
+- testes;
+- falhas;
+- itens não testados;
+- pendências;
+- riscos;
+- recomendação de próximo agente.
 
 | Ordem | Agente | Entrada mínima | Saída obrigatória |
 |---:|---|---|---|
@@ -678,6 +785,21 @@ Somente um agente poderá estar em execução por vez.
 | 8 | Supervisor | produto e pareceres | veredito final baseado em evidências |
 
 O agente visual não roda enquanto currículo ou wireframe estiverem abertos. O programador não roda enquanto o planejamento estiver pendente. O supervisor não implementa correções.
+
+Primeira fatia vertical aprovada:
+
+- uma atividade completa da Etapa 1;
+- palavra, imagem e som;
+- áudio por toque explícito;
+- seleção;
+- digitação;
+- feedback da Capivara;
+- revisão de erro;
+- persistência local;
+- funcionamento offline;
+- evidências suficientes para o supervisor bloquear ou liberar o avanço.
+
+O supervisor deverá revisar entre gates e decidir avanço, retrabalho, bloqueio ou encerramento. Ele não altera o produto nem suaviza critério para manter cadência.
 
 ## 13. Rastreabilidade no Git e no GitHub
 
@@ -721,7 +843,29 @@ O orquestrador só chama o próximo agente quando:
 
 Falha de push impede o handoff. Trabalho local não publicado não pode ser tratado como entrada canônica do próximo agente.
 
-### 13.1 Registro de decisão
+### 13.1 Orquestração e antirrepetição
+
+Haverá um único orquestrador. Ele verificará o estado a cada 10 minutos como fallback de despacho. Esse intervalo é frequência de verificação, não limite de duração da tarefa.
+
+O próximo agente também poderá ser acionado imediatamente após handoff publicado quando o ambiente suportar isso, mas o tick de 10 minutos continuará existindo como recuperação.
+
+Proteções obrigatórias:
+
+- `max_concurrency=1`;
+- lock atômico global antes de qualquer spawn ou alteração de estado;
+- claim de estado `PRONTO -> EM_EXECUCAO` antes de chamar o agente;
+- `run_id` e chave de idempotência por execução;
+- heartbeat durante execução;
+- lease operacional de até 50 minutos;
+- lock com mais de 55 minutos só pode ser tratado como possivelmente órfão depois de checar ausência de processo ativo;
+- tick que encontra `EM_EXECUCAO` com heartbeat válido encerra sem spawn;
+- reinício procura handoff ou commit do mesmo `run_id` antes de repetir;
+- conflito remoto, falha de publicação do claim ou estado divergente interrompe o despacho;
+- em GitHub Actions, usar `concurrency` com `cancel-in-progress: false`.
+
+Ticks sem transição real não devem gerar commit, comentário ou ruído. Só artefato novo, transição de estado ou bloqueio relevante gera rastreabilidade.
+
+### 13.2 Registro de decisão
 
 Cada decisão deverá registrar:
 
@@ -739,7 +883,7 @@ Cada decisão deverá registrar:
 
 Não registrar raciocínio interno bruto. Registrar a justificativa auditável necessária para entender e revisar a decisão.
 
-### 13.2 Handoff obrigatório
+### 13.3 Handoff obrigatório
 
 ```text
 Agente:
@@ -855,44 +999,62 @@ Um agente nunca reescreve silenciosamente o relatório histórico de outro. Corr
 - Matemática mantém seeds, habilidades, sessões e resultados atuais;
 - Chromium obrigatório e outros engines registrados como testados ou não testados.
 
-## 16. Definições ainda pendentes
+## 16. Decisões resolvidas e perguntas futuras
 
-### Bloqueiam o contrato pedagógico
+Não há pendência essencial do usuário para consolidar este Norte. As pendências antigas foram resolvidas por decisão explícita do usuário ou por decisão de supervisor/especialista dentro do escopo aprovado.
 
-| ID | Decisão pendente | Recomendação atual |
-|---|---|---|
-| PEN-019 | Duração do pacote temático | Descartar ao final da sessão por padrão, com opção adulta de reutilização temporária |
+### 16.1 Pendências antigas resolvidas
 
-### Bloqueiam identidade e geração visual
+| ID anterior | Resolução |
+|---|---|
+| PEN-019 | Pacotes temáticos futuros valem 7 dias, podem ser apagados antes e renovados explicitamente por mais 7 dias. |
+| PEN-007 | A Capivara é a mascote única e substitui a coruja. |
+| PEN-008 | A mascote chama-se **Capivara**, sem nome próprio. |
+| PEN-009 | Medalhão, símbolo, acessórios e variações ficam sob responsabilidade do design/artista, com validação do supervisor. |
+| PEN-010 | Paleta final fica sob responsabilidade do design/artista, validada contra contraste, consistência e resposta infantil. |
+| PEN-011 | A primeira fatia vertical é uma atividade completa da Etapa 1 com palavra, imagem, som, áudio, seleção, digitação, feedback, revisão, persistência e offline. |
+| PEN-012 | Áudio será organizado por pacote de etapa; Etapa 1 preparada na configuração inicial e demais etapas antes do primeiro uso. |
+| PEN-013 | Cache, hashes, quota e recuperação de pacote são decisões do engenheiro dentro dos critérios deste Norte. |
+| PEN-014 | Skills serão criadas e validadas após este Norte consolidado e antes de qualquer implementação. |
+| PEN-015 | Git permanece fonte canônica; GitHub funciona como painel de coordenação por Issue central e links para relatórios. |
 
-| ID | Decisão pendente | Recomendação atual |
-|---|---|---|
-| PEN-007 | Mascote única | Substituir a coruja pela Capivara Lumon |
-| PEN-008 | Nome da capivara | Decidir depois de aprovar o model sheet |
-| PEN-009 | Símbolo do medalhão | Manter sem símbolo no primeiro model sheet |
-| PEN-010 | Paleta final | Validar a proposta em telas claras, escuras e com contraste |
+### 16.2 Decisões assumidas pelo supervisor
 
-### Bloqueiam arquitetura ou implementação
+| Tema | Decisão do supervisor |
+|---|---|
+| Perguntas ao usuário | Não perguntar detalhes operacionais óbvios. Voltar ao usuário somente se houver mudança de produto, privacidade, custo, risco, experiência central, escopo ou uso de dados/rede. |
+| Model sheet | Design/artista propõe; supervisor aprova contra este Norte; usuário pode revisar por exceção, mas a aprovação operacional é gate do fluxo. |
+| Teste com crianças | Supervisor define protocolo objetivo, incluindo pré-leitores, meta mínima de autonomia e registro de bloqueios. |
+| Responsividade | Universal e bloqueante em todo componente e estado, não apenas nas telas principais. |
+| Acessibilidade | Bloqueante para avanço; cor, som, gesto e movimento nunca podem ser o único canal. |
+| Tecnologia de áudio | Engenheiro decide implementação concreta, desde que preserve MP3 estático, offline real, pacote por etapa e ausência de TTS em runtime. |
+| Detalhes visuais | Frontend/design e artista decidem detalhes dentro dos critérios infantis; supervisor valida evidência. |
 
-| ID | Decisão pendente | Recomendação atual |
-|---|---|---|
-| PEN-011 | Escopo da primeira fatia vertical | Uma micro-habilidade da Etapa 1 com áudio, seleção, erro, revisão e persistência |
-| PEN-012 | Download offline de áudio | Pacote explícito por etapa, com tamanho e progresso para o responsável |
-| PEN-013 | Local dos pacotes | Cache Storage separado; avaliar persistência e quota no dispositivo |
-| PEN-014 | Criação das skills | Criar após aprovação deste Norte e antes da implementação |
-| PEN-015 | Organização no GitHub | Uma Issue central e relatórios canônicos no Git |
+### 16.3 Perguntas futuras condicionais
+
+Estas perguntas só devem voltar ao usuário se a execução propuser mudar a decisão atual:
+
+| Gatilho | Pergunta ao usuário |
+|---|---|
+| Implementação | Autoriza iniciar implementação do produto? |
+| Dados online | Autoriza transmitir algum dado da criança ou sincronizar progresso? |
+| Perfis | Quer antecipar múltiplos perfis antes do Firebase? |
+| Custo externo | Autoriza serviço pago, assinatura, API ou infraestrutura permanente? |
+| Rede em runtime | Autoriza dependência online crítica fora do modo temático futuro? |
+| Identidade | Quer trocar a Capivara, nome, tom infantil ou direção visual central? |
+| Áudio | Quer trocar áudio por toque por tentativa de autoplay ou reconhecimento de fala? |
+| Escopo | Quer adicionar matéria, fase, recurso ou público fora do definido aqui? |
 
 ## 17. Condição para prosseguir
 
-O próximo passo não é implementar. O próximo passo é revisar este Norte e decidir os itens pendentes prioritários.
+O próximo passo não é implementar. Com as decisões atuais, o Norte está consolidado para orientar a criação das skills e a primeira execução formal dos agentes.
 
-Após aprovação do usuário:
+Após publicação deste documento consolidado:
 
-1. registrar a aprovação e as correções neste documento;
-2. criar a estrutura rastreável do loop de Português;
-3. criar e validar as skills;
-4. executar o pedagogo como primeiro agente formal;
-5. percorrer os gates sem pular aprovações;
-6. solicitar autorização separada antes de qualquer implementação ou geração de assets finais.
+1. criar ou atualizar a estrutura rastreável do loop de Português;
+2. criar e validar as skills;
+3. executar o pedagogo como primeiro agente formal quando houver autorização operacional;
+4. percorrer os gates sem pular aprovações;
+5. solicitar autorização separada antes de qualquer implementação ou geração de assets finais.
 
 Nenhum agente pode interpretar a aprovação deste documento, por si só, como autorização para alterar o produto.
