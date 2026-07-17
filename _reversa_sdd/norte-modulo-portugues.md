@@ -93,6 +93,7 @@ Referências públicas consultadas:
 | USR-013 | Na primeira versão, perfis, sessões e progresso serão armazenados somente no dispositivo; a arquitetura deverá permitir um adaptador Firebase futuro sem ativar persistência online agora. | APROVADA |
 | USR-014 | O corpus padrão será próprio do Lumon, formado prioritariamente por palavras do cotidiano infantil e conteúdo original ou com licença documentada. | APROVADA |
 | USR-015 | Quando houver internet, o produto poderá oferecer sessões temporárias com palavras relacionadas a um tema escolhido, mantendo o corpus Lumon como padrão. | APROVADA |
+| USR-016 | O modo temático ficará na Área do Responsável e exigirá revisão e confirmação da lista antes de qualquer palavra ser apresentada à criança. | APROVADA |
 
 ## 5. Proposta pedagógica para Português
 
@@ -212,7 +213,31 @@ Diretrizes propostas para esse modo:
 - permitir descarte ao final da sessão e não incluí-lo automaticamente no cache offline permanente;
 - falha de rede nunca bloqueia o corpus padrão.
 
-Ainda precisam ser decididos: aprovação prévia pelo responsável, fase de entrega, duração do pacote e impacto dessas palavras no cálculo de domínio.
+Fluxo de aprovação definido:
+
+1. o responsável entra na Área do Responsável;
+2. escolhe **Criar sessão temática** e informa somente o tema;
+3. a interface explica que o tema será consultado online, mas nenhum dado da criança será enviado;
+4. o serviço retorna candidatos já normalizados, deduplicados, classificados por dificuldade e filtrados;
+5. o responsável vê uma prévia com palavra, significado infantil curto, etapa sugerida e disponibilidade de áudio;
+6. todas as palavras começam apenas como candidatas; o responsável pode remover, editar ou confirmar individualmente;
+7. alertas destacam palavra ambígua, nome próprio, marca, termo acima da dificuldade ou áudio ainda não revisado;
+8. **Criar sessão** só é habilitado depois da confirmação explícita da lista final;
+9. o pacote recebe identificação de temporário, tema, data e prazo de descarte;
+10. a criança vê somente a sessão aprovada, nunca resultados brutos, fontes, links ou tela de busca.
+
+Regras adicionais:
+
+- sugerir inicialmente de 12 a 20 palavras para evitar revisão longa;
+- selecionar automaticamente apenas palavras de baixo risco, sem dispensar confirmação humana;
+- exigir um mínimo de palavras adequadas à habilidade antes de criar a sessão;
+- bloquear palavrões, conteúdo adulto, violência gráfica, publicidade e instruções perigosas;
+- não usar imagens encontradas na internet;
+- palavras sem áudio aprovado só podem entrar em atividades que não dependam de ouvir;
+- se futuramente houver geração online de áudio, ela ocorrerá durante a preparação adulta, será ouvida pelo responsável e ficará pronta antes do início da sessão infantil;
+- permitir apagar o pacote imediatamente na Área do Responsável.
+
+Ainda precisam ser decididos: fase de entrega, duração do pacote e impacto dessas palavras no cálculo de domínio.
 
 ## 6. Sessões, domínio e revisão
 
@@ -755,7 +780,6 @@ Um agente nunca reescreve silenciosamente o relatório histórico de outro. Corr
 |---|---|---|
 | PEN-005 | Variação regional da voz | Escolher por amostra cega de pronúncia pt-BR; permitir gravação humana |
 | PEN-006 | Validação de leitura oral | Não usar reconhecimento automático na V1; decidir se haverá validação opcional por responsável |
-| PEN-016 | Aprovação do modo temático | Responsável escolhe o tema e aprova a lista antes da criança usar |
 | PEN-017 | Fase do modo temático online | Implementar depois de o corpus padrão offline estar validado |
 | PEN-018 | Efeito no domínio | Registrar prática da habilidade, mas não usar conteúdo temporário sozinho para liberar avanço |
 
