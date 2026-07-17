@@ -98,6 +98,7 @@ Referências públicas consultadas:
 | USR-018 | Sessões temáticas registrarão prática e dificuldades, mas não liberarão avanço sozinhas; domínio exige verificação com itens aprovados do corpus Lumon. | APROVADA |
 | USR-019 | Haverá uma voz principal pt-BR escolhida por teste auditivo cego, com revisão humana obrigatória e gravação humana quando o TTS não for didaticamente correto. | APROVADA |
 | USR-020 | Autonomia de uma criança pré-leitora é fundamento não negociável: o fluxo infantil não pode depender de leitura nem de ajuda operacional adulta. | APROVADA |
+| USR-021 | Leitura oral usará cartão de autoavaliação infantil com botões visuais; swipe será apenas atalho e a autoavaliação não comprovará domínio sozinha. | APROVADA |
 
 ## 5. Proposta pedagógica para Português
 
@@ -298,6 +299,34 @@ Salvaguardas comuns:
 - latência usada somente para detectar dificuldade ou fluência, nunca para punir.
 
 Os números são a configuração inicial do produto, não uma alegação de que sejam critérios oficiais do Kumon. Ajustes exigirão evidência de uso e nova decisão rastreável.
+
+### Leitura oral autônoma
+
+A primeira versão não usará reconhecimento automático de fala nem validação obrigatória do responsável.
+
+Fluxo aprovado:
+
+1. mostrar palavra ou frase em um cartão, com apoio visual quando pedagogicamente adequado;
+2. a capivara demonstra visualmente que é hora de falar;
+3. a criança tenta ler em voz alta;
+4. apresentar dois botões grandes, visuais e com rótulo falado ao tocar ou focar:
+   - **Li sozinho**, com símbolo positivo e cor verde;
+   - **Quero praticar**, com símbolo de repetir e cor âmbar;
+5. permitir swipe para direita ou esquerda somente como atalho equivalente;
+6. mostrar microcelebração da capivara em **Li sozinho**;
+7. mostrar incentivo e disponibilidade de ajuda em **Quero praticar**, sem tristeza, culpa, reprovação ou punição;
+8. liberar **Ouvir** depois da tentativa para a criança comparar a leitura;
+9. reapresentar itens marcados para prática em sessões futuras.
+
+Regras:
+
+- os botões permanecem visíveis e utilizáveis por toque e teclado;
+- cor nunca é o único diferenciador;
+- setas e animação demonstram o gesto na primeira ocorrência;
+- redução de movimento usa demonstração estática;
+- autoavaliação registra confiança e orienta revisão;
+- autoavaliação positiva isolada nunca marca domínio nem desbloqueia habilidade;
+- domínio continua exigindo atividades objetivas e itens de transferência do corpus Lumon.
 
 ## 7. Áudio verdadeiramente offline
 
@@ -832,7 +861,6 @@ Um agente nunca reescreve silenciosamente o relatório histórico de outro. Corr
 
 | ID | Decisão pendente | Recomendação atual |
 |---|---|---|
-| PEN-006 | Validação de leitura oral | Não exigir responsável nem reconhecimento automático; decidir o contrato do cartão de autoavaliação infantil |
 | PEN-019 | Duração do pacote temático | Descartar ao final da sessão por padrão, com opção adulta de reutilização temporária |
 
 ### Bloqueiam identidade e geração visual
