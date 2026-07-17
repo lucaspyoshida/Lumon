@@ -97,6 +97,7 @@ Referências públicas consultadas:
 | USR-017 | O modo temático online será entregue em uma segunda fase; a primeira versão deverá usar contratos extensíveis que permitam adicioná-lo sem reescrever sessões, conteúdo ou interface. | APROVADA |
 | USR-018 | Sessões temáticas registrarão prática e dificuldades, mas não liberarão avanço sozinhas; domínio exige verificação com itens aprovados do corpus Lumon. | APROVADA |
 | USR-019 | Haverá uma voz principal pt-BR escolhida por teste auditivo cego, com revisão humana obrigatória e gravação humana quando o TTS não for didaticamente correto. | APROVADA |
+| USR-020 | Autonomia de uma criança pré-leitora é fundamento não negociável: o fluxo infantil não pode depender de leitura nem de ajuda operacional adulta. | APROVADA |
 
 ## 5. Proposta pedagógica para Português
 
@@ -443,17 +444,35 @@ Essa lacuna passa a ser bloqueante para a expansão do produto.
 
 ### 9.2 Direção proposta
 
+- projetar primeiro para a criança que ainda não sabe ler;
 - uma ação principal inequívoca por tela;
 - tela inicial com próxima missão dominante;
 - trilha simples de cinco marcos, sem expor dezenas de habilidades simultaneamente;
 - atividade com uma tarefa por tela;
-- instrução curta e botão **Ouvir**;
+- instrução curta, falada e repetível pelo botão **Ouvir**;
+- imagem ou demonstração visual do que deve ser feito;
+- setas contextuais apontando a ação ou o destino, sem uso meramente decorativo;
+- capivara podendo demonstrar o gesto ou a ação esperada;
+- nenhuma instrução crítica apresentada somente como texto;
 - opções grandes e legíveis;
 - apoio visual somente quando tiver função pedagógica ou emocional clara;
 - acerto com microcelebração curta;
 - erro com pista e nova tentativa, nunca punição;
 - conclusão com conquista e próximo passo;
 - área do responsável separada por acesso adulto e visual neutro.
+
+Contrato de autonomia pré-leitora:
+
+1. ao entrar pela primeira vez em um tipo de atividade, apresentar demonstração curta com imagem, seta e fala;
+2. mostrar somente a ação necessária naquele momento;
+3. manter **Ouvir novamente** sempre disponível e fácil de reconhecer;
+4. usar a mesma imagem, posição e comportamento para ações equivalentes;
+5. oferecer botões visíveis mesmo quando houver swipe, arraste ou outro gesto;
+6. confirmar visualmente cada toque em até 100 ms;
+7. explicar erro por pista visual e nova demonstração, não por texto longo;
+8. não exigir que um adulto leia instruções, valide cada resposta ou conduza a navegação;
+9. separar configurações e explicações adultas do ambiente infantil;
+10. em redução de movimento, substituir animação demonstrativa por sequência estática igualmente compreensível.
 
 Matérias propostas:
 
@@ -489,7 +508,8 @@ Componentes candidatos:
 - nenhum asset visual individual embarcado acima de 150 KB;
 - validação em 360×640, 390×844, 768×1024, 1280×720 e paisagem relevante;
 - teste moderado com pelo menos cinco crianças do público;
-- meta inicial: ao menos 80% inicia a primeira missão, responde e encontra **Ouvir** sem instrução operacional adulta;
+- incluir crianças pré-leitoras no teste moderado;
+- meta inicial: ao menos 80% inicia a primeira missão, entende a ação, responde e encontra **Ouvir** sem instrução operacional adulta;
 - zero bloqueios críticos no teste infantil.
 
 ## 10. Identidade visual — Capivara Lumon
@@ -812,7 +832,7 @@ Um agente nunca reescreve silenciosamente o relatório histórico de outro. Corr
 
 | ID | Decisão pendente | Recomendação atual |
 |---|---|---|
-| PEN-006 | Validação de leitura oral | Não usar reconhecimento automático na V1; decidir se haverá validação opcional por responsável |
+| PEN-006 | Validação de leitura oral | Não exigir responsável nem reconhecimento automático; decidir o contrato do cartão de autoavaliação infantil |
 | PEN-019 | Duração do pacote temático | Descartar ao final da sessão por padrão, com opção adulta de reutilização temporária |
 
 ### Bloqueiam identidade e geração visual
