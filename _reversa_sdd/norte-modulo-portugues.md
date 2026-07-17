@@ -96,6 +96,7 @@ Referências públicas consultadas:
 | USR-016 | O modo temático ficará na Área do Responsável e exigirá revisão e confirmação da lista antes de qualquer palavra ser apresentada à criança. | APROVADA |
 | USR-017 | O modo temático online será entregue em uma segunda fase; a primeira versão deverá usar contratos extensíveis que permitam adicioná-lo sem reescrever sessões, conteúdo ou interface. | APROVADA |
 | USR-018 | Sessões temáticas registrarão prática e dificuldades, mas não liberarão avanço sozinhas; domínio exige verificação com itens aprovados do corpus Lumon. | APROVADA |
+| USR-019 | Haverá uma voz principal pt-BR escolhida por teste auditivo cego, com revisão humana obrigatória e gravação humana quando o TTS não for didaticamente correto. | APROVADA |
 
 ## 5. Proposta pedagógica para Português
 
@@ -325,6 +326,17 @@ Fluxo proposto:
 7. somente ativos aprovados podem entrar em pacote offline.
 
 Letras, fonemas, sílabas, dígrafos e casos como R, S, X, G/J, QU/GU, LH, NH e CH exigem revisão humana. Quando o TTS não for didaticamente correto, usar gravação humana.
+
+Política de voz aprovada:
+
+- selecionar uma única voz principal pt-BR por comparação cega;
+- avaliar clareza, naturalidade, acolhimento, ritmo e inteligibilidade para crianças de 4 a 8 anos;
+- não escolher fornecedor ou voz apenas pelo menor custo;
+- usar o mesmo perfil de voz e parâmetros em todo o lote para evitar variação de identidade;
+- exigir revisão humana antes de publicar qualquer ativo;
+- registrar provedor, voz, parâmetros, texto, versão, revisor e estado de aprovação;
+- substituir por gravação humana letras, fonemas, sílabas ou palavras cuja pronúncia sintética não seja pedagogicamente adequada;
+- nova voz principal exige decisão registrada e nova validação de regressão auditiva.
 
 Não usar reconhecimento de fala como critério de domínio na primeira versão.
 
@@ -800,7 +812,6 @@ Um agente nunca reescreve silenciosamente o relatório histórico de outro. Corr
 
 | ID | Decisão pendente | Recomendação atual |
 |---|---|---|
-| PEN-005 | Variação regional da voz | Escolher por amostra cega de pronúncia pt-BR; permitir gravação humana |
 | PEN-006 | Validação de leitura oral | Não usar reconhecimento automático na V1; decidir se haverá validação opcional por responsável |
 | PEN-019 | Duração do pacote temático | Descartar ao final da sessão por padrão, com opção adulta de reutilização temporária |
 
