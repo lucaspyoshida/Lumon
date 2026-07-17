@@ -1,5 +1,9 @@
 # Agent loop do Lumon
 
+## Norte de novas evoluções
+
+- [Módulo de Português e operação multiagente](../../_reversa_sdd/norte-modulo-portugues.md) — planejamento; implementação ainda não autorizada
+
 ## Avaliações do supervisor
 
 - [2026-07-17 00:00 — REPROVADO](supervisor/2026-07-17/0000.md)

@@ -1,5 +1,7 @@
 # Plano de evolução do Lumon
 
+> A expansão para Português e o processo multiagente são regidos por [`norte-modulo-portugues.md`](norte-modulo-portugues.md). Esse Norte permanece em planejamento e não autoriza implementação até decisão explícita do usuário.
+
 ## 1. Objetivo
 
 Evoluir o Lumon de um aplicativo de cartões com números, operações e letras para uma plataforma infantil de prática matemática progressiva, inspirada em princípios gerais de aprendizagem gradual:
