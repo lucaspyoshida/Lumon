@@ -1,0 +1,54 @@
+.hero { max-width: 720px; padding: clamp(1.2rem, 5vw, 3rem) 0 1.5rem; }
+.hero h1 { margin-bottom: .7rem; }
+.hero > p:last-child { max-width: 62ch; color: var(--color-muted); font-size: 1.1rem; }
+.home-actions { display: flex; flex-wrap: wrap; gap: .8rem 1rem; align-items: center; margin: 1.2rem 0; }
+.home-actions p { margin: 0; color: var(--color-muted); font-size: .9rem; }
+.trail { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.trail .stage-card:first-child { grid-column: 1 / -1; }
+.activity-screen { padding-bottom: 2rem; }
+.activity-topbar { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.session-progress { margin: 0; font-weight: 850; }
+.activity-heading { max-width: 720px; margin: 1.3rem auto 0; text-align: center; }
+.activity-heading h1 { margin-bottom: .45rem; font-size: clamp(1.8rem, 6vw, 2.8rem); }
+.activity-heading p:last-child { margin-bottom: 0; color: var(--color-muted); }
+.result-screen { max-width: 680px; margin: 0 auto; padding: clamp(2rem, 8vw, 5rem) 0; text-align: center; }
+.celebration { width: 84px; height: 84px; display: grid; place-items: center; margin: 0 auto 1rem; border-radius: 28px; color: #5b3500; background: var(--color-accent); font-size: 2.5rem; transform: rotate(-4deg); }
+.result-score { font: 900 clamp(2rem, 8vw, 3.5rem) var(--font-display); color: var(--color-primary); }
+.recommendation { margin: 1.5rem 0; text-align: left; }
+.result-actions { display: grid; gap: .75rem; }
+
+@media (max-width: 760px) {
+  .trail { grid-template-columns: 1fr; }
+  .trail .stage-card:first-child { grid-column: auto; }
+  .stage-summary { grid-template-columns: 44px 1fr; }
+  .stage-status { grid-column: 2; }
+  .continue-card { align-items: stretch; flex-direction: column; }
+}
+
+@media (max-width: 480px) {
+  .app-shell { padding-inline: .75rem; }
+  .app-header { min-height: 66px; }
+  .app-header .button { max-width: 48%; padding-inline: .55rem; font-size: .82rem; }
+  .stage-summary { padding: .85rem; gap: .7rem; }
+  .stage-summary p { font-size: .86rem; }
+  .skills { padding-inline: .7rem; }
+  .choice-grid { grid-template-columns: 1fr; }
+  .exercise-card { padding: 1rem; border-radius: 22px; }
+  .prompt { min-height: 120px; }
+  .numeric-form { display: grid; }
+  .numeric-form input, .numeric-form .button { width: 100%; }
+  .update-banner { align-items: stretch; flex-direction: column; }
+}
+
+@media (max-height: 700px) and (orientation: landscape) {
+  .app-header { min-height: 58px; }
+  .hero { padding-block: .7rem; }
+  .activity-topbar { min-height: 52px; }
+  .activity-heading { margin-top: .6rem; }
+  .activity-heading p { margin-bottom: .3rem; }
+  .exercise-card { margin-top: .65rem; padding: 1rem 1.4rem; }
+  .prompt { min-height: 90px; }
+  .prompt-number { font-size: 4rem; }
+  .prompt-expression { font-size: 3rem; }
+  .response-area { margin-top: .7rem; }
+}

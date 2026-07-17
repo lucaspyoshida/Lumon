@@ -1,0 +1,17 @@
+:focus-visible { outline: 4px solid #f0a800; outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after {
+  scroll-behavior: auto !important;
+  animation-duration: .01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: .01ms !important;
+}
+
+@media (forced-colors: active) {
+  .brand-mark, .stage-number, .skill-state.mastered, .button-primary, .button-danger { forced-color-adjust: none; border: 2px solid ButtonText; }
+  .dot { background: CanvasText; }
+}

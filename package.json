@@ -1,0 +1,21 @@
+{
+  "name": "lumon",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Trilha matemática infantil progressiva, local e offline.",
+  "scripts": {
+    "lint": "node scripts/lint.mjs",
+    "test": "node --test tests/unit/*.test.js tests/integration/*.test.js",
+    "build": "node scripts/build.mjs",
+    "check": "npm run lint && npm test && npm run build",
+    "test:e2e": "playwright test",
+    "test:e2e:chromium": "playwright test --project=chromium"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1"
+  }
+}

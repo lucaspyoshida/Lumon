@@ -1,0 +1,40 @@
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html { min-width: 320px; background: var(--color-canvas); scroll-behavior: smooth; }
+
+body {
+  min-width: 320px;
+  min-height: 100dvh;
+  margin: 0;
+  color: var(--color-ink);
+  background:
+    radial-gradient(circle at 8% 4%, rgb(240 180 90 / 18%), transparent 24rem),
+    var(--color-canvas);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+button, input, select { color: inherit; font: inherit; }
+button, label[for], select { touch-action: manipulation; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .58; }
+
+h1, h2, h3, p { margin-top: 0; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.12; }
+h1 { font-size: clamp(2rem, 7vw, 3.5rem); }
+h2 { font-size: clamp(1.35rem, 4vw, 2rem); }
+
+.app-shell { width: min(100%, var(--content-max)); margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2.5rem) 3rem; }
+.app-header { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.brand { min-height: var(--touch-target); display: inline-flex; align-items: center; gap: .65rem; border: 0; background: transparent; font: 800 1.25rem var(--font-display); }
+.brand-mark { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 13px; color: #fff; background: var(--color-primary); }
+.screen[hidden] { display: none !important; }
+.screen.active { animation: screen-in 180ms ease-out; }
+.eyebrow { margin-bottom: .4rem; color: var(--color-primary); font-size: .78rem; font-weight: 850; letter-spacing: .09em; text-transform: uppercase; }
+.skip-link { position: fixed; z-index: 100; top: .5rem; left: .5rem; padding: .75rem 1rem; transform: translateY(-160%); border-radius: 8px; color: #fff; background: var(--color-primary-dark); }
+.skip-link:focus { transform: none; }
+.visually-hidden { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important; }
+
+@keyframes screen-in { from { opacity: 0; transform: translateY(6px); } }

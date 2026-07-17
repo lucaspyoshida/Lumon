@@ -1,117 +1,159 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!doctype html>
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Lumon</title>
-    <link rel="stylesheet" href="style.css">
-    <meta name="theme-color" content="#4a90e2"/>
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2f6d62">
+  <meta name="description" content="Lumon: prática matemática infantil, progressiva, acessível e offline.">
+  <title>Lumon — Trilha de matemática</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./favicon.ico">
+  <link rel="stylesheet" href="./styles/tokens.css">
+  <link rel="stylesheet" href="./styles/base.css">
+  <link rel="stylesheet" href="./styles/components.css">
+  <link rel="stylesheet" href="./styles/screens.css">
+  <link rel="stylesheet" href="./styles/accessibility.css">
 </head>
 <body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
-    <div class="app-container">
+  <div class="app-shell">
+    <header class="app-header">
+      <button class="brand" id="home-button" type="button" aria-label="Ir para a trilha do Lumon">
+        <span class="brand-mark" aria-hidden="true">L</span>
+        <span>Lumon</span>
+      </button>
+      <button class="button button-quiet" id="caregiver-button" type="button">Área do responsável</button>
+    </header>
 
-        <section id="menu-inicial" class="tela ativa">
-            <h1 id="titulo-principal">Lumon</h1>
-            <button class="btn-menu btn-numeros" data-activity="numeros">Números</button>
-            <button class="btn-menu btn-somas" data-activity="somas">Somas</button>
-            <button class="btn-menu btn-subtracoes" data-activity="subtracoes">Subtrações</button>
-            <button class="btn-menu btn-letras" data-activity="letras">Letras</button>
+    <main id="conteudo" tabindex="-1">
+      <section class="screen active" id="home-screen" aria-labelledby="home-title">
+        <div class="hero">
+          <p class="eyebrow">Aprender no seu ritmo</p>
+          <h1 id="home-title">Trilha de matemática</h1>
+          <p>Práticas curtas, apoio visual e revisão do que precisa de mais carinho.</p>
+        </div>
+
+        <section class="continue-card" id="continue-card" hidden aria-labelledby="continue-title">
+          <div>
+            <p class="eyebrow">Continuar</p>
+            <h2 id="continue-title">Sessão em andamento</h2>
+            <p id="continue-description"></p>
+          </div>
+          <button class="button button-primary" id="continue-button" type="button">Continuar sessão</button>
         </section>
 
-        <section id="menu-modo" class="tela">
-            <button class="btn-voltar" data-target="menu-inicial">← Voltar</button>
-            <h2 id="modo-titulo"></h2>
-            <button class="btn-modo btn-sequencial" data-mode="sequencial">Sequencial</button>
-            <button class="btn-modo btn-aleatorio" data-mode="aleatorio">Aleatório</button>
-        </section>
+        <div class="home-actions">
+          <button class="button button-review" id="review-button" type="button" disabled>Praticar pontos difíceis</button>
+          <p id="review-help">Os itens para revisar aparecem aqui depois das práticas.</p>
+        </div>
 
-        <section id="menu-nivel" class="tela">
-            <button class="btn-voltar" data-target="menu-modo">← Voltar</button>
-            <h2 id="nivel-titulo"></h2>
-            <div id="niveis-container"></div>
-        </section>
+        <div id="trail" class="trail" aria-label="Cinco etapas da trilha"></div>
 
-        <section id="tela-atividade" class="tela">
-            <div class="info-bar">
-                <span id="progresso"></span>
-                <button class="btn-voltar-menu-principal" data-target="menu-inicial">Sair</button>
-            </div>
-            
-            <div id="card-container">
-                <div id="card">
-                    <div class="card-face card-face-front">
-                        <span id="card-text"></span>
-                    </div>
-                    <div class="card-face card-face-back">
-                        <span id="card-answer"></span>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="feedback-acerto" class="feedback"><img class="imgresult" src="images/feliz.png"></div>
-            <div id="feedback-erro" class="feedback"><img class="imgresult" src="images/triste.png"></div>
+        <aside class="privacy-note">
+          <span aria-hidden="true">⌂</span>
+          <p><strong>Privacidade desde o começo.</strong> O progresso fica somente neste dispositivo e funciona sem conta.</p>
+        </aside>
+      </section>
 
-            <div id="flip-instruction" class="instruction">Toque no cartão para ver a resposta</div>
-        </section>
+      <section class="screen activity-screen" id="activity-screen" aria-labelledby="activity-title" hidden>
+        <div class="activity-topbar">
+          <button class="button button-quiet" id="exit-session" type="button">Sair</button>
+          <p id="session-progress" class="session-progress" aria-live="polite"></p>
+        </div>
+        <div class="progress-track" aria-hidden="true"><span id="progress-fill"></span></div>
 
-        <section id="menu-letras" class="tela">
-            <button class="btn-voltar" data-target="menu-inicial">← Voltar</button>
-            <h2 id="letras-titulo">Letras</h2>
-            <button class="btn-letras-menu btn-vogais" data-level="vogais">Vogais</button>
-            <button class="btn-letras-menu btn-palavra" data-level="palavra">Palavra</button>
-            <button class="btn-letras-menu btn-intervalo" data-level="intervalo">Intervalo Customizado</button>
-        </section>
+        <div class="activity-heading">
+          <p class="eyebrow" id="stage-label"></p>
+          <h1 id="activity-title"></h1>
+          <p id="activity-instruction"></p>
+        </div>
 
-        <section id="tela-palavra" class="tela">
-            <button class="btn-voltar" data-target="menu-letras">← Voltar</button>
-            <h2>Digite uma palavra</h2>
-            <input type="text" id="input-palavra" placeholder="Digite aqui">
-            <button id="btn-iniciar-palavra">Iniciar Jogo</button>
-        </section>
+        <div class="exercise-card" id="exercise-card">
+          <div id="prompt" class="prompt" aria-live="polite"></div>
+          <div id="response-area" class="response-area"></div>
+          <div id="feedback" class="feedback" role="status" aria-live="assertive"></div>
+          <button class="button button-primary next-button" id="next-question" type="button" hidden>Próxima</button>
+        </div>
+      </section>
 
-        <section id="tela-intervalo-letras" class="tela">
-            <button class="btn-voltar" data-target="menu-letras">← Voltar</button>
-            <h2>Selecione o intervalo</h2>
-            <div class="letras-intervalo-container">
-                <label for="select-letra-inicio">De:</label>
-                <select id="select-letra-inicio"></select>
-                <label for="select-letra-fim">Até:</label>
-                <select id="select-letra-fim"></select>
-            </div>
-            <button id="btn-iniciar-intervalo-letras">Iniciar Jogo</button>
-        </section>
+      <section class="screen result-screen" id="result-screen" aria-labelledby="result-title" hidden>
+        <div class="celebration" aria-hidden="true">★</div>
+        <p class="eyebrow">Sessão concluída</p>
+        <h1 id="result-title">Você praticou com atenção!</h1>
+        <p id="result-score" class="result-score"></p>
+        <p id="result-skill"></p>
+        <div class="recommendation" id="recommendation"></div>
+        <div class="result-actions">
+          <button class="button button-review" id="result-review" type="button" hidden>Revisar estes itens</button>
+          <button class="button button-primary" id="result-repeat" type="button">Praticar de novo</button>
+          <button class="button button-secondary" id="result-home" type="button">Voltar à trilha</button>
+        </div>
+      </section>
+    </main>
+  </div>
 
-        <section id="tela-resumo" class="tela">
-            <h2>Fim de Jogo!</h2>
-            <p>Acertos: <span id="resumo-acertos">0</span></p>
-            <p>Erros: <span id="resumo-erros">0</span></p>
-            <button id="btn-treinar-erros">Treinar erros</button>
-            <button id="btn-recomecar">Recomeçar</button>
-            <button class="btn-voltar-menu-principal" data-target="menu-inicial">Voltar ao Menu</button>
-        </section>
+  <div class="update-banner" id="update-banner" role="status" hidden>
+    <span>Uma nova versão do Lumon está pronta.</span>
+    <button class="button button-secondary" id="update-button" type="button">Atualizar</button>
+  </div>
 
-        <section id="tela-intervalo-customizado" class="tela">
-            <button class="btn-voltar" data-target="menu-nivel">← Voltar</button>
-            <h2 id="intervalo-titulo">Intervalo Customizado</h2>
-            
-            <div class="slider-container">
-                <label for="slider-inicio">Início: <span id="slider-inicio-valor">1</span></label>
-                <input type="range" id="slider-inicio" min="1" max="100" value="1">
-            </div>
+  <dialog id="caregiver-dialog" aria-labelledby="caregiver-title">
+    <form method="dialog" class="dialog-close-row"><button class="icon-button" aria-label="Fechar área do responsável">×</button></form>
+    <p class="eyebrow">Controles locais</p>
+    <h1 id="caregiver-title">Área do responsável</h1>
+    <p>Nenhuma informação sai deste dispositivo.</p>
 
-            <div class="slider-container">
-                <label for="slider-fim">Fim: <span id="slider-fim-valor">10</span></label>
-                <input type="range" id="slider-fim" min="1" max="100" value="10">
-            </div>
+    <section class="settings-section" aria-labelledby="preferences-title">
+      <h2 id="preferences-title">Preferências</h2>
+      <label class="field-label" for="session-length">Questões por sessão</label>
+      <select id="session-length">
+        <option value="5">5 — bem curta</option>
+        <option value="10">10 — padrão</option>
+        <option value="15">15 — mais prática</option>
+      </select>
+      <label class="check-row"><input id="reduced-motion" type="checkbox"> Reduzir movimentos</label>
+      <label class="check-row"><input id="high-contrast" type="checkbox"> Aumentar contraste</label>
+      <label class="check-row"><input id="record-time" type="checkbox"> Registrar tempo de resposta localmente</label>
+    </section>
 
-            <button id="btn-iniciar-customizado">Iniciar Jogo</button>
-        </section>
+    <section class="settings-section" aria-labelledby="progress-title">
+      <h2 id="progress-title">Progresso por habilidade</h2>
+      <div id="caregiver-progress" class="caregiver-progress"></div>
+    </section>
 
+    <section class="settings-section" aria-labelledby="unlock-title">
+      <h2 id="unlock-title">Desbloqueio manual</h2>
+      <label class="field-label" for="unlock-skill">Escolher habilidade</label>
+      <div class="inline-controls">
+        <select id="unlock-skill"></select>
+        <button class="button button-secondary" id="unlock-button" type="button">Desbloquear</button>
+      </div>
+    </section>
+
+    <section class="settings-section" aria-labelledby="backup-title">
+      <h2 id="backup-title">Backup local</h2>
+      <div class="button-row">
+        <button class="button button-secondary" id="export-button" type="button">Exportar JSON</button>
+        <label class="button button-secondary file-button" for="import-file">Importar JSON</label>
+        <input id="import-file" class="visually-hidden" type="file" accept="application/json,.json">
+      </div>
+      <p id="import-status" role="status"></p>
+    </section>
+
+    <button class="button button-danger" id="reset-button" type="button">Apagar todo o progresso</button>
+  </dialog>
+
+  <dialog id="reset-dialog" aria-labelledby="reset-title">
+    <h1 id="reset-title">Apagar o progresso?</h1>
+    <p>Isso remove sessões, dificuldades e desbloqueios deste dispositivo.</p>
+    <div class="button-row">
+      <button class="button button-danger" id="confirm-reset" type="button">Sim, apagar</button>
+      <button class="button button-secondary" id="cancel-reset" type="button">Cancelar</button>
     </div>
+  </dialog>
 
-    <script src="script.js"></script>
+  <div class="visually-hidden" id="screen-announcer" aria-live="polite"></div>
+  <script type="module" src="./src/app.js"></script>
 </body>
 </html>
