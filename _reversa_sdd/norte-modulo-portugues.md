@@ -89,6 +89,8 @@ Referências públicas consultadas:
 | USR-009 | Ainda não está autorizada a implementação. | APROVADA |
 | USR-010 | A faixa etária principal será de 4 a 8 anos, com entrada diagnóstica por habilidade e progressão não limitada pela idade. | APROVADA |
 | USR-011 | A trilha de Português será organizada nas cinco etapas pedagógicas descritas na seção 5. | APROVADA |
+| USR-012 | Os critérios iniciais de domínio seguirão os percentuais e salvaguardas da seção 6, serão configuráveis e deverão ser validados com crianças. | APROVADA |
+| USR-013 | Na primeira versão, perfis, sessões e progresso serão armazenados somente no dispositivo; a arquitetura deverá permitir um adaptador Firebase futuro sem ativar persistência online agora. | APROVADA |
 
 ## 5. Proposta pedagógica para Português
 
@@ -195,17 +197,29 @@ Princípios já herdados do Lumon:
 - recomendação de avanço ou revisão;
 - tempo apenas como diagnóstico, nunca como ranking ou pressão.
 
-Proposta inicial a validar com crianças:
+Critérios iniciais aprovados, configuráveis e sujeitos à validação com crianças:
+
+| Etapa | Critério inicial de precisão |
+|---|---|
+| 1 — Palavra, imagem e som | 90% nas três sessões recentes |
+| 2 — Decodificação e palavras | 95% em itens praticados e 90% em itens inéditos |
+| 3 — Frases | 90% em reconhecimento e 85% em digitação |
+| 4 — Textos curtos | 90% em compreensão literal e 80% em produção |
+| 5 — Compreensão e produção | 85% em textos inéditos de pelo menos três gêneros |
+
+Salvaguardas comuns:
 
 - duração-alvo de 8 a 12 minutos;
 - três sessões recentes para comprovar domínio;
+- nenhum item recorrente com taxa de erro recente superior a 30%;
 - itens inéditos ou de transferência para evitar aprovação por memorização;
+- avanço somente depois de resolver item de transferência;
 - composição aproximada de 70% a 80% de conteúdo conhecido e 20% a 30% de revisão ou desafio;
 - reapresentação de erros após intervalos aproximados de 1, 3 e 7 dias;
 - escada de correção: nova tentativa sem pista, pista graduada, exemplo explicado e item análogo;
 - latência usada somente para detectar dificuldade ou fluência, nunca para punir.
 
-Os percentuais exatos por etapa ainda estão pendentes. Qualquer número deverá ser configurável e tratado como hipótese até haver observação com crianças.
+Os números são a configuração inicial do produto, não uma alegação de que sejam critérios oficiais do Kumon. Ajustes exigirão evidência de uso e nova decisão rastreável.
 
 ## 7. Áudio verdadeiramente offline
 
@@ -307,6 +321,19 @@ Requisitos obrigatórios:
 - determinismo dependente de habilidade, versão de conteúdo e seed;
 - nenhum blob, MP3 ou imagem armazenado em `localStorage`;
 - nenhuma dependência externa crítica em runtime.
+
+### Persistência local e evolução futura
+
+Na primeira versão:
+
+- perfis, sessões, domínio, revisão, preferências e progresso ficam somente no dispositivo;
+- não existe conta online, login, sincronização, banco remoto ou transmissão de progresso;
+- o aplicativo continua utilizável offline;
+- exportação e importação local podem oferecer portabilidade sem servidor.
+
+A camada de persistência deverá ser acessada por um contrato de repositório, sem regras pedagógicas acopladas a `localStorage`, IndexedDB ou qualquer fornecedor. A implementação inicial será local. Uma futura implementação Firebase poderá cumprir o mesmo contrato e adicionar sincronização após decisão específica de produto, privacidade, consentimento e segurança.
+
+Preparar para Firebase significa somente preservar essa separação arquitetural. Nesta fase, é proibido adicionar SDK, credenciais, configuração, chamadas de rede, autenticação ou código Firebase não utilizado.
 
 Ordem técnica proposta:
 
@@ -697,7 +724,6 @@ Um agente nunca reescreve silenciosamente o relatório histórico de outro. Corr
 
 | ID | Decisão pendente | Recomendação atual |
 |---|---|---|
-| PEN-003 | Percentuais por etapa | Começar configurável e validar com crianças; não tratar proposta como verdade pedagógica |
 | PEN-004 | Corpus de palavras e textos | Conteúdo próprio ou devidamente licenciado, com revisão pedagógica e linguística |
 | PEN-005 | Variação regional da voz | Escolher por amostra cega de pronúncia pt-BR; permitir gravação humana |
 | PEN-006 | Validação de leitura oral | Não usar reconhecimento automático na V1; decidir se haverá validação opcional por responsável |
