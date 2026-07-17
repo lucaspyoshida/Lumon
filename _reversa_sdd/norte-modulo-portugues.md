@@ -88,10 +88,11 @@ Referências públicas consultadas:
 | USR-008 | Os agentes trabalharão um de cada vez, com rastreabilidade. | APROVADA |
 | USR-009 | Ainda não está autorizada a implementação. | APROVADA |
 | USR-010 | A faixa etária principal será de 4 a 8 anos, com entrada diagnóstica por habilidade e progressão não limitada pela idade. | APROVADA |
+| USR-011 | A trilha de Português será organizada nas cinco etapas pedagógicas descritas na seção 5. | APROVADA |
 
 ## 5. Proposta pedagógica para Português
 
-As cinco etapas abaixo são uma **proposta a aprovar**, não uma implementação autorizada.
+As cinco etapas abaixo estão **aprovadas como estrutura pedagógica principal**. O detalhamento das habilidades e dos critérios de domínio continua sujeito aos gates deste documento e não autoriza implementação.
 
 ### Etapa 1 — Palavra, imagem e som
 
@@ -696,7 +697,6 @@ Um agente nunca reescreve silenciosamente o relatório histórico de outro. Corr
 
 | ID | Decisão pendente | Recomendação atual |
 |---|---|---|
-| PEN-002 | Aprovação das cinco etapas | Aprovar a estrutura das seções 5 e 6 antes de detalhar habilidades |
 | PEN-003 | Percentuais por etapa | Começar configurável e validar com crianças; não tratar proposta como verdade pedagógica |
 | PEN-004 | Corpus de palavras e textos | Conteúdo próprio ou devidamente licenciado, com revisão pedagógica e linguística |
 | PEN-005 | Variação regional da voz | Escolher por amostra cega de pronúncia pt-BR; permitir gravação humana |
