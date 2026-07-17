@@ -1,7 +1,7 @@
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 
-html { min-width: 320px; background: var(--color-canvas); scroll-behavior: smooth; }
+html { min-width: 320px; background: var(--color-canvas); }
 
 body {
   min-width: 320px;

@@ -58,7 +58,13 @@ function showScreen(id, announcement) {
   elements['screen-announcer'].textContent = announcement;
   const heading = document.querySelector(`#${id} h1`);
   if (heading) heading.tabIndex = -1;
-  requestAnimationFrame(() => (heading ?? document.getElementById('conteudo')).focus({ preventScroll: false }));
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+  requestAnimationFrame(() => {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    (heading ?? document.getElementById('conteudo')).focus({ preventScroll: true });
+  });
 }
 
 function skillStatus(skillId) {
@@ -385,7 +391,6 @@ function renderNumericInput(question, answered) {
   form.append(label, input, submit);
   elements['response-area'].append(form);
   if (answered) showAnsweredState(answered, question);
-  else requestAnimationFrame(() => input.focus());
 }
 
 function renderOrdering(question, answered) {
@@ -501,7 +506,6 @@ function renderActivity() {
   else if (question.response.type === 'ordering') renderOrdering(question, answered);
   else if (question.response.type === 'self-assessment') renderSelfAssessment(question, answered);
   showScreen('activity-screen', `${skill.title}, questão ${session.currentIndex + 1} de ${session.questions.length}`);
-  if (!answered) requestAnimationFrame(() => elements['response-area'].querySelector('button, input')?.focus());
 }
 
 function finishSession() {

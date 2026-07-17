@@ -35,6 +35,49 @@ async function startFirstSkill(page) {
   await expect(page.locator('#activity-screen')).toBeVisible();
 }
 
+async function startSkill(page, skillId) {
+  const stageIndex = STAGES.findIndex((stage) => stage.skills.some((skill) => skill.id === skillId));
+  const skill = ALL_SKILLS.find((entry) => entry.id === skillId);
+  expect(stageIndex).toBeGreaterThanOrEqual(0);
+  expect(skill).toBeTruthy();
+  const card = page.locator('.stage-card').nth(stageIndex);
+  const skills = card.locator('.skills');
+  if (await skills.isHidden()) await card.locator('.stage-summary').click();
+  await skills.locator('.skill-button').filter({ hasText: skill.title }).click();
+  await expect(page.locator('#activity-title')).toHaveText(skill.title);
+}
+
+async function waitForScreenFocus(page) {
+  await page.evaluate(() => new Promise((resolve) => {
+    requestAnimationFrame(() => requestAnimationFrame(resolve));
+  }));
+}
+
+async function expectTopContext(page, selectors, expectedFocusId) {
+  const metrics = await page.evaluate((expectedSelectors) => ({
+    scrollTop: document.documentElement.scrollTop,
+    focusedId: document.activeElement?.id,
+    viewportHeight: window.innerHeight,
+    elements: expectedSelectors.map((selector) => {
+      const element = document.querySelector(selector);
+      const rect = element?.getBoundingClientRect();
+      return {
+        selector,
+        visible: Boolean(element && rect && !element.hidden && getComputedStyle(element).display !== 'none'),
+        top: rect?.top ?? null,
+        bottom: rect?.bottom ?? null,
+      };
+    }),
+  }), selectors);
+  expect(metrics.scrollTop).toBeLessThanOrEqual(1);
+  expect(metrics.focusedId).toBe(expectedFocusId);
+  for (const element of metrics.elements) {
+    expect(element.visible, `${element.selector} deveria estar visível`).toBe(true);
+    expect(element.top, `${element.selector} não pode ficar cortado no topo`).toBeGreaterThanOrEqual(-1);
+    expect(element.bottom, `${element.selector} deve permanecer no contexto visível`).toBeLessThanOrEqual(metrics.viewportHeight + 1);
+  }
+}
+
 async function answerFindNumber(page, correct = true) {
   const prompt = await page.locator('#prompt').innerText();
   const target = prompt.match(/\d+/)?.[0];
@@ -265,6 +308,37 @@ test('fluxo essencial funciona apenas por teclado e Escape registra abandono', a
   await expect(page.locator('#home-screen')).toBeVisible();
   const stored = JSON.parse(await page.evaluate((key) => localStorage.getItem(key), STORAGE_KEY));
   expect(stored.progress.completedSessions.at(-1).abandoned).toBe(true);
+});
+
+test('foco preserva navegação e contexto ao iniciar, retomar e sair no celular', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 640 });
+  await installUnlockedState(page);
+  await page.goto(APP_URL);
+  const activityContext = ['#exit-session', '#session-progress', '#activity-instruction'];
+  const homeContext = ['#home-button', '#caregiver-button', '#home-title'];
+  const responseTypes = [
+    'number.find.1-10',
+    'number.write.1-50',
+    'number.order.1-10',
+    'addition.flashcard',
+  ];
+
+  for (const skillId of responseTypes) {
+    await startSkill(page, skillId);
+    await waitForScreenFocus(page);
+    await expectTopContext(page, activityContext, 'activity-title');
+
+    await page.reload();
+    await page.locator('#continue-button').click();
+    await expect(page.locator('#activity-screen')).toBeVisible();
+    await waitForScreenFocus(page);
+    await expectTopContext(page, activityContext, 'activity-title');
+
+    await page.keyboard.press('Escape');
+    await expect(page.locator('#home-screen')).toBeVisible();
+    await waitForScreenFocus(page);
+    await expectTopContext(page, homeContext, 'home-title');
+  }
 });
 
 test('reinício confirmado apaga progresso sem apagar outras chaves', async ({ page }) => {

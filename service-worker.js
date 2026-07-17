@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'lumon-shell-';
-const CACHE_NAME = `${CACHE_PREFIX}2026-07-17-05`;
+const CACHE_NAME = `${CACHE_PREFIX}2026-07-17-06`;
 const SHELL_ASSETS = [
   './',
   './index.htm',
