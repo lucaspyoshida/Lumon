@@ -1,17 +1,17 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: EM_EXECUCAO
+estado: EM_REVISAO
 gate_atual: G3_EXPERIENCIA_PILOTO_VISUAL
 implementacao_autorizada: false
 max_concurrency: 1
-agente_ativo: frontend_design
+agente_ativo: supervisor
 proximo_agente_autorizado: null
-proxima_skill: lumon-frontend-infantil
-commit_canonico: 09621e7dbe1f6e3fb2e8842f54053ffc315da1c7
-run_id: pt-20260718T155615Z-frontend-09621e7
-idempotency_key: G3_EXPERIENCIA_PILOTO_VISUAL:frontend_design:09621e7dbe1f6e3fb2e8842f54053ffc315da1c7
-heartbeat_at: 2026-07-18T15:56:15Z
-lease_expires_at: 2026-07-18T16:46:15Z
+proxima_skill: lumon-supervisao-final
+commit_canonico: aa15669be3aacf85cdb7a13300a7ee0d491bddc7
+run_id: pt-20260718T162644Z-supervisor-aa15669
+idempotency_key: G3_EXPERIENCIA_PILOTO_VISUAL:supervisor:aa15669be3aacf85cdb7a13300a7ee0d491bddc7
+heartbeat_at: 2026-07-18T16:26:44Z
+lease_expires_at: 2026-07-18T17:16:44Z
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
@@ -28,9 +28,9 @@ ressalvas_ativas:
     bloqueia: aprovacao futura do shell e build
     aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: PRONTO
-  para: EM_EXECUCAO
-  em: 2026-07-18T15:56:15Z
-  motivo: Claim publicado para projetar experiencia infantil, wireframes, acessibilidade e briefing visual.
+  de: EM_EXECUCAO
+  para: EM_REVISAO
+  em: 2026-07-18T16:26:44Z
+  motivo: Plano e handoff frontend publicados e confirmados no remoto; revisao independente G3 obrigatoria.
 bloqueios:
   - Implementacao do produto nao autorizada.
