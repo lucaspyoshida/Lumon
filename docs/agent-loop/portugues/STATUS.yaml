@@ -1,17 +1,17 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: PRONTO
+estado: EM_EXECUCAO
 gate_atual: G3_EXPERIENCIA_PILOTO_VISUAL
 implementacao_autorizada: false
 max_concurrency: 1
-agente_ativo: null
-proximo_agente_autorizado: artista_ia
+agente_ativo: artista_ia
+proximo_agente_autorizado: null
 proxima_skill: lumon-arte-capivara
-commit_canonico: 5719ba6c415953fa304ae19726e08dd8bd9fbf62
-run_id: null
-idempotency_key: null
-heartbeat_at: null
-lease_expires_at: null
+commit_canonico: e245f3b2dd6ad3bf84b36496a4942ac06f0ecb1b
+run_id: pt-20260718T164034Z-artista-e245f3b
+idempotency_key: G3_EXPERIENCIA_PILOTO_VISUAL:artista_ia:e245f3b2dd6ad3bf84b36496a4942ac06f0ecb1b
+heartbeat_at: 2026-07-18T16:40:34Z
+lease_expires_at: 2026-07-18T17:30:34Z
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
@@ -28,9 +28,9 @@ ressalvas_ativas:
     bloqueia: aprovacao futura do shell e build
     aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: EM_REVISAO
-  para: PRONTO
-  em: 2026-07-18T16:39:44Z
-  motivo: Frontend documental aprovado com ressalvas; artista liberado somente para especificacao visual nao-final dentro do Gate G3.
+  de: PRONTO
+  para: EM_EXECUCAO
+  em: 2026-07-18T16:40:34Z
+  motivo: Claim publicado para especificar Capivara e lote visual nao-final, sem gerar assets ou alterar o app.
 bloqueios:
   - Implementacao do produto nao autorizada.
