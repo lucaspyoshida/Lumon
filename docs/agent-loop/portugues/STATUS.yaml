@@ -1,12 +1,15 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: AGUARDA_USUARIO
+estado: PRONTO
 gate_atual: G3_EXPERIENCIA_PILOTO_VISUAL
 implementacao_autorizada: false
+geracao_visual_autorizada: true
+autoridade_de_avanco: supervisor
+escopo_visual_autorizado: P0a_P0b_P0c_em_sequencia_com_supervisao
 max_concurrency: 1
 agente_ativo: null
-proximo_agente_autorizado: null
-proxima_skill: null
+proximo_agente_autorizado: artista_ia
+proxima_skill: lumon-arte-capivara
 commit_canonico: cb69f4c7669d4c5cb556244612e20098dcb42c4c
 run_id: null
 idempotency_key: null
@@ -28,10 +31,10 @@ ressalvas_ativas:
     bloqueia: aprovacao futura do shell e build
     aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: EM_REVISAO
-  para: AGUARDA_USUARIO
-  em: 2026-07-18T17:03:53Z
-  motivo: Subgate documental de arte aprovado com ressalvas; gerar P0a exige autorizacao explicita compativel do usuario.
+  de: AGUARDA_USUARIO
+  para: PRONTO
+  em: 2026-07-18T17:23:32Z
+  motivo: Usuario autorizou geracao visual e delegou ao supervisor decisao de avanco; P0a liberado primeiro.
 bloqueios:
   - Implementacao do produto nao autorizada.
-  - Geracao de model sheet, imagens e assets finais nao autorizada.
+  - P0b e P0c dependem do veredito supervisor do lote anterior.
