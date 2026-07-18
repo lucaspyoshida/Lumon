@@ -1,17 +1,17 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: EM_EXECUCAO
+estado: EM_REVISAO
 gate_atual: G2_CONTRATO_TECNICO
 implementacao_autorizada: false
 max_concurrency: 1
-agente_ativo: arquiteto
+agente_ativo: supervisor
 proximo_agente_autorizado: null
-proxima_skill: lumon-arquitetura-pwa
-commit_canonico: 29d5db337a4754c23319eeace2541129853cae87
-run_id: pt-20260718T142849Z-arquiteto-29d5db3
-idempotency_key: G2_CONTRATO_TECNICO:arquiteto:29d5db337a4754c23319eeace2541129853cae87
-heartbeat_at: 2026-07-18T14:28:49Z
-lease_expires_at: 2026-07-18T15:18:49Z
+proxima_skill: lumon-supervisao-final
+commit_canonico: a1becef200ca56cc982829e38bd2b0a7a4565cd0
+run_id: pt-20260718T145025Z-supervisor-a1becef
+idempotency_key: G2_CONTRATO_TECNICO:supervisor:a1becef200ca56cc982829e38bd2b0a7a4565cd0
+heartbeat_at: 2026-07-18T14:50:25Z
+lease_expires_at: 2026-07-18T15:40:25Z
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
@@ -21,9 +21,9 @@ ultimo_gate_aprovado:
   relatorio_commit: 4aff99d4aac6220353ef786680a4819514b4db4e
   handoff_commit: 42c6c4b357d64581bb540925eead2b77ba23e362
 ultima_transicao:
-  de: PRONTO
-  para: EM_EXECUCAO
-  em: 2026-07-18T14:28:49Z
-  motivo: Claim publicado para definir o contrato tecnico do Gate G2.
+  de: EM_EXECUCAO
+  para: EM_REVISAO
+  em: 2026-07-18T14:50:25Z
+  motivo: Handoff arquitetural publicado e confirmado; supervisor autorizado para revisar o Gate G2.
 bloqueios:
   - Implementacao do produto nao autorizada.
