@@ -1,0 +1,110 @@
+schema_version: 1
+lote: P0a
+estado: CANDIDATO_EM_REVISAO
+run_id: pt-20260718T172438Z-artista-p0a-dfaa87d
+idempotency_key: G3_P0A_MODEL_SHEET:artista_ia:dfaa87dfc4cc64fecb14d224aa1a9417020743f7
+gate: G3_P0A_MODEL_SHEET
+entrada_canonica:
+  commit: 20ab1d6de815a14095d96f713414b49d180433c2
+  branch: feature/evolucao-pedagogica
+escopo:
+  incluido:
+    - folha de modelo editorial P0a
+    - ancora frontal P0a
+    - ancora tres_quartos P0a
+  excluido:
+    - P0b
+    - P0c
+    - icones
+    - conteudo pedagogico
+    - codigo do aplicativo
+    - CSS
+    - PWA
+geracao:
+  provedor: OpenAI
+  ferramenta: image_gen_integrada
+  classificacao: illustration-flat
+  modelo: nao_exposto
+  versao_modelo: nao_exposta
+  versao_interface: nao_exposta
+  seed: nao_exposta
+  parametros_deterministicos: nao_expostos
+  prompt: PROMPT_P0A_V1.md
+  candidato_selecionado:
+    gerado_em_utc: 2026-07-18T17:32:04Z
+    caminho_externo: /Users/yoshida/.codex/generated_images/019f761a-e61f-7183-839d-306a3ac440bb/exec-69425295-21ab-4664-89d8-4031f8b95efb.png
+    mime: image/png
+    dimensoes_px: 1254x1254
+    bytes: 1789258
+    sha256: 7cd643f61181d2ce8969b20059055e4315fbfd8cf7053b520b6c983d8b69de45
+    commitado: false
+    motivo_nao_commit: fonte pesada; caminho e hash preservados para rastreabilidade
+  candidato_rejeitado:
+    gerado_em_utc: 2026-07-18T17:30:03Z
+    caminho_externo: /Users/yoshida/.codex/generated_images/019f761a-e61f-7183-839d-306a3ac440bb/exec-6bb94c87-28b1-42dc-b583-74dffe7f9734.png
+    mime: image/png
+    dimensoes_px: 1254x1254
+    bytes: 1602036
+    sha256: 260a6a94a550854cd3130565ba6839ffe3dbcbc5769d0a8f3bd5df6e8a13070b
+    motivo_rejeicao: maos humanas em gestos e marca semelhante a cauda na vista traseira
+pos_processamento:
+  ferramenta: /usr/bin/sips
+  versao: sips-316
+  espaco_de_cor: sRGB IEC61966-2.1
+  alfa: false
+  operacoes:
+    - redimensionamento deterministico da folha para 1536x1536
+    - recorte seguro frontal, padding neutro e redimensionamento para 512x512
+    - recorte seguro tres_quartos, padding neutro e redimensionamento para 512x512
+    - compressao JPEG com qualidade 45 para a folha e 88 para as ancoras
+  formato_solicitado: WebP
+  formato_entregue: JPEG
+  desvio_formato: encoder WebP indisponivel; tentativa de canvas Chromium foi bloqueada pela politica de sandbox
+  reproducibilidade_pixel_a_pixel: false
+assets:
+  - id: p0a_model_sheet_v1_review
+    arquivo: p0a-model-sheet-v1-review-1536.jpg
+    funcao: referencia editorial global de identidade, vistas e expressoes
+    alt: Folha de modelo da Capivara em doze vistas e expressoes, com pelo marrom, focinho claro, lenco verde-petroleo e medalhao dourado.
+    mime: image/jpeg
+    dimensoes_px: 1536x1536
+    bytes: 146959
+    sha256: 08dea06c86465cf773a05c43dba0fc93bdbc83a87912be7020239ac9c9366b90
+    budget_bytes: 150000
+    budget_resultado: PASSOU
+  - id: p0a_anchor_front_v1
+    arquivo: p0a-anchor-front-v1-512.jpg
+    funcao: ancora editorial frontal de identidade
+    alt: Capivara em vista frontal, corpo inteiro, pelo marrom, focinho claro, lenco verde-petroleo e medalhao dourado.
+    mime: image/jpeg
+    dimensoes_px: 512x512
+    bytes: 38232
+    sha256: 89476d450a4d650676ba3f3153519f14d56f58a682c7a835cde6ff3a63b9fe16
+    budget_bytes: 90000
+    budget_resultado: PASSOU
+  - id: p0a_anchor_3q_v1
+    arquivo: p0a-anchor-3q-v1-512.jpg
+    funcao: ancora editorial tres_quartos de identidade
+    alt: Capivara em vista de tres quartos voltada para a direita, corpo inteiro, pelo marrom, focinho claro, lenco verde-petroleo e medalhao dourado.
+    mime: image/jpeg
+    dimensoes_px: 512x512
+    bytes: 43506
+    sha256: 787fd31ce78b38b2bedf26792674a2bce9320318a74c4d13efbaf696b4ecb3bf
+    budget_bytes: 90000
+    budget_resultado: PASSOU
+metadados_e_privacidade:
+  dados_de_criancas_usados: false
+  dados_pessoais_inseridos_no_prompt: false
+  inspecao: sips_get_all_e_strings
+  resultado: nenhum autor, caminho local, GPS, latitude, longitude ou identificador pessoal encontrado; JPEG contem perfil sRGB e marcador tecnico Photoshop 3.0
+proveniencia_e_licenca:
+  origem: geracao_nova_com_image_gen_integrada
+  referencia_visual_protegida_fornecida: false
+  artista_ou_estudio_imitado: false
+  termos_de_uso_e_retencao: nao_expostos_pela_ferramenta
+  verificacao_juridica: nao_realizada
+revisao:
+  autoaprovacao_artista: false
+  proximo_papel: supervisor
+  proxima_skill: lumon-supervisao-final
+  veredito_requerido: decidir_APROVADO_ou_RETRABALHO
