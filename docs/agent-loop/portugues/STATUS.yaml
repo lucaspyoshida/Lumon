@@ -1,24 +1,29 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: EM_REVISAO
-gate_atual: G1_CONTRATO_PEDAGOGICO
+estado: PRONTO
+gate_atual: G2_CONTRATO_TECNICO
 implementacao_autorizada: false
 max_concurrency: 1
-agente_ativo: supervisor
-proximo_agente_autorizado: null
-proxima_skill: lumon-supervisao-final
-commit_canonico: 302b853f495d86abd3839481c88081989ccbd208
-run_id: pt-20260718T141249Z-supervisor-302b853
-idempotency_key: G1_CONTRATO_PEDAGOGICO:supervisor:302b853f495d86abd3839481c88081989ccbd208
-heartbeat_at: 2026-07-18T14:12:49Z
-lease_expires_at: 2026-07-18T15:02:49Z
+agente_ativo: null
+proximo_agente_autorizado: arquiteto
+proxima_skill: lumon-arquitetura-pwa
+commit_canonico: 42c6c4b357d64581bb540925eead2b77ba23e362
+run_id: null
+idempotency_key: null
+heartbeat_at: null
+lease_expires_at: null
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
+ultimo_gate_aprovado:
+  gate: G1_CONTRATO_PEDAGOGICO
+  veredito: OBJETIVO ALCANCADO — APROVADO
+  relatorio_commit: 4aff99d4aac6220353ef786680a4819514b4db4e
+  handoff_commit: 42c6c4b357d64581bb540925eead2b77ba23e362
 ultima_transicao:
-  de: EM_EXECUCAO
-  para: EM_REVISAO
-  em: 2026-07-18T14:12:49Z
-  motivo: Handoff pedagogico publicado e confirmado; supervisor autorizado para revisar o Gate G1.
+  de: EM_REVISAO
+  para: PRONTO
+  em: 2026-07-18T14:27:25Z
+  motivo: Supervisor aprovou documentalmente o Gate G1; arquiteto liberado para planejar o Gate G2.
 bloqueios:
   - Implementacao do produto nao autorizada.
