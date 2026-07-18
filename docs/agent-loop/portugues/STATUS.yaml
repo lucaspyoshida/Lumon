@@ -1,20 +1,20 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: PRONTO
-gate_atual: G3_EXPERIENCIA_PILOTO_VISUAL
+estado: EM_EXECUCAO
+gate_atual: G3_P0A_MODEL_SHEET
 implementacao_autorizada: false
 geracao_visual_autorizada: true
 autoridade_de_avanco: supervisor
 escopo_visual_autorizado: P0a_P0b_P0c_em_sequencia_com_supervisao
 max_concurrency: 1
-agente_ativo: null
-proximo_agente_autorizado: artista_ia
+agente_ativo: artista_ia
+proximo_agente_autorizado: null
 proxima_skill: lumon-arte-capivara
-commit_canonico: cb69f4c7669d4c5cb556244612e20098dcb42c4c
-run_id: null
-idempotency_key: null
-heartbeat_at: null
-lease_expires_at: null
+commit_canonico: dfaa87dfc4cc64fecb14d224aa1a9417020743f7
+run_id: pt-20260718T172438Z-artista-p0a-dfaa87d
+idempotency_key: G3_P0A_MODEL_SHEET:artista_ia:dfaa87dfc4cc64fecb14d224aa1a9417020743f7
+heartbeat_at: 2026-07-18T17:24:38Z
+lease_expires_at: 2026-07-18T18:14:38Z
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
@@ -31,10 +31,10 @@ ressalvas_ativas:
     bloqueia: aprovacao futura do shell e build
     aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: AGUARDA_USUARIO
-  para: PRONTO
-  em: 2026-07-18T17:23:32Z
-  motivo: Usuario autorizou geracao visual e delegou ao supervisor decisao de avanco; P0a liberado primeiro.
+  de: PRONTO
+  para: EM_EXECUCAO
+  em: 2026-07-18T17:24:38Z
+  motivo: Claim publicado para gerar somente model sheet P0a e ancoras visuais sob supervisao.
 bloqueios:
   - Implementacao do produto nao autorizada.
   - P0b e P0c dependem do veredito supervisor do lote anterior.
