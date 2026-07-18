@@ -1,29 +1,36 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: EM_REVISAO
-gate_atual: G2_ENGENHARIA_LEVE
+estado: PRONTO
+gate_atual: G3_EXPERIENCIA_PILOTO_VISUAL
 implementacao_autorizada: false
 max_concurrency: 1
-agente_ativo: supervisor
-proximo_agente_autorizado: null
-proxima_skill: lumon-supervisao-final
-commit_canonico: dd22860a8bb0c65cec6014e6a17a9028a6ea53e2
-run_id: pt-20260718T153522Z-supervisor-dd22860
-idempotency_key: G2_ENGENHARIA_LEVE:supervisor:dd22860a8bb0c65cec6014e6a17a9028a6ea53e2
-heartbeat_at: 2026-07-18T15:35:22Z
-lease_expires_at: 2026-07-18T16:25:22Z
+agente_ativo: null
+proximo_agente_autorizado: frontend_design
+proxima_skill: lumon-frontend-infantil
+commit_canonico: 0bd9ce5a88e48082855354a8083c6588a0bbf7f7
+run_id: null
+idempotency_key: null
+heartbeat_at: null
+lease_expires_at: null
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
 ultimo_gate_aprovado:
-  gate: G2_ARQUITETURA_PWA
-  veredito: OBJETIVO ALCANCADO — APROVADO
-  relatorio_commit: 297b1bfcb3a51bd4df43e7386b96f07a2b31c9ac
-  handoff_commit: 29e012cae2f55f641f6bf4c03a96924085daf348
+  gate: G2_ENGENHARIA_LEVE
+  veredito: APROVADO COM RESSALVAS
+  relatorio_commit: bc7666d12be3c552ed6022ff3f971e6f888c75e7
+  handoff_commit: 0bd9ce5a88e48082855354a8083c6588a0bbf7f7
+ressalvas_ativas:
+  - id: P1_ICONE_512_ACIMA_DO_TETO
+    bloqueia: aprovacao futura do asset e shell visual
+    aceite: asset final com no maximo 150000 bytes e budget check bloqueante
+  - id: P1_SHELL_SEM_PROVA_FRIA
+    bloqueia: aprovacao futura do shell e build
+    aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: EM_EXECUCAO
-  para: EM_REVISAO
-  em: 2026-07-18T15:35:22Z
-  motivo: Handoff de engenharia publicado e confirmado; supervisor autorizado para revisar tecnologia leve.
+  de: EM_REVISAO
+  para: PRONTO
+  em: 2026-07-18T15:55:05Z
+  motivo: Engenharia aprovada com ressalvas nao bloqueantes ao planejamento; frontend/design liberado para o Gate G3.
 bloqueios:
   - Implementacao do produto nao autorizada.
