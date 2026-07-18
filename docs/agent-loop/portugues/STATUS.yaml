@@ -1,25 +1,25 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: EM_REVISAO
+estado: PRONTO
 gate_atual: G3_EXPERIENCIA_PILOTO_VISUAL
 implementacao_autorizada: false
 max_concurrency: 1
-agente_ativo: supervisor
-proximo_agente_autorizado: null
-proxima_skill: lumon-supervisao-final
-commit_canonico: aa15669be3aacf85cdb7a13300a7ee0d491bddc7
-run_id: pt-20260718T162644Z-supervisor-aa15669
-idempotency_key: G3_EXPERIENCIA_PILOTO_VISUAL:supervisor:aa15669be3aacf85cdb7a13300a7ee0d491bddc7
-heartbeat_at: 2026-07-18T16:26:44Z
-lease_expires_at: 2026-07-18T17:16:44Z
+agente_ativo: null
+proximo_agente_autorizado: artista_ia
+proxima_skill: lumon-arte-capivara
+commit_canonico: 5719ba6c415953fa304ae19726e08dd8bd9fbf62
+run_id: null
+idempotency_key: null
+heartbeat_at: null
+lease_expires_at: null
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
 ultimo_gate_aprovado:
-  gate: G2_ENGENHARIA_LEVE
+  gate: G3_FRONTEND_DOCUMENTAL
   veredito: APROVADO COM RESSALVAS
-  relatorio_commit: bc7666d12be3c552ed6022ff3f971e6f888c75e7
-  handoff_commit: 0bd9ce5a88e48082855354a8083c6588a0bbf7f7
+  relatorio_commit: baf1b81c29a4710d207660602ad5ea13d27d698e
+  handoff_commit: 5719ba6c415953fa304ae19726e08dd8bd9fbf62
 ressalvas_ativas:
   - id: P1_ICONE_512_ACIMA_DO_TETO
     bloqueia: aprovacao futura do asset e shell visual
@@ -28,9 +28,9 @@ ressalvas_ativas:
     bloqueia: aprovacao futura do shell e build
     aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: EM_EXECUCAO
-  para: EM_REVISAO
-  em: 2026-07-18T16:26:44Z
-  motivo: Plano e handoff frontend publicados e confirmados no remoto; revisao independente G3 obrigatoria.
+  de: EM_REVISAO
+  para: PRONTO
+  em: 2026-07-18T16:39:44Z
+  motivo: Frontend documental aprovado com ressalvas; artista liberado somente para especificacao visual nao-final dentro do Gate G3.
 bloqueios:
   - Implementacao do produto nao autorizada.
