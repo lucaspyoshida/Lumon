@@ -1,17 +1,17 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: EM_EXECUCAO
+estado: EM_REVISAO
 gate_atual: G3_EXPERIENCIA_PILOTO_VISUAL
 implementacao_autorizada: false
 max_concurrency: 1
-agente_ativo: artista_ia
+agente_ativo: supervisor
 proximo_agente_autorizado: null
-proxima_skill: lumon-arte-capivara
-commit_canonico: e245f3b2dd6ad3bf84b36496a4942ac06f0ecb1b
-run_id: pt-20260718T164034Z-artista-e245f3b
-idempotency_key: G3_EXPERIENCIA_PILOTO_VISUAL:artista_ia:e245f3b2dd6ad3bf84b36496a4942ac06f0ecb1b
-heartbeat_at: 2026-07-18T16:40:34Z
-lease_expires_at: 2026-07-18T17:30:34Z
+proxima_skill: lumon-supervisao-final
+commit_canonico: 84785f44795f222a3956db24600ae2b58618fbea
+run_id: pt-20260718T165435Z-supervisor-84785f4
+idempotency_key: G3_EXPERIENCIA_PILOTO_VISUAL:supervisor:84785f44795f222a3956db24600ae2b58618fbea
+heartbeat_at: 2026-07-18T16:54:35Z
+lease_expires_at: 2026-07-18T17:44:35Z
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
@@ -28,9 +28,9 @@ ressalvas_ativas:
     bloqueia: aprovacao futura do shell e build
     aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: PRONTO
-  para: EM_EXECUCAO
-  em: 2026-07-18T16:40:34Z
-  motivo: Claim publicado para especificar Capivara e lote visual nao-final, sem gerar assets ou alterar o app.
+  de: EM_EXECUCAO
+  para: EM_REVISAO
+  em: 2026-07-18T16:54:35Z
+  motivo: Especificacao visual e handoff publicados e confirmados no remoto; revisao independente G3 obrigatoria.
 bloqueios:
   - Implementacao do produto nao autorizada.
