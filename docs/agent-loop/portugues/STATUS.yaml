@@ -1,24 +1,24 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: EM_EXECUCAO
+estado: EM_REVISAO
 gate_atual: G1_CONTRATO_PEDAGOGICO
 implementacao_autorizada: false
 max_concurrency: 1
-agente_ativo: pedagogo
+agente_ativo: supervisor
 proximo_agente_autorizado: null
-proxima_skill: lumon-pedagogia-infantil
-commit_canonico: 989309552554409f3a6869205fced837c978d237
-run_id: pt-20260718T135710Z-pedagogo-9893095
-idempotency_key: G1_CONTRATO_PEDAGOGICO:pedagogo:989309552554409f3a6869205fced837c978d237
-heartbeat_at: 2026-07-18T13:57:42Z
-lease_expires_at: 2026-07-18T14:47:14Z
+proxima_skill: lumon-supervisao-final
+commit_canonico: 302b853f495d86abd3839481c88081989ccbd208
+run_id: pt-20260718T141249Z-supervisor-302b853
+idempotency_key: G1_CONTRATO_PEDAGOGICO:supervisor:302b853f495d86abd3839481c88081989ccbd208
+heartbeat_at: 2026-07-18T14:12:49Z
+lease_expires_at: 2026-07-18T15:02:49Z
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
 ultima_transicao:
-  de: PRONTO
-  para: EM_EXECUCAO
-  em: 2026-07-18T13:57:42Z
-  motivo: Claim publicado para executar o contrato pedagogico do Gate G1.
+  de: EM_EXECUCAO
+  para: EM_REVISAO
+  em: 2026-07-18T14:12:49Z
+  motivo: Handoff pedagogico publicado e confirmado; supervisor autorizado para revisar o Gate G1.
 bloqueios:
   - Implementacao do produto nao autorizada.
