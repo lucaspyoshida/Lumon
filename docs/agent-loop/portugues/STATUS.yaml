@@ -1,0 +1,21 @@
+schema_version: 1
+objetivo: portugues-lumon
+estado: PRONTO
+gate_atual: G1_CONTRATO_PEDAGOGICO
+implementacao_autorizada: false
+max_concurrency: 1
+agente_ativo: null
+proximo_agente_autorizado: pedagogo
+proxima_skill: lumon-pedagogia-infantil
+commit_canonico: 167a346906dca5d352fe67f43518c23d3c3c87c5
+run_id: null
+idempotency_key: null
+heartbeat_at: null
+lease_expires_at: null
+ultima_transicao:
+  de: null
+  para: PRONTO
+  em: 2026-07-18T13:45:30Z
+  motivo: Estrutura minima criada; primeiro gate formal encaminhado ao pedagogo.
+bloqueios:
+  - Implementacao do produto nao autorizada.
