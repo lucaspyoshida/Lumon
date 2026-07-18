@@ -1,17 +1,17 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: PRONTO
+estado: EM_EXECUCAO
 gate_atual: G2_ENGENHARIA_LEVE
 implementacao_autorizada: false
 max_concurrency: 1
-agente_ativo: null
-proximo_agente_autorizado: engenheiro
+agente_ativo: engenheiro
+proximo_agente_autorizado: null
 proxima_skill: lumon-engenharia-leve
-commit_canonico: 29e012cae2f55f641f6bf4c03a96924085daf348
-run_id: null
-idempotency_key: null
-heartbeat_at: null
-lease_expires_at: null
+commit_canonico: 214f1804a3298e196f504c3c5abafb464fbe4331
+run_id: pt-20260718T150534Z-engenheiro-214f180
+idempotency_key: G2_ENGENHARIA_LEVE:engenheiro:214f1804a3298e196f504c3c5abafb464fbe4331
+heartbeat_at: 2026-07-18T15:05:34Z
+lease_expires_at: 2026-07-18T15:55:34Z
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
@@ -21,9 +21,9 @@ ultimo_gate_aprovado:
   relatorio_commit: 297b1bfcb3a51bd4df43e7386b96f07a2b31c9ac
   handoff_commit: 29e012cae2f55f641f6bf4c03a96924085daf348
 ultima_transicao:
-  de: EM_REVISAO
-  para: PRONTO
-  em: 2026-07-18T15:04:20Z
-  motivo: Supervisor aprovou o contrato arquitetural; engenheiro liberado para detalhar tecnologia leve do Gate G2.
+  de: PRONTO
+  para: EM_EXECUCAO
+  em: 2026-07-18T15:05:34Z
+  motivo: Claim publicado para detalhar tecnologia leve, audio offline, cache, desempenho e testes.
 bloqueios:
   - Implementacao do produto nao autorizada.
