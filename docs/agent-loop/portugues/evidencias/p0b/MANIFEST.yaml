@@ -1,0 +1,287 @@
+schema_version: 2
+lote: P0b
+versao_lote: v1
+estado: CANDIDATO_EM_REVISAO
+gate: G3_P0B_MOMENTOS_ESSENCIAIS
+run_id: pt-20260721T182750Z-artista-p0b-2fa19d8
+idempotency_key: G3_P0B_MOMENTOS_ESSENCIAIS:artista_ia:2fa19d889d50d25ec0a650348284e6416bc1ca6d
+entrada_canonica:
+  commit: 2fa19d889d50d25ec0a650348284e6416bc1ca6d
+  claim_remoto: fa0757af903479aec2ae1192a2a8031d29d5fc8f
+  branch: feature/evolucao-pedagogica
+  referencia_aprovada: capivara-model-v1
+  referencias:
+    - arquivo: ../p0a-v2/p0a-model-sheet-v2-master-1254.png
+      sha256: 43a42dc4dcb413ea27c1df6a798e2de59039c1646b87d3ffd4ed154f6cd7c2e4
+    - arquivo: ../p0a-v2/p0a-anchor-front-v2-512.webp
+      sha256: 7b210ece4e69cce646cd3a64830ccf5f32d8d27d15257a9e1cc77c597a7e99fc
+    - arquivo: ../p0a-v2/p0a-anchor-3q-v2-512.webp
+      sha256: ada5e022a7185c075d41b59c954007d0abd8e333b311ea5c15a3c42c8f96a1ff
+  origem: Git_publicado
+escopo:
+  incluido:
+    - cinco_assets_globais_P0B_01_a_P0B_05
+    - masters_lossless_de_geracao_e_masters_RGBA
+    - exports_WebP_com_alfa
+    - prompts_manifesto_avaliacao_e_licenca
+    - provas_de_fundo_reducao_e_responsividade
+  excluido:
+    - P0c
+    - icones_de_interface
+    - codigo_do_aplicativo
+    - CSS
+    - PWA
+    - conteudo_pedagogico
+    - alteracao_de_STATUS_handoff_Issue_ou_lock
+geracao:
+  provedor: OpenAI
+  ferramenta: image_gen_integrada_Codex
+  modo: built_in_generation_with_references
+  modelo: nao_exposto_pela_interface
+  versao_modelo: nao_exposta_pela_interface
+  seed: nao_exposta_pela_interface
+  sampler: nao_exposto_pela_interface
+  steps: nao_expostos_pela_interface
+  guidance: nao_exposto_pela_interface
+  reproducibilidade_pixel_a_pixel: false
+  independencia:
+    cada_asset_derivado_diretamente_de_P0a: true
+    P0b_usado_como_referencia_de_outro_P0b: false
+  prompt:
+    arquivo: PROMPTS_P0B_V1.md
+    sha256: 3b68ffca2f74f5c426dfaab183f7b9330229f4c0cd0b9b00671d05b03d0f3a1b
+  chroma_solicitado: '#ff00ff'
+  candidatos_selecionados:
+    - id: P0B-01
+      output_id: exec-0b7706c2-ea90-4f53-9283-58a3a9b8a042
+      arquivo: masters/P0B-01-welcome-master-v1.png
+      dimensoes_px: 1254x1254
+      bytes: 1327787
+      sha256: 9cd7f55dc7d52fb70b72891f82de1732f7daf13f5aa4b21caf94ea43695c54d4
+    - id: P0B-02
+      output_id: exec-4f830e48-80ed-4867-baf6-6741fad8bd3a
+      arquivo: masters/P0B-02-listen-master-v1.png
+      dimensoes_px: 1254x1254
+      bytes: 1304276
+      sha256: 465561c4996cb1a9be6da1d7b42490f42338d2dd2d7e9d7fa3c3ec802f0820bf
+    - id: P0B-03
+      output_id: exec-12f12acc-00d9-47a3-9bfd-049576154030
+      arquivo: masters/P0B-03-correct-master-v1.png
+      dimensoes_px: 1254x1254
+      bytes: 1399590
+      sha256: 76f7659e8a5eca467e0ad5143d42a968c84ec6a8c8c8d7b34f608ad70afeadb1
+    - id: P0B-04
+      output_id: exec-c31d8181-0a66-4555-a0a6-128e95c4474e
+      arquivo: masters/P0B-04-retry-master-v1.png
+      dimensoes_px: 1254x1254
+      bytes: 1489159
+      sha256: 9bd6edf8cabd5a650ec435234992cd3ff1e79b92fa26e367d83dfec28678eefb
+    - id: P0B-05
+      output_id: exec-127f5cfc-ce66-4a10-85dd-293aa166eab7
+      arquivo: masters/P0B-05-complete-master-v1.png
+      dimensoes_px: 1448x1086
+      bytes: 1216314
+      sha256: e49d06b93e093bc6efe881d28957e2a2f7625ca4818423f23d7e3535e1bccd52
+masters_transparentes:
+  ferramenta: remove_chroma_key.py_da_skill_imagegen
+  ambiente: venv_isolado_em_private_tmp
+  Pillow: 12.1.0
+  parametros:
+    auto_key: border
+    soft_matte: true
+    transparent_threshold: 12
+    opaque_threshold: 220
+    despill: true
+    edge_contract: 1
+    repeticoes: 1_correcao_apos_inspecao_do_halo
+  arquivos:
+    - id: P0B-01
+      arquivo: masters/P0B-01-welcome-transparent-master-v1.png
+      dimensoes_px: 1254x1254
+      bytes: 637555
+      sha256: 08628e36a921166db4216ea4007bd7291d147b63701ecbd75f00535f875bc587
+    - id: P0B-02
+      arquivo: masters/P0B-02-listen-transparent-master-v1.png
+      dimensoes_px: 1254x1254
+      bytes: 631771
+      sha256: 16800ca878a6013fc2c5386bacf5702749170d26ba4530536da90516f43396df
+    - id: P0B-03
+      arquivo: masters/P0B-03-correct-transparent-master-v1.png
+      dimensoes_px: 1254x1254
+      bytes: 785636
+      sha256: a74e6cb2e52e4e974e61078c545cd9325dbe1dcd1d12f531481fb9a5fec556c8
+    - id: P0B-04
+      arquivo: masters/P0B-04-retry-transparent-master-v1.png
+      dimensoes_px: 1254x1254
+      bytes: 963206
+      sha256: 239d0e23dd63de029b256730376f47e91146702c86a397912da2b9a6d649b0d3
+    - id: P0B-05
+      arquivo: masters/P0B-05-complete-transparent-master-v1.png
+      dimensoes_px: 1448x1086
+      bytes: 491416
+      sha256: e098b1567c708a61c362bc37933b7744a6de81d17ae3cd7e6ccdb3b5c65d1c6c
+pos_processamento:
+  ferramenta: sharp
+  versao_ferramenta: 0.34.4
+  libvips: 8.17.2
+  libwebp: 1.6.0
+  instalacao: isolada_em_private_tmp_sem_dependencias_no_repositorio
+  operacoes:
+    - resize_fit_contain_Lanczos3_com_fundo_RGBA_transparente
+    - WebP_quality_90_alphaQuality_100_smartSubsample_true_effort_6
+    - perfil_ICC_sRGB_embutido
+  formato_entregue: WebP
+  alfa_entregue: true
+assets:
+  - id: P0B-01
+    arquivo: exports/P0B-01-welcome-v1.webp
+    funcao: boas_vindas_global
+    papel_acessivel: decorativo
+    alt: ''
+    dimensoes_px: 512x512
+    bytes: 21072
+    sha256: 7bf4e244dff15570716d0d899f00e4ed19bea8f23a40b7d793caa345604111a0
+    canais: RGBA_8bit
+    alfa: true
+    espaco_de_cor: sRGB
+    perfil_icc_embutido: true
+    bbox_alpha_px: [137, 91, 386, 409]
+    budget_bytes: 70000
+    margem_bytes: 48928
+    budget_resultado: PASSOU
+  - id: P0B-02
+    arquivo: exports/P0B-02-listen-v1.webp
+    funcao: apontar_para_controle_Ouvir
+    papel_acessivel: funcional_quando_o_gesto_carrega_a_relacao
+    alt: Capivara aponta para o botão Ouvir
+    dimensoes_px: 512x512
+    bytes: 22710
+    sha256: d853f5ae094e0a25c3fc66027c6c34a8b62f769b61a5de03445f7241c0969b11
+    canais: RGBA_8bit
+    alfa: true
+    espaco_de_cor: sRGB
+    perfil_icc_embutido: true
+    bbox_alpha_px: [198, 111, 484, 406]
+    margem_esquerda_percentual: 38.7
+    budget_bytes: 50000
+    margem_bytes: 27290
+    budget_resultado: PASSOU
+  - id: P0B-03
+    arquivo: exports/P0B-03-correct-v1.webp
+    funcao: feedback_global_de_acerto
+    papel_acessivel: decorativo_com_feedback_equivalente_textual_ou_sonoro
+    alt: ''
+    dimensoes_px: 512x512
+    bytes: 23530
+    sha256: cc2d5985c8146e4d6d4a0225311d7025991ef6b265fa8da819fe4576fddf801c
+    canais: RGBA_8bit
+    alfa: true
+    espaco_de_cor: sRGB
+    perfil_icc_embutido: true
+    bbox_alpha_px: [126, 107, 386, 455]
+    budget_bytes: 45000
+    margem_bytes: 21470
+    budget_resultado: PASSOU
+  - id: P0B-04
+    arquivo: exports/P0B-04-retry-v1.webp
+    funcao: feedback_global_de_tentar_de_novo
+    papel_acessivel: funcional_somente_se_o_gesto_carrega_a_acao
+    alt: Capivara convida a tentar de novo
+    dimensoes_px: 512x512
+    bytes: 26488
+    sha256: e0444dbcd0cd19b3108bfbeb815c8649805016bc208f08a297bad6f2f3a205b4
+    canais: RGBA_8bit
+    alfa: true
+    espaco_de_cor: sRGB
+    perfil_icc_embutido: true
+    bbox_alpha_px: [115, 74, 396, 471]
+    budget_bytes: 45000
+    margem_bytes: 18512
+    budget_resultado: PASSOU
+  - id: P0B-05
+    arquivo: exports/P0B-05-complete-v1.webp
+    funcao: conclusao_global_responsiva
+    papel_acessivel: decorativo_com_conclusao_equivalente_textual_ou_sonora
+    alt: ''
+    dimensoes_px: 1024x768
+    bytes: 41256
+    sha256: 97c95a84eab6e5684fdb38d85a4d7d9696609af83c82c8da23c801f8659e0a60
+    canais: RGBA_8bit
+    alfa: true
+    espaco_de_cor: sRGB
+    perfil_icc_embutido: true
+    bbox_alpha_px: [267, 159, 735, 614]
+    margens_px: {esquerda: 267, topo: 159, direita: 288, base: 153}
+    budget_bytes: 90000
+    margem_bytes: 48744
+    budget_resultado: PASSOU
+budget_agregado:
+  bytes: 135056
+  teto_bytes: 300000
+  margem_bytes: 164944
+  resultado: PASSOU
+  nenhum_asset_acima_de_150000_bytes: true
+provas:
+  - arquivo: reviews/P0B-alpha-backgrounds-v1.png
+    sha256: 1e6a12eaa309ffe1f571c104af495e0700d1acde02d2ad5f806664d901d84746
+    funcao: alfa_sobre_quatro_fundos
+  - arquivo: reviews/P0B-reduced-proof-v1.png
+    sha256: 5ec118c24ed772ecaaf9d91d6614ecdd9f0a52eb80ea77bf46acec4cca1e8931
+    funcao: leitura_em_256_192_96_e_48_px
+  - arquivo: reviews/P0B-05-responsive-proof-v1.png
+    sha256: beacc2d0a8040929ddc2cb9f4a32716e0d604d89a3a7b83f99b437b572a31ffe
+    funcao: composicao_contain_em_cinco_aspectos_de_viewport
+documentos:
+  - arquivo: PROMPTS_P0B_V1.md
+    sha256: 3b68ffca2f74f5c426dfaab183f7b9330229f4c0cd0b9b00671d05b03d0f3a1b
+  - arquivo: LICENCA_E_TERMOS_OPENAI_2026-07-21.md
+    sha256: cd7f16b644fa97989043d349e0491168e8124598ef822185f80e987650c413b9
+  - arquivo: AVALIACAO_ARTISTA.md
+    sha256: 3682580b485524cb88ed1d740e5e13f95b3a756077cae5e579b1aa5fe0582fab
+metadados_e_privacidade:
+  dados_de_criancas_usados: false
+  dados_pessoais_inseridos_no_prompt: false
+  referencia_protegida_de_terceiro: false
+  inspecao: sharp_metadata_alpha_scan_e_strings
+  resultado: nenhum_autor_GPS_coordenada_caminho_local_ou_identificador_pessoal_encontrado
+proveniencia_e_licenca:
+  origem: cinco_geracoes_novas_com_referencias_proprias_P0a_publicadas
+  referencia_visual_protegida_fornecida: false
+  artista_ou_estudio_imitado: false
+  evidencia: LICENCA_E_TERMOS_OPENAI_2026-07-21.md
+  termos_aplicaveis: OpenAI_Terms_of_Use_efetivos_2026_01_01
+  propriedade_output_entre_partes: atribuida_ao_usuario_nos_limites_da_lei_aplicavel
+  uso_comercial: compativel_sob_termos_consultados_com_responsabilidade_do_usuario
+  output_pode_nao_ser_unico: true
+  garantia_nao_infracao: false
+  configuracao_opt_out_Codex: nao_inspecionada
+  retencao_builtin_especifica: nao_exposta
+  revisao_juridica_exaustiva: nao_realizada
+validacao:
+  testado:
+    - inspecao_visual_dos_cinco_exports_em_resolucao_original
+    - alfa_sobre_quatro_cores
+    - reducoes_256_192_96_e_48_px
+    - P0B_05_em_cinco_aspectos_responsivos_com_fit_contain
+    - identidade_anatomia_emocoes_area_negativa_e_ausencias_proibidas
+    - MIME_dimensoes_bytes_SHA256_canais_alfa_sRGB_ICC_e_budgets
+    - derivacao_independente_direta_de_P0a
+  falhou:
+    - primeira_passagem_de_geracao_rejeitada_por_deriva_e_anatomia
+    - primeira_extracao_alpha_repetida_uma_vez_por_halo_fino
+  nao_testado:
+    - integracao_real_CSS_leitores_de_tela_e_PWA
+    - validacao_com_criancas
+    - recorte_cover_de_implementacao_futura
+    - busca_reversa_ampla_e_revisao_juridica
+    - configuracao_de_opt_out_e_retencao_especifica
+    - P0c
+  inferido:
+    - adequacao_provavel_ao_produto_infantil_sujeita_a_supervisao
+    - originalidade_aparente_sem_garantia_juridica
+    - significado_funcional_de_P0B_02_e_P0B_04_depende_do_contexto_acessivel
+revisao:
+  autoaprovacao_artista: false
+  proximo_papel: supervisor
+  proxima_skill: lumon-supervisao-final
+  veredito_requerido: revisar_P0b_v1_independentemente
