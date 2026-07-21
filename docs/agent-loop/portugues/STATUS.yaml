@@ -1,7 +1,7 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: APROVADO
-gate_atual: G3_P0A_MODEL_SHEET
+estado: PRONTO
+gate_atual: G3_P0B_MOMENTOS_ESSENCIAIS
 implementacao_autorizada: false
 geracao_visual_autorizada: true
 autoridade_de_avanco: supervisor
@@ -10,7 +10,7 @@ max_concurrency: 1
 agente_ativo: null
 proximo_agente_autorizado: artista_ia
 proxima_skill: lumon-arte-capivara
-commit_canonico: 9424a5256e33421926053e798116c9ad8979fca9
+commit_canonico: d4480c22f8bd6d25484d7fad350a4ae0e9690b94
 run_id: null
 idempotency_key: null
 heartbeat_at: null
@@ -31,10 +31,10 @@ ressalvas_ativas:
     bloqueia: aprovacao futura do shell e build
     aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: EM_REVISAO
-  para: APROVADO
-  em: 2026-07-21T18:26:08Z
-  motivo: Supervisor aprovou P0a v2 como capivara-model-v1; P0b e o proximo subgate autorizado.
+  de: APROVADO
+  para: PRONTO
+  em: 2026-07-21T18:27:05Z
+  motivo: Aprovacao P0a v2 publicada; P0b momentos essenciais liberado somente para o artista.
 bloqueios:
   - Implementacao do produto nao autorizada.
   - P0c permanece bloqueado ate aprovacao do P0b.
