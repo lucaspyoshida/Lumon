@@ -1,20 +1,20 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: PRONTO
+estado: EM_EXECUCAO
 gate_atual: G3_P0B_MOMENTOS_ESSENCIAIS
 implementacao_autorizada: false
 geracao_visual_autorizada: true
 autoridade_de_avanco: supervisor
 escopo_visual_autorizado: P0a_P0b_P0c_em_sequencia_com_supervisao
 max_concurrency: 1
-agente_ativo: null
-proximo_agente_autorizado: artista_ia
+agente_ativo: artista_ia
+proximo_agente_autorizado: null
 proxima_skill: lumon-arte-capivara
-commit_canonico: d4480c22f8bd6d25484d7fad350a4ae0e9690b94
-run_id: null
-idempotency_key: null
-heartbeat_at: null
-lease_expires_at: null
+commit_canonico: 2fa19d889d50d25ec0a650348284e6416bc1ca6d
+run_id: pt-20260721T182750Z-artista-p0b-2fa19d8
+idempotency_key: G3_P0B_MOMENTOS_ESSENCIAIS:artista_ia:2fa19d889d50d25ec0a650348284e6416bc1ca6d
+heartbeat_at: 2026-07-21T18:27:50Z
+lease_expires_at: 2026-07-21T19:17:50Z
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
@@ -31,10 +31,10 @@ ressalvas_ativas:
     bloqueia: aprovacao futura do shell e build
     aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: APROVADO
-  para: PRONTO
-  em: 2026-07-21T18:27:05Z
-  motivo: Aprovacao P0a v2 publicada; P0b momentos essenciais liberado somente para o artista.
+  de: PRONTO
+  para: EM_EXECUCAO
+  em: 2026-07-21T18:27:50Z
+  motivo: Claim publicado para gerar somente cinco momentos essenciais P0b a partir de capivara-model-v1.
 bloqueios:
   - Implementacao do produto nao autorizada.
   - P0c permanece bloqueado ate aprovacao do P0b.
