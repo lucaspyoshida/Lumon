@@ -1,28 +1,28 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: EM_REVISAO
+estado: APROVADO
 gate_atual: G3_P0A_MODEL_SHEET
 implementacao_autorizada: false
 geracao_visual_autorizada: true
 autoridade_de_avanco: supervisor
 escopo_visual_autorizado: P0a_P0b_P0c_em_sequencia_com_supervisao
 max_concurrency: 1
-agente_ativo: supervisor
-proximo_agente_autorizado: null
-proxima_skill: lumon-supervisao-final
-commit_canonico: a1f1c55de3b6a5af5b54def76d1bce0883817a36
-run_id: pt-20260721T181356Z-supervisor-p0a-a1f1c55
-idempotency_key: G3_P0A_MODEL_SHEET:supervisor:a1f1c55de3b6a5af5b54def76d1bce0883817a36
-heartbeat_at: 2026-07-21T18:13:56Z
-lease_expires_at: 2026-07-21T19:03:56Z
+agente_ativo: null
+proximo_agente_autorizado: artista_ia
+proxima_skill: lumon-arte-capivara
+commit_canonico: 9424a5256e33421926053e798116c9ad8979fca9
+run_id: null
+idempotency_key: null
+heartbeat_at: null
+lease_expires_at: null
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
 ultimo_gate_aprovado:
-  gate: G3_ARTE_DOCUMENTAL
-  veredito: APROVADO COM RESSALVAS
-  relatorio_commit: f8a9fb7d0d85f395d31c01132f9a2492c0025304
-  handoff_commit: cb69f4c7669d4c5cb556244612e20098dcb42c4c
+  gate: G3_P0A_MODEL_SHEET
+  veredito: OBJETIVO ALCANCADO — APROVADO
+  relatorio_commit: 07c813e452d209c321d5aa8bd1e5483ea851c53a
+  handoff_commit: 9424a5256e33421926053e798116c9ad8979fca9
 ressalvas_ativas:
   - id: P1_ICONE_512_ACIMA_DO_TETO
     bloqueia: aprovacao futura do asset e shell visual
@@ -31,11 +31,10 @@ ressalvas_ativas:
     bloqueia: aprovacao futura do shell e build
     aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: EM_EXECUCAO
-  para: EM_REVISAO
-  em: 2026-07-21T18:13:56Z
-  motivo: P0a v2 e handoff publicados e confirmados no remoto; nova revisao independente obrigatoria.
+  de: EM_REVISAO
+  para: APROVADO
+  em: 2026-07-21T18:26:08Z
+  motivo: Supervisor aprovou P0a v2 como capivara-model-v1; P0b e o proximo subgate autorizado.
 bloqueios:
   - Implementacao do produto nao autorizada.
-  - P0b e P0c permanecem bloqueados ate aprovacao do P0a.
-  - P0a exige prova de licenca e termos, master lossless canonico, pose de alcance corrigida e formato/proveniencia resolvidos.
+  - P0c permanece bloqueado ate aprovacao do P0b.
