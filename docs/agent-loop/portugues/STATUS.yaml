@@ -1,6 +1,6 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: RETRABALHO
+estado: PRONTO
 gate_atual: G3_P0A_MODEL_SHEET
 implementacao_autorizada: false
 geracao_visual_autorizada: true
@@ -10,7 +10,7 @@ max_concurrency: 1
 agente_ativo: null
 proximo_agente_autorizado: artista_ia
 proxima_skill: lumon-arte-capivara
-commit_canonico: 07f262e8ac1e5d378c06e489c23ceeee1d14c889
+commit_canonico: 9b3e8a439f6928b8e56ca132b7809be713ff363a
 run_id: null
 idempotency_key: null
 heartbeat_at: null
@@ -31,10 +31,10 @@ ressalvas_ativas:
     bloqueia: aprovacao futura do shell e build
     aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: EM_REVISAO
-  para: RETRABALHO
-  em: 2026-07-21T17:48:02Z
-  motivo: Supervisor publicou veredito REPROVADO; P0a retorna ao artista e P0b permanece bloqueado.
+  de: RETRABALHO
+  para: PRONTO
+  em: 2026-07-21T17:49:11Z
+  motivo: Handoff supervisor e estado de retrabalho publicados; artista P0a e unico proximo papel autorizado.
 bloqueios:
   - Implementacao do produto nao autorizada.
   - P0b e P0c permanecem bloqueados ate aprovacao do P0a.
