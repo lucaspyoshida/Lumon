@@ -1,0 +1,212 @@
+schema_version: 2
+lote: P0a
+versao_lote: v2
+estado: CANDIDATO_EM_REVISAO
+gate: G3_P0A_MODEL_SHEET
+run_id: pt-20260721T174958Z-artista-p0a-7a56fcd
+idempotency_key: G3_P0A_MODEL_SHEET:artista_ia:7a56fcdb35e055b7ca0a2c0bf75b49705dacf121
+entrada_canonica:
+  commit: 7a56fcdb35e055b7ca0a2c0bf75b49705dacf121
+  claim_remoto: bd0e3588479a0e93b42e9387c529d0b4f1431133
+  branch: feature/evolucao-pedagogica
+  referencia_visual:
+    arquivo: ../p0a/p0a-model-sheet-v1-review-1536.jpg
+    sha256: 08dea06c86465cf773a05c43dba0fc93bdbc83a87912be7020239ac9c9366b90
+    origem: Git_publicado
+  master_v1_externo_usado: false
+escopo:
+  incluido:
+    - correcao exclusiva da pose 6 de alcance curto
+    - master lossless canonico P0a v2
+    - folha de revisao WebP
+    - ancoras frontal e tres_quartos WebP
+    - recorte de evidencia da pose de alcance
+    - prompt, manifesto, avaliacao e evidencia de termos/licenca
+  excluido:
+    - P0b
+    - P0c
+    - icones
+    - conteudo pedagogico
+    - codigo do aplicativo
+    - CSS
+    - PWA
+geracao:
+  provedor: OpenAI
+  ferramenta: image_gen_integrada_Codex
+  modo: built_in_precise_object_edit
+  taxonomia: precise-object-edit
+  modelo: nao_exposto_pela_interface
+  versao_modelo: nao_exposta_pela_interface
+  versao_interface: nao_exposta_pela_interface
+  seed: nao_exposta_pela_interface
+  sampler: nao_exposto_pela_interface
+  steps: nao_expostos_pela_interface
+  guidance: nao_exposto_pela_interface
+  parametros_deterministicos: nao_expostos_pela_interface
+  reproducibilidade_pixel_a_pixel: false
+  prompt:
+    arquivo: PROMPT_P0A_V2.md
+    sha256: c57b52a0287c1b213f66e444e4626031bba2a99cc09010ac155b31a792783602
+  candidato_selecionado:
+    output_id: exec-a5912f6d-f99b-44a0-848e-f4790ea8559b
+    gerado_em_utc: 2026-07-21T17:55:15Z
+    mime: image/png
+    dimensoes_px: 1254x1254
+    bytes: 1498937
+    sha256: 43a42dc4dcb413ea27c1df6a798e2de59039c1646b87d3ffd4ed154f6cd7c2e4
+    motivo_selecao: quadrado; pose_6_inequivoca; identidade_e_demais_poses_conformes_na_inspecao_do_artista
+    copiado_para_master_canonico: p0a-model-sheet-v2-master-1254.png
+  candidato_rejeitado:
+    output_id: exec-6071f5a4-df4e-4c34-a15c-149487985867
+    gerado_em_utc: 2026-07-21T17:56:56Z
+    mime: image/png
+    dimensoes_px: 1448x1086
+    bytes: 1487591
+    sha256: ed49ed1e66e93e5354ffdf822dc636a5a71cb8cb4bc30b0b05a875ff29fe4a58
+    motivo_rejeicao: quadro_4_por_3_incompativel_com_model_sheet_quadrado
+master_canonico:
+  id: p0a_model_sheet_v2_master_sha256_43a42dc4
+  arquivo: p0a-model-sheet-v2-master-1254.png
+  armazenamento: Git_e_remoto_da_branch_exclusiva
+  lossless: true
+  mime: image/png
+  dimensoes_px: 1254x1254
+  bytes: 1498937
+  sha256: 43a42dc4dcb413ea27c1df6a798e2de59039c1646b87d3ffd4ed154f6cd7c2e4
+  canais: RGB_8bit
+  alfa: false
+  espaco_de_cor: sRGB
+  perfil_icc_embutido: false
+  distribuido_no_app: false
+pos_processamento:
+  ferramenta: sharp
+  versao_ferramenta: 0.34.4
+  libvips: 8.17.2
+  libwebp: 1.6.0
+  instalacao: isolada_em_private_tmp_sem_alterar_dependencias_do_repositorio
+  formato_solicitado: WebP
+  formato_entregue: WebP
+  operacoes:
+    - folha_de_revisao_redimensionada_do_master_para_1536x1536_lanczos3
+    - folha_de_revisao_WebP_quality_88_smartSubsample_true_effort_6
+    - ancoras_recortadas_diretamente_do_master_em_celulas_P0A_01_F_e_P0A_01_Q
+    - ancoras_contidas_em_410x410_com_margem_externa_de_51px_em_canvas_512x512
+    - pose_6_recortada_diretamente_do_master_com_mesma_politica_de_margem
+    - ancoras_e_pose_WebP_quality_90_smartSubsample_true_effort_6
+    - perfil_sRGB_embutido_nos_WebP
+  transparencia_requerida: false
+  alfa_entregue: false
+assets:
+  - id: p0a_model_sheet_v2_review
+    arquivo: p0a-model-sheet-v2-review-1536.webp
+    funcao: referencia_editorial_global_de_identidade_vistas_expressoes_e_pose_6_corrigida
+    alt: Folha de modelo da Capivara em doze vistas e expressoes, incluindo alcance curto de uma pata, com pelo marrom, focinho claro, lenco verde-petroleo e medalhao dourado.
+    mime: image/webp
+    dimensoes_px: 1536x1536
+    bytes: 144584
+    sha256: bee85ae3844ebb7d829bf2784e8fdf6efe163d953824649dd3c2e12f3df4f2e8
+    canais: RGB_8bit
+    alfa: false
+    espaco_de_cor: sRGB
+    perfil_icc_embutido: true
+    budget_bytes: 150000
+    budget_resultado: PASSOU
+    margem_bytes: 5416
+  - id: p0a_anchor_front_v2
+    arquivo: p0a-anchor-front-v2-512.webp
+    funcao: ancora_editorial_frontal_de_identidade
+    alt: Capivara em vista frontal, corpo inteiro, pelo marrom, focinho claro, lenco verde-petroleo e medalhao dourado.
+    mime: image/webp
+    dimensoes_px: 512x512
+    bytes: 11806
+    sha256: 7b210ece4e69cce646cd3a64830ccf5f32d8d27d15257a9e1cc77c597a7e99fc
+    canais: RGB_8bit
+    alfa: false
+    espaco_de_cor: sRGB
+    perfil_icc_embutido: true
+    budget_bytes: 90000
+    budget_resultado: PASSOU
+    margem_bytes: 78194
+  - id: p0a_anchor_3q_v2
+    arquivo: p0a-anchor-3q-v2-512.webp
+    funcao: ancora_editorial_tres_quartos_de_identidade
+    alt: Capivara em vista de tres quartos voltada para a direita, corpo inteiro, pelo marrom, focinho claro, lenco verde-petroleo e medalhao dourado.
+    mime: image/webp
+    dimensoes_px: 512x512
+    bytes: 13286
+    sha256: ada5e022a7185c075d41b59c954007d0abd8e333b311ea5c15a3c42c8f96a1ff
+    canais: RGB_8bit
+    alfa: false
+    espaco_de_cor: sRGB
+    perfil_icc_embutido: true
+    budget_bytes: 90000
+    budget_resultado: PASSOU
+    margem_bytes: 76714
+  - id: p0a_pose_reach_v2_evidence
+    arquivo: p0a-pose-reach-v2-512.webp
+    funcao: evidencia_isolada_da_pose_6_de_alcance_curto
+    alt: Capivara quadrupede alcanca um espaco vazio com uma pata dianteira curta e arredondada.
+    mime: image/webp
+    dimensoes_px: 512x512
+    bytes: 12470
+    sha256: 98f0ea6178ab0196ed5cdb3a27a300126d6fec3d4bfe1581fe2fab9dddf4042c
+    canais: RGB_8bit
+    alfa: false
+    espaco_de_cor: sRGB
+    perfil_icc_embutido: true
+    budget_bytes: 90000
+    budget_resultado: PASSOU
+    margem_bytes: 77530
+documentos:
+  - arquivo: PROMPT_P0A_V2.md
+    sha256: c57b52a0287c1b213f66e444e4626031bba2a99cc09010ac155b31a792783602
+  - arquivo: LICENCA_E_TERMOS_OPENAI_2026-07-21.md
+    sha256: 2d41cd243099546aaa091f71c0783afdc9eec410de029dc94c113f09aac441de
+metadados_e_privacidade:
+  dados_de_criancas_usados: false
+  dados_pessoais_inseridos_no_prompt: false
+  referencia_protegida_de_terceiro: false
+  inspecao: sharp_metadata_e_strings
+  resultado: nenhum_autor_GPS_coordenada_caminho_local_ou_identificador_pessoal_encontrado
+proveniencia_e_licenca:
+  origem: edicao_nova_com_image_gen_integrada_sobre_referencia_propria_publicada
+  referencia_visual_protegida_fornecida: false
+  artista_ou_estudio_imitado: false
+  evidencia: LICENCA_E_TERMOS_OPENAI_2026-07-21.md
+  termos_aplicaveis: OpenAI_Terms_of_Use_efetivos_2026_01_01
+  propriedade_output_entre_partes: atribuida_ao_usuario_nos_limites_da_lei_aplicavel
+  uso_comercial: compativel_sob_termos_consultados_com_responsabilidade_do_usuario
+  output_pode_nao_ser_unico: true
+  garantia_nao_infracao: false
+  uso_para_treinamento_em_servico_individual: possivel_salvo_opt_out
+  configuracao_opt_out_Codex: nao_inspecionada
+  retencao_builtin_especifica: nao_exposta
+  revisao_juridica_exaustiva: nao_realizada
+validacao:
+  testado:
+    - inspecao_visual_do_master_e_dos_quatro_WebP_em_resolucao_original
+    - pose_6_com_forepata_curta_alcancando_espaco_vazio_e_tres_patas_de_apoio
+    - ausencia_visual_de_maos_humanas_cauda_texto_numero_logo_marca_dagua_pista_e_emocao_punitiva
+    - identidade_focinho_olhos_orelhas_lenco_medalhao_e_silhueta_nas_12_celulas
+    - corpo_inteiro_padding_e_recortes_das_ancoras
+    - reducao_das_duas_ancoras_e_da_pose_6_para_48px
+    - MIME_dimensoes_bytes_SHA256_canais_alfa_sRGB_e_ICC
+    - budgets_da_folha_e_dos_tres_recortes
+    - busca_basica_de_metadados_privados
+  falhou: []
+  nao_testado:
+    - validacao_com_criancas
+    - integracao_e_responsividade_no_aplicativo
+    - busca_reversa_ampla_e_revisao_juridica
+    - correspondencia_colorimetrica_pixel_a_pixel_com_HEX_documentados
+    - configuracao_de_opt_out_da_conta_Codex
+    - retencao_especifica_do_output_transitorio_builtin
+    - P0b_e_P0c
+  inferido:
+    - adequacao_provavel_como_referencia_editorial_infantil_sujeita_a_supervisao
+    - originalidade_aparente_sem_garantia_juridica
+revisao:
+  autoaprovacao_artista: false
+  proximo_papel: supervisor
+  proxima_skill: lumon-supervisao-final
+  veredito_requerido: revisar_P0a_v2_independentemente
