@@ -1,20 +1,20 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: PRONTO
+estado: EM_EXECUCAO
 gate_atual: G3_P0C_ICONE_MARCADOR
 implementacao_autorizada: false
 geracao_visual_autorizada: true
 autoridade_de_avanco: supervisor
 escopo_visual_autorizado: P0a_P0b_P0c_em_sequencia_com_supervisao
 max_concurrency: 1
-agente_ativo: null
-proximo_agente_autorizado: artista_ia
+agente_ativo: artista_ia
+proximo_agente_autorizado: null
 proxima_skill: lumon-arte-capivara
-commit_canonico: 876ca88f279f1d60f704abb533dd5ce7d3162e92
-run_id: null
-idempotency_key: null
-heartbeat_at: null
-lease_expires_at: null
+commit_canonico: c5eef27ff949264e1df3c33dfe4457ac7494e345
+run_id: pt-20260726T035942Z-artista-p0c-c5eef27
+idempotency_key: G3_P0C_ICONE_MARCADOR:artista_ia:c5eef27ff949264e1df3c33dfe4457ac7494e345
+heartbeat_at: 2026-07-26T03:59:42Z
+lease_expires_at: 2026-07-26T04:49:42Z
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
@@ -31,10 +31,10 @@ ressalvas_ativas:
     bloqueia: aprovacao futura do shell e build
     aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: APROVADO
-  para: PRONTO
-  em: 2026-07-26T03:59:03Z
-  motivo: P0b aprovado e handoff supervisor publicado; P0c liberado somente para novo claim do artista.
+  de: PRONTO
+  para: EM_EXECUCAO
+  em: 2026-07-26T03:59:42Z
+  motivo: Claim publicado para produzir somente P0c, sem substituir assets do app.
 bloqueios:
   - Implementacao do produto nao autorizada.
   - Icones atuais, manifesto, service worker, app e shell nao podem ser alterados neste subgate visual.
