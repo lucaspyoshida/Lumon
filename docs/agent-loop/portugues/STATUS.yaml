@@ -1,20 +1,20 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: EM_EXECUCAO
+estado: EM_REVISAO
 gate_atual: G3_P0B_MOMENTOS_ESSENCIAIS
 implementacao_autorizada: false
 geracao_visual_autorizada: true
 autoridade_de_avanco: supervisor
 escopo_visual_autorizado: P0a_P0b_P0c_em_sequencia_com_supervisao
 max_concurrency: 1
-agente_ativo: artista_ia
+agente_ativo: supervisor
 proximo_agente_autorizado: null
-proxima_skill: lumon-arte-capivara
-commit_canonico: 2fa19d889d50d25ec0a650348284e6416bc1ca6d
-run_id: pt-20260721T182750Z-artista-p0b-2fa19d8
-idempotency_key: G3_P0B_MOMENTOS_ESSENCIAIS:artista_ia:2fa19d889d50d25ec0a650348284e6416bc1ca6d
-heartbeat_at: 2026-07-21T18:27:50Z
-lease_expires_at: 2026-07-21T19:17:50Z
+proxima_skill: lumon-supervisao-final
+commit_canonico: fcd6826fe7a5e3ba1fb60f473c8be285b4812ed4
+run_id: pt-20260726T030609Z-supervisor-p0b-fcd6826
+idempotency_key: G3_P0B_MOMENTOS_ESSENCIAIS:supervisor:fcd6826fe7a5e3ba1fb60f473c8be285b4812ed4
+heartbeat_at: 2026-07-26T03:06:09Z
+lease_expires_at: 2026-07-26T03:56:09Z
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
@@ -31,10 +31,10 @@ ressalvas_ativas:
     bloqueia: aprovacao futura do shell e build
     aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: PRONTO
-  para: EM_EXECUCAO
-  em: 2026-07-21T18:27:50Z
-  motivo: Claim publicado para gerar somente cinco momentos essenciais P0b a partir de capivara-model-v1.
+  de: EM_EXECUCAO
+  para: EM_REVISAO
+  em: 2026-07-26T03:06:09Z
+  motivo: Handoff P0b publicado; claim exclusivo do supervisor para revisão independente.
 bloqueios:
   - Implementacao do produto nao autorizada.
   - P0c permanece bloqueado ate aprovacao do P0b.
