@@ -1,28 +1,28 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: EM_REVISAO
+estado: APROVADO
 gate_atual: G3_P0B_MOMENTOS_ESSENCIAIS
 implementacao_autorizada: false
 geracao_visual_autorizada: true
 autoridade_de_avanco: supervisor
 escopo_visual_autorizado: P0a_P0b_P0c_em_sequencia_com_supervisao
 max_concurrency: 1
-agente_ativo: supervisor
-proximo_agente_autorizado: null
-proxima_skill: lumon-supervisao-final
-commit_canonico: fcd6826fe7a5e3ba1fb60f473c8be285b4812ed4
-run_id: pt-20260726T030609Z-supervisor-p0b-fcd6826
-idempotency_key: G3_P0B_MOMENTOS_ESSENCIAIS:supervisor:fcd6826fe7a5e3ba1fb60f473c8be285b4812ed4
-heartbeat_at: 2026-07-26T03:39:50Z
-lease_expires_at: 2026-07-26T04:29:50Z
+agente_ativo: null
+proximo_agente_autorizado: artista_ia
+proxima_skill: lumon-arte-capivara
+commit_canonico: b8f72ecc10f13af5c6b0033f80c06cd0477a9909
+run_id: null
+idempotency_key: null
+heartbeat_at: null
+lease_expires_at: null
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
 ultimo_gate_aprovado:
-  gate: G3_P0A_MODEL_SHEET
+  gate: G3_P0B_MOMENTOS_ESSENCIAIS
   veredito: OBJETIVO ALCANCADO — APROVADO
-  relatorio_commit: 07c813e452d209c321d5aa8bd1e5483ea851c53a
-  handoff_commit: 9424a5256e33421926053e798116c9ad8979fca9
+  relatorio_commit: 11ce199d8d9e917d5c42f169a174554d21781634
+  handoff_commit: b8f72ecc10f13af5c6b0033f80c06cd0477a9909
 ressalvas_ativas:
   - id: P1_ICONE_512_ACIMA_DO_TETO
     bloqueia: aprovacao futura do asset e shell visual
@@ -31,10 +31,10 @@ ressalvas_ativas:
     bloqueia: aprovacao futura do shell e build
     aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: EM_EXECUCAO
-  para: EM_REVISAO
-  em: 2026-07-26T03:06:09Z
-  motivo: Handoff P0b publicado; claim exclusivo do supervisor para revisão independente.
+  de: EM_REVISAO
+  para: APROVADO
+  em: 2026-07-26T03:58:02Z
+  motivo: Supervisor aprovou P0b sem problema acionavel P0-P3; P0c pode ser preparado em novo claim.
 bloqueios:
   - Implementacao do produto nao autorizada.
-  - P0c permanece bloqueado ate aprovacao do P0b.
+  - P0c aguarda transicao PRONTO e novo claim exclusivo.
