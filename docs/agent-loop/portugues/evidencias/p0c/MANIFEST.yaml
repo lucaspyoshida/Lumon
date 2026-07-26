@@ -1,0 +1,263 @@
+schema_version: 1
+lote: P0c
+versao_lote: v1
+estado: CANDIDATO_EM_REVISAO
+gate: G3_P0C_ICONE_MARCADOR
+run_id: pt-20260726T035942Z-artista-p0c-c5eef27
+idempotency_key: G3_P0C_ICONE_MARCADOR:artista_ia:c5eef27ff949264e1df3c33dfe4457ac7494e345
+branch: feature/evolucao-pedagogica
+entrada_canonica:
+  commit: c5eef27ff949264e1df3c33dfe4457ac7494e345
+  claim_remoto_inicial: 12f88fcdafab93ccdcaf2e00a18d4e528cae5fa0
+  heartbeat_mesmo_run_observado: adb5f9bbb6cb634cd7960138f23f857ca0f4eea9
+  repository: /Users/yoshida/Documents/Codex/2026-07-16/quai/Lumon
+  lock_owner_run_id: pt-20260726T035942Z-artista-p0c-c5eef27
+referencias_aprovadas_exclusivas:
+  - arquivo: ../p0a-v2/p0a-model-sheet-v2-master-1254.png
+    sha256: 43a42dc4dcb413ea27c1df6a798e2de59039c1646b87d3ffd4ed154f6cd7c2e4
+    papel: master_capivara-model-v1
+  - arquivo: ../p0a-v2/p0a-anchor-front-v2-512.webp
+    sha256: 7b210ece4e69cce646cd3a64830ccf5f32d8d27d15257a9e1cc77c597a7e99fc
+    papel: ancora_frontal
+  - arquivo: ../p0a-v2/p0a-anchor-3q-v2-512.webp
+    sha256: ada5e022a7185c075d41b59c954007d0abd8e333b311ea5c15a3c42c8f96a1ff
+    papel: ancora_3q_primaria
+derivacao:
+  referencias_P0b_usadas: false
+  saida_P0c_usada_como_referencia_de_geracao: false
+  chamadas_builtin_independentes: 2
+  derivadas_tecnicas_sem_nova_geracao:
+    - P0C-02_192
+    - P0C-03B_96
+    - P0C-03A_48
+    - reducao_32
+    - reducao_16
+geracao:
+  provedor: OpenAI
+  ferramenta: image_gen_integrada_Codex
+  modo: built_in
+  modelo: nao_exposto_pela_interface
+  versao_modelo: nao_exposta_pela_interface
+  seed: nao_exposta_pela_interface
+  sampler: nao_exposto_pela_interface
+  steps: nao_expostos_pela_interface
+  guidance: nao_exposto_pela_interface
+  reproducibilidade_pixel_a_pixel: false
+  prompt:
+    arquivo: PROMPTS_P0C_V1.md
+    sha256: a85c3fe566463f172aeff6636f56535e3be48f302311358c7c87df6e02953afe
+  saidas:
+    - ticket: P0C-01
+      artefato_builtin: call_P2XxQCnAmdBlEJPM6ds7Vc2I.png
+      sha256: e3e23871dfd0f618ea648d96be1abb9aee572ef9619d721f7a0b180e2eaa0976
+      mime: image/png
+      dimensoes_px: 1254x1254
+      bytes: 1633803
+      taxonomia: stylized-concept
+    - ticket: P0C-04
+      artefato_builtin: call_enhWsnnv7Dis2qpOY1hDPdE1.png
+      sha256: ee75524401f3f4b8c4fddf855c6f69b94824fb1a80ac301c1971273b2f8fe930
+      mime: image/png
+      dimensoes_px: 1254x1254
+      bytes: 1355875
+      taxonomia: background-extraction
+pos_processamento:
+  ambiente: isolado_fora_das_dependencias_do_app
+  dependencias_adicionadas_ao_app: false
+  ferramentas:
+    - nome: sips
+      versao: 316
+      sistema: macOS_26.5.2
+      uso: redimensionamento_para_exports_e_provas
+    - nome: Python
+      versao: 3.14.6
+      bibliotecas_externas: nenhuma
+      uso: chroma_alpha_quantizacao_PNG_provas_e_metadados
+    - nome: PROCESSAMENTO_P0C_V1.py
+      sha256: 65684144e800140a51b316d59c1a298d672779ff5310b2d855c726b523dcebd6
+  icone:
+    - fonte_lossless_1254_preservada
+    - composicao_redimensionada_para_400x400_e_centralizada_em_canvas_512
+    - fundo_amostrado_RGB_248_240_231
+    - export_512_indexado_48_cores
+    - 192_96_48_32_16_derivados_exclusivamente_do_export_512
+    - PNG_zlib_nivel_9_com_gAMA_e_sRGB
+  marcador:
+    - chroma_magenta_flat_builtin
+    - alpha_soft_thresholds_12_220
+    - despill_por_reconstrucao_e_cor_de_doador_opaco_ate_3px
+    - master_transparente_RGBA_lossless
+    - export_256_indexado_ate_256_cores_com_tRNS
+    - PNG_zlib_nivel_9_com_gAMA_e_sRGB
+  perfil:
+    espaco_de_cor: sRGB
+    gAMA: 0.45455
+    chunk_sRGB: true
+    ICC_embutido_exports: false
+masters:
+  - arquivo: masters/P0C-01-icon-generated-master-v1.png
+    mime: image/png
+    dimensoes_px: 1254x1254
+    bytes: 1633803
+    sha256: e3e23871dfd0f618ea648d96be1abb9aee572ef9619d721f7a0b180e2eaa0976
+    canais: RGB_8bit
+    alpha: false
+    lossless: true
+    distribuido_no_app: false
+  - arquivo: masters/P0C-04-marker-chroma-master-v1.png
+    mime: image/png
+    dimensoes_px: 1254x1254
+    bytes: 1355875
+    sha256: ee75524401f3f4b8c4fddf855c6f69b94824fb1a80ac301c1971273b2f8fe930
+    canais: RGB_8bit
+    alpha: false
+    lossless: true
+    distribuido_no_app: false
+  - arquivo: masters/P0C-04-marker-transparent-master-v1.png
+    mime: image/png
+    dimensoes_px: 1254x1254
+    bytes: 720898
+    sha256: 58b0a71d59ebdeff4b8c8d90c7eadf48c9da932dddab5130169943e10feeff5b
+    canais: RGBA_8bit
+    alpha: true
+    lossless: true
+    distribuido_no_app: false
+exports:
+  - id: P0C-01
+    arquivo: exports/P0C-01-icon-512-v1.png
+    funcao: icone_PWA_512_candidato
+    alt: nome_acessivel_vem_do_manifesto_nao_da_imagem
+    mime: image/png
+    dimensoes_px: 512x512
+    bytes: 37370
+    sha256: c7ba4443b5985f8b598cad6b4741b94c18d6ffea943b8d4f69d2545371ffb93a
+    canais: indexed_RGB_8bit
+    alpha: false
+    budget_bytes: 80000
+    budget_resultado: PASSOU
+    margem_bytes: 42630
+  - id: P0C-02
+    arquivo: exports/P0C-02-icon-192-v1.png
+    funcao: icone_PWA_192_derivado_do_512
+    mime: image/png
+    dimensoes_px: 192x192
+    bytes: 6441
+    sha256: 0137c76297efbbd7914d692da43948bda8a975344ea468b71a8bf463cab3d1d6
+    canais: indexed_RGB_8bit
+    alpha: false
+    budget_bytes: 25000
+    budget_resultado: PASSOU
+    margem_bytes: 18559
+  - id: P0C-03A
+    arquivo: exports/P0C-03A-favicon-48-v1.png
+    funcao: favicon_48
+    mime: image/png
+    dimensoes_px: 48x48
+    bytes: 713
+    sha256: 474b80acd536522000689d6d9009bb4434ea997af157e378711668c9583566d0
+    canais: indexed_RGB_8bit
+    alpha: false
+    budget_bytes: 7000
+    budget_resultado: PASSOU
+    margem_bytes: 6287
+  - id: P0C-03B
+    arquivo: exports/P0C-03B-shortcut-96-v1.png
+    funcao: atalho_96
+    mime: image/png
+    dimensoes_px: 96x96
+    bytes: 1625
+    sha256: f709042154992481a89dad53da08ef8a3d3392027d48aaa48268029c7f4a9359
+    canais: indexed_RGB_8bit
+    alpha: false
+    budget_bytes: 3000
+    budget_resultado: PASSOU
+    margem_bytes: 1375
+  - id: P0C-04
+    arquivo: exports/P0C-04-marker-256-v1.png
+    funcao: marcador_trilha_neutro_decorativo
+    alt: ""
+    mime: image/png
+    dimensoes_px: 256x256
+    bytes: 11089
+    sha256: 35d8e1cdc85ffbccd5dde1ca89c76d92f2064bdba50f3c0e91ad5243788fdad0
+    canais: indexed_RGBA_8bit_tRNS
+    alpha: true
+    alpha_bbox_gt_8: [60, 49, 202, 193]
+    margens_px: [60, 49, 53, 62]
+    margem_minima_percentual: 19.1
+    budget_bytes: 25000
+    budget_resultado: PASSOU
+    margem_bytes: 13911
+derivadas_de_reducao:
+  - arquivo: exports/P0C-03A-favicon-32-v1.png
+    dimensoes_px: 32x32
+    bytes: 416
+    sha256: 1b1c08a060326def410331ac1baa3e6ed0fbf0fd51de071fe5fd01baf40b20f4
+  - arquivo: exports/P0C-03A-favicon-16-v1.png
+    dimensoes_px: 16x16
+    bytes: 247
+    sha256: 5ce9b9d92cdaf28f3d71bda97a5d56544751077d35ef1d92f7bb6ba22faecada
+budgets:
+  ticket_exports_bytes: 57238
+  todas_as_derivadas_distribuiveis_bytes: 57901
+  lote_budget_bytes: 140000
+  lote_resultado: PASSOU
+  lote_margem_bytes: 82099
+  cada_asset_abaixo_150000: true
+provas:
+  - arquivo: reviews/P0C-mask-proof-v1.png
+    criterio: circular_squircle_rounded_square_Android_maskable
+    quadrantes: [circular, squircle, rounded_square, Android_maskable]
+    sha256: 9d7fd1825174d603571f395805396ed4232f9814f9c6ef563b80aa5df35e2896
+  - arquivo: reviews/P0C-reduction-proof-v1.png
+    criterio: leitura_512_192_96_48_32_16
+    sha256: 55d3a3b854f2c52b7b9321698cf64e82d233ea46e5e91d705bd3bea98ac6b7e6
+  - arquivo: reviews/P0C-alpha-backgrounds-v1.png
+    criterio: marker_alpha_em_fundo_claro_branco_matematica_portugues
+    quadrantes: ["#FFF9F1", "#FFFFFF", "#176B87", "#8A3D78"]
+    sha256: 1457a74665621a794b90d9f707ddefb363ae9b3a992fe1318c98bc262ba09cf5
+  - arquivo: reviews/P0C-marker-reduction-proof-v1.png
+    criterio: marcador_legivel_em_256_64_48
+    sha256: 44588f8f5bd4dd6c797e30861eb70b40c943106be6572036f5bcd8f1617a0655
+documentos:
+  - arquivo: PROMPTS_P0C_V1.md
+    sha256: a85c3fe566463f172aeff6636f56535e3be48f302311358c7c87df6e02953afe
+  - arquivo: LICENCA_E_TERMOS_OPENAI_2026-07-26.md
+    sha256: fd43dddfa864d89f489b971dd5077c9e7d5aeefd052d5078aff83c9a17c61e11
+metadados_e_privacidade:
+  dados_de_criancas_usados: false
+  dados_pessoais_no_prompt: false
+  referencia_protegida_de_terceiro: false
+  imita_artista_ou_estudio: false
+  app_assets_substituidos: false
+  manifesto_service_worker_app_alterados: false
+validacao:
+  testado:
+    - identidade_contra_master_e_ancoras_P0a_v2
+    - ausencia_de_texto_logo_marca_dagua_cauda_maos_humanas_estado_e_emocao_punitiva
+    - mascaras_circular_squircle_rounded_square_Android_maskable
+    - reducoes_512_192_96_48_32_16
+    - marker_alpha_em_quatro_fundos_e_reducao_256_64_48
+    - MIME_dimensoes_bytes_SHA256_canais_alpha_sRGB_e_budgets
+    - marcador_neutro_com_alt_vazio_e_margem_superior_a_12_porcento
+    - escopo_exclusivo_da_pasta_p0c
+  falhou:
+    - tentativa_inicial_de_instalar_Pillow_em_ambiente_temporario_bloqueada_sem_efeito_no_repositorio
+  nao_testado:
+    - manifesto_e_service_worker_apontando_para_o_lote
+    - cache_offline_e_atualizacao_PWA
+    - instalacao_Android_desktop_iOS_Safari
+    - captura_de_icone_realmente_instalado
+    - shell_frio_e_transferSize
+    - integracao_no_app_CSS_HTML_JS
+    - leitores_de_tela_teclado_toque_zoom_e_teste_com_criancas
+    - busca_reversa_ampla_parecer_juridico_opt_out_e_retencao_especifica
+    - repeticao_generativa_pixel_a_pixel
+  inferido:
+    - direcao_visual_provavelmente_adequada_ao_publico_infantil
+    - identidade_tende_a_permanecer_reconhecivel_em_plataformas_reais
+revisao:
+  autoaprovacao_artista: false
+  recomendacao: supervisor_independente_P0c
+  proximo_papel: supervisor
+  proxima_skill: lumon-supervisao-final
