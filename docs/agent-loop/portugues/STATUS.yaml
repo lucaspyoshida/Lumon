@@ -13,8 +13,8 @@ proxima_skill: lumon-arte-capivara
 commit_canonico: c5eef27ff949264e1df3c33dfe4457ac7494e345
 run_id: pt-20260726T035942Z-artista-p0c-c5eef27
 idempotency_key: G3_P0C_ICONE_MARCADOR:artista_ia:c5eef27ff949264e1df3c33dfe4457ac7494e345
-heartbeat_at: 2026-07-26T03:59:42Z
-lease_expires_at: 2026-07-26T04:49:42Z
+heartbeat_at: 2026-07-26T04:26:02Z
+lease_expires_at: 2026-07-26T05:16:02Z
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
