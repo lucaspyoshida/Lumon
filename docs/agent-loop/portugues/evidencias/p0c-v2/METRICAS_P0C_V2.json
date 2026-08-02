@@ -1,0 +1,145 @@
+{
+  "entrada": {
+    "p0a-v2/p0a-anchor-3q-v2-512.webp": "ada5e022a7185c075d41b59c954007d0abd8e333b311ea5c15a3c42c8f96a1ff",
+    "p0a-v2/p0a-anchor-front-v2-512.webp": "7b210ece4e69cce646cd3a64830ccf5f32d8d27d15257a9e1cc77c597a7e99fc",
+    "p0a-v2/p0a-model-sheet-v2-master-1254.png": "43a42dc4dcb413ea27c1df6a798e2de59039c1646b87d3ffd4ed154f6cd7c2e4",
+    "p0c/masters/P0C-04-marker-chroma-master-v1.png": "ee75524401f3f4b8c4fddf855c6f69b94824fb1a80ac301c1971273b2f8fe930"
+  },
+  "export_v2": {
+    "alpha_bbox_gt_8": [
+      60,
+      48,
+      203,
+      193
+    ],
+    "alpha_gt_8_pixels": 13948,
+    "alpha_partial_pixels": 668,
+    "budget_bytes": 25000,
+    "budget_resultado": "PASSOU",
+    "bytes": 15560,
+    "canais": "indexed_RGBA_8bit_tRNS",
+    "chunks": [
+      "IHDR",
+      "gAMA",
+      "sRGB",
+      "PLTE",
+      "tRNS",
+      "IDAT",
+      "IEND"
+    ],
+    "dimensoes_px": [
+      256,
+      256
+    ],
+    "interior_alpha_255_percent": 100.0,
+    "interior_alpha_255_pixels": 11607,
+    "interior_erosao_3px_pixels": 11607,
+    "magenta_residual_predicado": 0,
+    "margem_minima_percentual": 18.75,
+    "margens_px": [
+      60,
+      48,
+      52,
+      62
+    ],
+    "mime": "image/png",
+    "rgb_0_255_0_nao_transparente": 0,
+    "rgb_255_0_255_nao_transparente": 0,
+    "sha256": "5281e51df7dcdfc0e1f531a520cd7dc905ee6bf83cb0ad7949a514904ae79613"
+  },
+  "master_v2": {
+    "arquivo": "masters/P0C-04-marker-transparent-master-v2.png",
+    "bytes": 648218,
+    "canais": "RGBA_8bit",
+    "dimensoes_px": [
+      1254,
+      1254
+    ],
+    "sha256": "3768fcfa21abfab97d332377ba475a39c68c8057ea25277e19bb24bde38b08b3"
+  },
+  "pipeline": "PROCESSAMENTO_P0C_V2.py",
+  "provas": {
+    "reviews/P0C-04-alpha-backgrounds-v2.png": {
+      "bytes": 75060,
+      "chunks": [
+        "IHDR",
+        "gAMA",
+        "sRGB",
+        "IDAT",
+        "IEND"
+      ],
+      "dimensoes_px": [
+        640,
+        640
+      ],
+      "sha256": "b2d99a378db2aa3360159cad8e0936d6d019c90ec32bdb1a8ad574cb8bfe30da"
+    },
+    "reviews/P0C-04-alpha-interior-proof-v2.png": {
+      "bytes": 4463,
+      "chunks": [
+        "IHDR",
+        "gAMA",
+        "sRGB",
+        "IDAT",
+        "IEND"
+      ],
+      "dimensoes_px": [
+        256,
+        256
+      ],
+      "sha256": "39a21b1cdec82628e31970b9c46fa30f77202f9301c134c174837fc5b799756a"
+    },
+    "reviews/P0C-04-marker-48-proof-v2.png": {
+      "bytes": 1978,
+      "chunks": [
+        "IHDR",
+        "gAMA",
+        "sRGB",
+        "IDAT",
+        "IEND"
+      ],
+      "dimensoes_px": [
+        48,
+        48
+      ],
+      "sha256": "94dee10fc9de2f1e21c74c009d572fe4c48a4dee3fc5a6624d67cbbb0f100c75"
+    },
+    "reviews/P0C-04-marker-64-proof-v2.png": {
+      "bytes": 3040,
+      "chunks": [
+        "IHDR",
+        "gAMA",
+        "sRGB",
+        "IDAT",
+        "IEND"
+      ],
+      "dimensoes_px": [
+        64,
+        64
+      ],
+      "sha256": "5a52f72d9bd26c86f88ca44354606270bae6f2379fc6317b9533f0832ef421db"
+    },
+    "reviews/P0C-04-marker-reduction-proof-v2.png": {
+      "bytes": 36941,
+      "chunks": [
+        "IHDR",
+        "gAMA",
+        "sRGB",
+        "IDAT",
+        "IEND"
+      ],
+      "dimensoes_px": [
+        500,
+        300
+      ],
+      "sha256": "5bd2bfef34fe680a11f93584f7722f3a98f2bd06221e8927695c600c99e09fa4"
+    }
+  },
+  "quantizacao": {
+    "edge_palette": 31,
+    "opaque_palette": 224,
+    "palette_entries": 256
+  },
+  "resampling": "Lanczos3_separavel_RGBA_premultiplicado",
+  "schema_version": 1
+}

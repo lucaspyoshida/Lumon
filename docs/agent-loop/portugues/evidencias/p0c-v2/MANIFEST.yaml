@@ -1,0 +1,184 @@
+schema_version: 2
+lote: P0c
+versao_lote: v2
+estado: CANDIDATO_EM_REVISAO
+gate: G3_P0C_ICONE_MARCADOR
+run_id: pt-20260802T032346Z-artista-p0c-3cd427a
+idempotency_key: G3_P0C_ICONE_MARCADOR:artista_ia:3cd427a4b8edfd41eaf981b85e6c2fd28f9e5253
+branch: feature/evolucao-pedagogica
+entrada_canonica:
+  commit: 3cd427a4b8edfd41eaf981b85e6c2fd28f9e5253
+  claim_remoto: 79c5545413c8ad3a8395264005fe6b092cf1ff1f
+  relatorio_supervisor: fafd404d62ca8a19a2736e2fea3b83b22422a5f6
+  handoff_supervisor: c5a813c03feb9e64d756e0707887ecb9e28ff9f7
+  repository: /Users/yoshida/Documents/Codex/2026-07-16/quai/Lumon
+  lock_owner_run_id: pt-20260802T032346Z-artista-p0c-3cd427a
+escopo:
+  corrigido:
+    - P0C-04_marker_256
+    - master_transparente_P0C-04
+    - provas_alpha_fundos_reducoes
+    - pipeline_e_metricas
+  preservado_sem_copia_ou_alteracao:
+    - P0C-01
+    - P0C-02
+    - P0C-03A
+    - P0C-03B
+    - lote_P0c_v1_historico
+    - P0a_v2
+    - P0b
+  excluido:
+    - app
+    - codigo
+    - CSS
+    - icones_e_favicon_ativos
+    - manifest_json
+    - service_worker
+    - PWA
+    - shell
+    - STATUS
+    - lock
+    - handoff
+    - Issue
+    - Gate_G4
+referencias_aprovadas:
+  - arquivo: ../p0a-v2/p0a-model-sheet-v2-master-1254.png
+    sha256: 43a42dc4dcb413ea27c1df6a798e2de59039c1646b87d3ffd4ed154f6cd7c2e4
+    papel: master_capivara-model-v1
+  - arquivo: ../p0a-v2/p0a-anchor-front-v2-512.webp
+    sha256: 7b210ece4e69cce646cd3a64830ccf5f32d8d27d15257a9e1cc77c597a7e99fc
+    papel: ancora_frontal
+  - arquivo: ../p0a-v2/p0a-anchor-3q-v2-512.webp
+    sha256: ada5e022a7185c075d41b59c954007d0abd8e333b311ea5c15a3c42c8f96a1ff
+    papel: ancora_3q
+fonte_tecnica:
+  arquivo: ../p0c/masters/P0C-04-marker-chroma-master-v1.png
+  sha256: ee75524401f3f4b8c4fddf855c6f69b94824fb1a80ac301c1971273b2f8fe930
+  derivacao_direta_P0a_registrada_no_lote_v1: true
+  geracao_nova: false
+  imagegen_usada: false
+preservados_por_hash_canonico:
+  P0C-01_512: c7ba4443b5985f8b598cad6b4741b94c18d6ffea943b8d4f69d2545371ffb93a
+  P0C-02_192: 0137c76297efbbd7914d692da43948bda8a975344ea468b71a8bf463cab3d1d6
+  P0C-03A_48: 474b80acd536522000689d6d9009bb4434ea997af157e378711668c9583566d0
+  P0C-03A_32: 1b1c08a060326def410331ac1baa3e6ed0fbf0fd51de071fe5fd01baf40b20f4
+  P0C-03A_16: 5ce9b9d92cdaf28f3d71bda97a5d56544751077d35ef1d92f7bb6ba22faecada
+  P0C-03B_96: f709042154992481a89dad53da08ef8a3d3392027d48aaa48268029c7f4a9359
+pos_processamento:
+  ambiente: Python_3.14.6_stdlib
+  dependencias_adicionadas_ao_app: false
+  pipeline:
+    arquivo: PROCESSAMENTO_P0C_V2.py
+    sha256: 6c50ab03a294254a35c4cddec7dfbabb39512f1781220acf46f2c133e1245446
+  comandos: COMANDOS_P0C_V2.md
+  metodo:
+    - componente_conectado_contra_chroma_distancia_28
+    - erosao_1px_no_master
+    - alpha_binario_no_master
+    - remocao_de_residuo_magenta_por_doador_opaco
+    - Lanczos3_separavel_RGBA_premultiplicado
+    - interior_erodido_3px_forcado_alpha_255
+    - paleta_sem_prebucket_224_opacas_31_borda
+    - PNG_indexado_tRNS_zlib9_gAMA_sRGB
+  provas_leem_export_canonico_direto: true
+master:
+  arquivo: masters/P0C-04-marker-transparent-master-v2.png
+  mime: image/png
+  dimensoes_px: 1254x1254
+  bytes: 648218
+  sha256: 3768fcfa21abfab97d332377ba475a39c68c8057ea25277e19bb24bde38b08b3
+  canais: RGBA_8bit
+  alpha: true
+  lossless: true
+  distribuido_no_app: false
+export:
+  id: P0C-04
+  arquivo: exports/P0C-04-marker-256-v2.png
+  funcao: marcador_trilha_neutro_decorativo
+  alt: ""
+  mime: image/png
+  dimensoes_px: 256x256
+  bytes: 15560
+  sha256: 5281e51df7dcdfc0e1f531a520cd7dc905ee6bf83cb0ad7949a514904ae79613
+  canais: indexed_RGBA_8bit_tRNS
+  chunks: [IHDR, gAMA, sRGB, PLTE, tRNS, IDAT, IEND]
+  alpha_bbox_gt_8: [60, 48, 203, 193]
+  margens_px: [60, 48, 52, 62]
+  margem_minima_percentual: 18.75
+  alpha_gt_8_pixels: 13948
+  alpha_partial_pixels: 668
+  interior_erosao_3px_pixels: 11607
+  interior_alpha_255_pixels: 11607
+  interior_alpha_255_percent: 100.0
+  rgb_0_255_0_nao_transparente: 0
+  rgb_255_0_255_nao_transparente: 0
+  magenta_residual_predicado: 0
+  budget_bytes: 25000
+  budget_resultado: PASSOU
+  margem_bytes: 9440
+provas:
+  - arquivo: reviews/P0C-04-alpha-backgrounds-v2.png
+    fonte: export_P0C-04_v2_RGBA_tRNS_direto
+    recomputa_alpha: false
+    fundos: ["#FFF9F1", "#FFFFFF", "#176B87", "#8A3D78"]
+    dimensoes_px: 640x640
+    bytes: 75060
+    sha256: b2d99a378db2aa3360159cad8e0936d6d019c90ec32bdb1a8ad574cb8bfe30da
+  - arquivo: reviews/P0C-04-marker-64-proof-v2.png
+    fonte: export_P0C-04_v2_direto
+    resampling: Lanczos3_RGBA_premultiplicado
+    dimensoes_px: 64x64
+    bytes: 3040
+    sha256: 5a52f72d9bd26c86f88ca44354606270bae6f2379fc6317b9533f0832ef421db
+  - arquivo: reviews/P0C-04-marker-48-proof-v2.png
+    fonte: export_P0C-04_v2_direto
+    resampling: Lanczos3_RGBA_premultiplicado
+    dimensoes_px: 48x48
+    bytes: 1978
+    sha256: 94dee10fc9de2f1e21c74c009d572fe4c48a4dee3fc5a6624d67cbbb0f100c75
+  - arquivo: reviews/P0C-04-marker-reduction-proof-v2.png
+    fonte: export_P0C-04_v2_e_reducoes_diretas
+    dimensoes_px: 500x300
+    bytes: 36941
+    sha256: 5bd2bfef34fe680a11f93584f7722f3a98f2bd06221e8927695c600c99e09fa4
+  - arquivo: reviews/P0C-04-alpha-interior-proof-v2.png
+    criterio: interior_erodido_3px_opaco
+    dimensoes_px: 256x256
+    bytes: 4463
+    sha256: 39a21b1cdec82628e31970b9c46fa30f77202f9301c134c174837fc5b799756a
+metricas:
+  arquivo: METRICAS_P0C_V2.json
+  sha256: 40381b554229e87c824397950bbce22d34304ed3052d34ead26bd7cb01780508
+reproducibilidade:
+  build_limpa_em: /private/tmp/lumon-p0c-v2-repro-pt-20260802T032346Z
+  arquivos_comparados_byte_a_byte: 8
+  divergencias: 0
+validacao:
+  testado:
+    - pose_neutra_global_alt_vazio_identidade_P0a_preservada
+    - margem_maior_ou_igual_12_porcento
+    - budget_menor_ou_igual_25000_bytes
+    - interior_erodido_3px_100_porcento_alpha_255
+    - zero_RGB_0_255_0_nao_transparente
+    - zero_RGB_255_0_255_nao_transparente
+    - zero_residuo_magenta_por_predicado_conservador
+    - borda_em_quatro_fundos_sem_halo_perceptivel
+    - leitura_256_64_48_sem_macrobloco_perceptivel
+    - hashes_MIME_dimensoes_canais_chunks_bytes_budgets
+    - provas_lendo_export_canonico_sem_chroma_key
+    - reproducao_byte_a_byte
+  falhou: []
+  nao_testado:
+    - integracao_no_app_StageNode
+    - leitores_de_tela_teclado_toque_zoom_safe_areas
+    - manifesto_service_worker_cache_offline_instalacao_PWA
+    - shell_visual_e_frio_transferSize_Content_Encoding
+    - teste_com_criancas_e_atratividade_medida
+    - regressao_de_Matematica
+  inferido:
+    - direcao_visual_permanece_adequada_ao_publico_infantil_sujeita_a_teste
+revisao:
+  autoaprovacao_artista: false
+  recomendacao: nova_supervisao_independente_P0c
+  proximo_papel: supervisor
+  proxima_skill: lumon-supervisao-final
