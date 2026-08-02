@@ -1,28 +1,28 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: EM_REVISAO
+estado: APROVADO
 gate_atual: G3_P0C_ICONE_MARCADOR
 implementacao_autorizada: false
 geracao_visual_autorizada: true
 autoridade_de_avanco: supervisor
 escopo_visual_autorizado: P0a_P0b_P0c_em_sequencia_com_supervisao
 max_concurrency: 1
-agente_ativo: supervisor
+agente_ativo: null
 proximo_agente_autorizado: null
-proxima_skill: lumon-supervisao-final
-commit_canonico: c9476caa77a3a926e66a0bd6eab09a2684fdd69a
-run_id: pt-20260802T034654Z-supervisor-p0c-c9476ca
-idempotency_key: G3_P0C_ICONE_MARCADOR:supervisor:c9476caa77a3a926e66a0bd6eab09a2684fdd69a
-heartbeat_at: 2026-08-02T03:46:54Z
-lease_expires_at: 2026-08-02T04:36:54Z
+proxima_skill: null
+commit_canonico: d0ae8e4ee0f8c9e9b07059ec04094815a4d58031
+run_id: null
+idempotency_key: null
+heartbeat_at: null
+lease_expires_at: null
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
 ultimo_gate_aprovado:
-  gate: G3_P0B_MOMENTOS_ESSENCIAIS
+  gate: G3_P0C_ICONE_MARCADOR
   veredito: OBJETIVO ALCANCADO — APROVADO
-  relatorio_commit: 11ce199d8d9e917d5c42f169a174554d21781634
-  handoff_commit: b8f72ecc10f13af5c6b0033f80c06cd0477a9909
+  relatorio_commit: 60347fc257c4d07123fd6a831d334b4dba1701d7
+  handoff_commit: d0ae8e4ee0f8c9e9b07059ec04094815a4d58031
 ressalvas_ativas:
   - id: P1_ICONE_512_ACIMA_DO_TETO
     bloqueia: aprovacao futura do asset e shell visual
@@ -31,12 +31,12 @@ ressalvas_ativas:
     bloqueia: aprovacao futura do shell e build
     aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: EM_EXECUCAO
-  para: EM_REVISAO
-  em: 2026-08-02T03:46:54Z
-  motivo: Retrabalho P0C-04 v2 e handoff publicados; claim exclusivo do supervisor para revisao independente.
+  de: EM_REVISAO
+  para: APROVADO
+  em: 2026-08-02T04:00:58Z
+  motivo: Supervisor aprovou P0C-04 v2 sem P0-P3; sequencia visual P0a/P0b/P0c concluida como candidatos.
 bloqueios:
   - Implementacao do produto nao autorizada.
-  - Icones atuais, manifesto, service worker, app e shell nao podem ser alterados neste subgate visual.
-  - P0C-04 exige matte opaco no interior, zero residuos chroma e acabamento sem pixelizacao.
-  - Provas P0C-04 devem usar diretamente o alpha do export canonico, sem recomputacao.
+  - Candidatos visuais aprovados nao estao integrados; icones ativos, manifesto, service worker, app e shell permanecem inalterados.
+  - Instalacao, shell frio, integracao runtime e teste infantil permanecem NAO TESTADO.
+  - Gate G4 e programador dependem de autorizacao explicita do usuario.
