@@ -1,6 +1,6 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: RETRABALHO
+estado: PRONTO
 gate_atual: G3_P0C_ICONE_MARCADOR
 implementacao_autorizada: false
 geracao_visual_autorizada: true
@@ -10,7 +10,7 @@ max_concurrency: 1
 agente_ativo: null
 proximo_agente_autorizado: artista_ia
 proxima_skill: lumon-arte-capivara
-commit_canonico: c5a813c03feb9e64d756e0707887ecb9e28ff9f7
+commit_canonico: b0e70c0554662ae90c753847b55b7d29f0b790e7
 run_id: null
 idempotency_key: null
 heartbeat_at: null
@@ -31,10 +31,10 @@ ressalvas_ativas:
     bloqueia: aprovacao futura do shell e build
     aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: EM_REVISAO
-  para: RETRABALHO
-  em: 2026-08-02T03:22:00Z
-  motivo: Supervisor publicou REPROVADO; somente marcador P0C-04 e provas retornam ao artista.
+  de: RETRABALHO
+  para: PRONTO
+  em: 2026-08-02T03:23:15Z
+  motivo: Handoff supervisor e estado de retrabalho publicados; artista P0c e unico proximo papel autorizado.
 bloqueios:
   - Implementacao do produto nao autorizada.
   - Icones atuais, manifesto, service worker, app e shell nao podem ser alterados neste subgate visual.
