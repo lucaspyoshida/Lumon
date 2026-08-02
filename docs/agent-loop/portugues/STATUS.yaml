@@ -1,6 +1,6 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: APROVADO
+estado: AGUARDA_USUARIO
 gate_atual: G3_P0C_ICONE_MARCADOR
 implementacao_autorizada: false
 geracao_visual_autorizada: true
@@ -10,7 +10,7 @@ max_concurrency: 1
 agente_ativo: null
 proximo_agente_autorizado: null
 proxima_skill: null
-commit_canonico: d0ae8e4ee0f8c9e9b07059ec04094815a4d58031
+commit_canonico: 27fe24471fdc42c095920c57d998c8c75fb71df5
 run_id: null
 idempotency_key: null
 heartbeat_at: null
@@ -31,10 +31,10 @@ ressalvas_ativas:
     bloqueia: aprovacao futura do shell e build
     aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: EM_REVISAO
-  para: APROVADO
-  em: 2026-08-02T04:00:58Z
-  motivo: Supervisor aprovou P0C-04 v2 sem P0-P3; sequencia visual P0a/P0b/P0c concluida como candidatos.
+  de: APROVADO
+  para: AGUARDA_USUARIO
+  em: 2026-08-02T04:01:40Z
+  motivo: Planejamento e sequencia visual autorizada concluidos; proximo avanco exige autorizacao explicita de implementacao no Gate G4.
 bloqueios:
   - Implementacao do produto nao autorizada.
   - Candidatos visuais aprovados nao estao integrados; icones ativos, manifesto, service worker, app e shell permanecem inalterados.
