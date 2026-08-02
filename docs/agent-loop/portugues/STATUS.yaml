@@ -13,8 +13,8 @@ proxima_skill: lumon-supervisao-final
 commit_canonico: fa87c8476b93c0653382947b2d6d01c9b1451819
 run_id: pt-20260726T044409Z-supervisor-p0c-fa87c84
 idempotency_key: G3_P0C_ICONE_MARCADOR:supervisor:fa87c8476b93c0653382947b2d6d01c9b1451819
-heartbeat_at: 2026-07-26T04:44:09Z
-lease_expires_at: 2026-07-26T05:34:09Z
+heartbeat_at: 2026-08-02T03:03:30Z
+lease_expires_at: 2026-08-02T03:53:30Z
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
