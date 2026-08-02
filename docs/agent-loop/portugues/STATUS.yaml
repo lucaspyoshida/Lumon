@@ -1,20 +1,20 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: PRONTO
+estado: EM_EXECUCAO
 gate_atual: G3_P0C_ICONE_MARCADOR
 implementacao_autorizada: false
 geracao_visual_autorizada: true
 autoridade_de_avanco: supervisor
 escopo_visual_autorizado: P0a_P0b_P0c_em_sequencia_com_supervisao
 max_concurrency: 1
-agente_ativo: null
-proximo_agente_autorizado: artista_ia
+agente_ativo: artista_ia
+proximo_agente_autorizado: null
 proxima_skill: lumon-arte-capivara
-commit_canonico: b0e70c0554662ae90c753847b55b7d29f0b790e7
-run_id: null
-idempotency_key: null
-heartbeat_at: null
-lease_expires_at: null
+commit_canonico: 3cd427a4b8edfd41eaf981b85e6c2fd28f9e5253
+run_id: pt-20260802T032346Z-artista-p0c-3cd427a
+idempotency_key: G3_P0C_ICONE_MARCADOR:artista_ia:3cd427a4b8edfd41eaf981b85e6c2fd28f9e5253
+heartbeat_at: 2026-08-02T03:23:46Z
+lease_expires_at: 2026-08-02T04:13:46Z
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
@@ -31,10 +31,10 @@ ressalvas_ativas:
     bloqueia: aprovacao futura do shell e build
     aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: RETRABALHO
-  para: PRONTO
-  em: 2026-08-02T03:23:15Z
-  motivo: Handoff supervisor e estado de retrabalho publicados; artista P0c e unico proximo papel autorizado.
+  de: PRONTO
+  para: EM_EXECUCAO
+  em: 2026-08-02T03:23:46Z
+  motivo: Claim exclusivo publicado para corrigir somente P0C-04 e provas contra P1 e P2 do supervisor.
 bloqueios:
   - Implementacao do produto nao autorizada.
   - Icones atuais, manifesto, service worker, app e shell nao podem ser alterados neste subgate visual.
