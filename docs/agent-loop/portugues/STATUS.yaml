@@ -13,8 +13,8 @@ proxima_skill: lumon-programador-pwa
 commit_canonico: d53608bfd77de55e28fcffb19f47080c7d5ad058
 run_id: pt-20260804T100522Z-programador-g4-d53608b
 idempotency_key: G4_IMPLEMENTACAO_FATIA_VERTICAL_1:programador:d53608bfd77de55e28fcffb19f47080c7d5ad058
-heartbeat_at: 2026-08-04T10:05:22Z
-lease_expires_at: 2026-08-04T10:55:22Z
+heartbeat_at: 2026-08-04T10:12:30Z
+lease_expires_at: 2026-08-04T12:12:30Z
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
