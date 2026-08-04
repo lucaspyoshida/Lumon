@@ -1,20 +1,20 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: EM_EXECUCAO
+estado: EM_REVISAO
 gate_atual: G4_IMPLEMENTACAO_FATIA_VERTICAL_1
 implementacao_autorizada: true
 geracao_visual_autorizada: true
 autoridade_de_avanco: supervisor
 escopo_visual_autorizado: P0a_P0b_P0c_em_sequencia_com_supervisao
 max_concurrency: 1
-agente_ativo: programador
+agente_ativo: supervisor
 proximo_agente_autorizado: null
-proxima_skill: lumon-programador-pwa
-commit_canonico: d53608bfd77de55e28fcffb19f47080c7d5ad058
-run_id: pt-20260804T100522Z-programador-g4-d53608b
-idempotency_key: G4_IMPLEMENTACAO_FATIA_VERTICAL_1:programador:d53608bfd77de55e28fcffb19f47080c7d5ad058
-heartbeat_at: 2026-08-04T10:12:30Z
-lease_expires_at: 2026-08-04T12:12:30Z
+proxima_skill: lumon-supervisao-final
+commit_canonico: 05f357602954244c25b7dedc9b930c19ca2cacc0
+run_id: pt-20260804T102715Z-supervisor-g4-05f3576
+idempotency_key: G4_IMPLEMENTACAO_FATIA_VERTICAL_1:supervisor:05f357602954244c25b7dedc9b930c19ca2cacc0
+heartbeat_at: 2026-08-04T10:27:15Z
+lease_expires_at: 2026-08-04T12:27:15Z
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
@@ -31,12 +31,11 @@ ressalvas_ativas:
     bloqueia: aprovacao futura do shell e build
     aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: PRONTO
-  para: EM_EXECUCAO
-  em: 2026-08-04T10:05:22Z
-  motivo: Claim exclusivo publicado para programador implementar menor fatia vertical aprovada do Gate G4.
+  de: EM_EXECUCAO
+  para: EM_REVISAO
+  em: 2026-08-04T10:27:15Z
+  motivo: Implementacao G4 publicada no remoto com evidencias; claim transferido ao supervisor independente.
 bloqueios:
-  - Escopo inicial limitado a menor fatia vertical aprovada; demais etapas nao podem ser antecipadas.
+  - Microcorpus, audio editorial pt-BR e imagens pedagogicas aprovados estao ausentes; Portugues permanece blocked-content.
+  - Transferencia fria real em producao, instalacao em dispositivo fisico e cotas reais permanecem NAO TESTADO.
   - Sem backend, Firebase, analytics, TTS em runtime, transmissao de dados ou modo tematico online.
-  - Audio ou imagem pedagogica sem aprovacao/proveniencia suficiente deve falhar fechada.
-  - Instalacao, shell frio, integracao runtime e teste infantil permanecem NAO TESTADO ate evidencia do programador e revisores.
