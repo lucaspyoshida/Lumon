@@ -1,20 +1,20 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: EM_REVISAO
+estado: RETRABALHO
 gate_atual: G4_IMPLEMENTACAO_FATIA_VERTICAL_1
 implementacao_autorizada: true
 geracao_visual_autorizada: true
 autoridade_de_avanco: supervisor
 escopo_visual_autorizado: P0a_P0b_P0c_em_sequencia_com_supervisao
 max_concurrency: 1
-agente_ativo: supervisor
+agente_ativo: programador
 proximo_agente_autorizado: null
-proxima_skill: lumon-supervisao-final
-commit_canonico: 05f357602954244c25b7dedc9b930c19ca2cacc0
-run_id: pt-20260804T102715Z-supervisor-g4-05f3576
-idempotency_key: G4_IMPLEMENTACAO_FATIA_VERTICAL_1:supervisor:05f357602954244c25b7dedc9b930c19ca2cacc0
-heartbeat_at: 2026-08-04T10:27:15Z
-lease_expires_at: 2026-08-04T12:27:15Z
+proxima_skill: lumon-programador-pwa
+commit_canonico: bc14d32f247b88f0bf6c9ee58eba43895ccc5d78
+run_id: pt-20260804T103728Z-programador-g4-retrabalho-bc14d32
+idempotency_key: G4_IMPLEMENTACAO_FATIA_VERTICAL_1:programador-retrabalho:bc14d32f247b88f0bf6c9ee58eba43895ccc5d78
+heartbeat_at: 2026-08-04T10:37:28Z
+lease_expires_at: 2026-08-04T12:37:28Z
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
@@ -24,18 +24,22 @@ ultimo_gate_aprovado:
   relatorio_commit: 60347fc257c4d07123fd6a831d334b4dba1701d7
   handoff_commit: d0ae8e4ee0f8c9e9b07059ec04094815a4d58031
 ressalvas_ativas:
-  - id: P1_ICONE_512_ACIMA_DO_TETO
-    bloqueia: aprovacao futura do asset e shell visual
-    aceite: asset final com no maximo 150000 bytes e budget check bloqueante
+  - id: P1_EXCLUSAO_COMPLETA_RETEM_HISTORICO
+    bloqueia: conformidade de exclusao e privacidade
+    aceite: apagar ou anonimizar todas as copias permitidas pela politica, com teste E2E
   - id: P1_SHELL_SEM_PROVA_FRIA
-    bloqueia: aprovacao futura do shell e build
-    aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
+    bloqueia: aprovacao final do shell e release
+    aceite: identidade de release derivada dos bytes, teste anti-mistura e transferencia fria final de no maximo 500000 bytes
+  - id: P0_GATE_G5_SEM_PACOTE_EDITORIAL
+    bloqueia: Gate G5 e primeira fatia pedagogica de Portugues
+    aceite: microcorpus, audio pt-BR e imagens pedagogicas aprovados com autoria, licenca, versao e hashes
 ultima_transicao:
-  de: EM_EXECUCAO
-  para: EM_REVISAO
-  em: 2026-08-04T10:27:15Z
-  motivo: Implementacao G4 publicada no remoto com evidencias; claim transferido ao supervisor independente.
+  de: EM_REVISAO
+  para: RETRABALHO
+  em: 2026-08-04T10:37:28Z
+  motivo: Supervisor aprovou a fundacao com ressalvas, mas dois P1 acionaveis impedem aprovacao plena e retornam ao mesmo programador.
 bloqueios:
+  - Exclusao completa ainda retem progresso historico em V1 e backup de migracao.
+  - Identidade manual do cache nao prova coerencia de release; transferencia fria do host final permanece NAO TESTADO.
   - Microcorpus, audio editorial pt-BR e imagens pedagogicas aprovados estao ausentes; Portugues permanece blocked-content.
-  - Transferencia fria real em producao, instalacao em dispositivo fisico e cotas reais permanecem NAO TESTADO.
   - Sem backend, Firebase, analytics, TTS em runtime, transmissao de dados ou modo tematico online.
