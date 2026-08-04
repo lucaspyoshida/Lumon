@@ -1,12 +1,15 @@
 const CACHE_PREFIX = 'lumon-shell-';
-const CACHE_NAME = `${CACHE_PREFIX}2026-07-17-06`;
+const CACHE_NAME = `${CACHE_PREFIX}2026-08-04-g4-01`;
 const SHELL_ASSETS = [
   './',
   './index.htm',
   './manifest.json',
-  './favicon.ico',
+  './images/favicon-48.png',
   './images/icon-192x192.png',
   './images/icon-512x512.png',
+  './images/capybara/welcome.webp',
+  './images/capybara/complete.webp',
+  './images/capybara/trail-marker-256.png',
   './styles/tokens.css',
   './styles/base.css',
   './styles/components.css',
@@ -23,6 +26,11 @@ const SHELL_ASSETS = [
   './src/generators/sequences.js',
   './src/generators/operations.js',
   './src/storage/repository.js',
+  './src/storage/schema-v2.js',
+  './src/storage/repository-v2.js',
+  './src/subjects/portuguese.js',
+  './src/subjects/registry.js',
+  './src/media/audio-controller.js',
   './src/pwa/registration.js'
 ];
 
@@ -37,9 +45,13 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys
-        .filter((key) => key.startsWith(CACHE_PREFIX) && key !== CACHE_NAME)
-        .map((key) => caches.delete(key))))
+      .then((keys) => {
+        const lumonCaches = keys.filter((key) => key.startsWith(CACHE_PREFIX)).sort().reverse();
+        const retained = new Set([CACHE_NAME, ...lumonCaches.filter((key) => key !== CACHE_NAME).slice(0, 1)]);
+        return Promise.all(keys
+          .filter((key) => key.startsWith(CACHE_PREFIX) && !retained.has(key))
+          .map((key) => caches.delete(key)));
+      })
       .then(() => self.clients.claim())
   );
 });
@@ -49,32 +61,16 @@ self.addEventListener('message', (event) => {
 });
 
 async function navigationResponse(request) {
-  try {
-    const response = await fetch(request);
-    if (response.ok) {
-      const cache = await caches.open(CACHE_NAME);
-      await cache.put(scopedUrl('./index.htm'), response.clone());
-    }
-    return response;
-  } catch {
-    return caches.match(scopedUrl('./index.htm'));
-  }
+  const cache = await caches.open(CACHE_NAME);
+  return (await cache.match(scopedUrl('./index.htm')))
+    ?? fetch(request).catch(() => new Response('Lumon indisponível offline.', { status: 503 }));
 }
 
-async function staleWhileRevalidate(request) {
-  const cached = await caches.match(request);
-  const refresh = fetch(request).then(async (response) => {
-    if (response.ok) {
-      const cache = await caches.open(CACHE_NAME);
-      await cache.put(request, response.clone());
-    }
-    return response;
-  }).catch(() => null);
-  if (cached) {
-    void refresh;
-    return cached;
-  }
-  return (await refresh) ?? new Response('Recurso indisponível offline.', { status: 503 });
+async function cacheFirst(request) {
+  const cache = await caches.open(CACHE_NAME);
+  const cached = await cache.match(request);
+  if (cached) return cached;
+  return fetch(request).catch(() => new Response('Recurso indisponível offline.', { status: 503 }));
 }
 
 self.addEventListener('fetch', (event) => {
@@ -85,5 +81,5 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(navigationResponse(request));
     return;
   }
-  if (url.href.startsWith(self.registration.scope)) event.respondWith(staleWhileRevalidate(request));
+  if (url.href.startsWith(self.registration.scope)) event.respondWith(cacheFirst(request));
 });

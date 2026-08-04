@@ -21,6 +21,46 @@ async function installUnlockedState(page) {
   });
 }
 
+async function readV2State(page) {
+  return page.evaluate(() => new Promise((resolve, reject) => {
+    const request = indexedDB.open('lumon-local-v2', 1);
+    request.onerror = () => reject(request.error);
+    request.onsuccess = () => {
+      const database = request.result;
+      const read = database.transaction('learnerState', 'readonly').objectStore('learnerState').get('current');
+      read.onerror = () => reject(read.error);
+      read.onsuccess = () => {
+        database.close();
+        resolve(read.result.state);
+      };
+    };
+  }));
+}
+
+async function readMigrationRecord(page, id) {
+  return page.evaluate((recordId) => new Promise((resolve, reject) => {
+    const request = indexedDB.open('lumon-local-v2', 1);
+    request.onerror = () => reject(request.error);
+    request.onsuccess = () => {
+      const database = request.result;
+      const read = database.transaction('migrationJournal', 'readonly').objectStore('migrationJournal').get(recordId);
+      read.onerror = () => reject(read.error);
+      read.onsuccess = () => {
+        database.close();
+        resolve(read.result);
+      };
+    };
+  }), id);
+}
+
+async function openCaregiver(page) {
+  const button = page.locator('#caregiver-button');
+  await button.dispatchEvent('pointerdown', { pointerId: 1, pointerType: 'mouse', isPrimary: true });
+  await page.waitForTimeout(3050);
+  await button.dispatchEvent('pointerup', { pointerId: 1, pointerType: 'mouse', isPrimary: true });
+  await expect(page.locator('#caregiver-dialog')).toBeVisible();
+}
+
 function watchRuntime(page) {
   const errors = [];
   const requests = [];
@@ -105,10 +145,9 @@ async function answerVisibleOperation(page) {
 }
 
 async function currentQuestion(page) {
-  return page.evaluate((key) => {
-    const session = JSON.parse(localStorage.getItem(key)).activeSession;
-    return session.questions[session.currentIndex];
-  }, STORAGE_KEY);
+  const state = await readV2State(page);
+  const session = state.subjects.matematica.activeSession;
+  return session.questions[session.currentIndex];
 }
 
 async function answerCurrentQuestionCorrectly(page) {
@@ -245,8 +284,8 @@ test('uma sessão representativa de cada etapa funciona do início ao fim', asyn
     await page.locator('#result-home').click();
     await expect(page.locator('#home-screen')).toBeVisible();
   }
-  const stored = JSON.parse(await page.evaluate((key) => localStorage.getItem(key), STORAGE_KEY));
-  expect(stored.progress.completedSessions.filter((session) => session.completed)).toHaveLength(5);
+  const stored = await readV2State(page);
+  expect(stored.subjects.matematica.progress.completedSessions.filter((session) => session.completed)).toHaveLength(5);
 });
 
 test('todas as habilidades renderizam e aceitam resposta correta', async ({ page }) => {
@@ -306,8 +345,8 @@ test('fluxo essencial funciona apenas por teclado e Escape registra abandono', a
   await expect(page.locator('#feedback')).not.toBeEmpty();
   await page.keyboard.press('Escape');
   await expect(page.locator('#home-screen')).toBeVisible();
-  const stored = JSON.parse(await page.evaluate((key) => localStorage.getItem(key), STORAGE_KEY));
-  expect(stored.progress.completedSessions.at(-1).abandoned).toBe(true);
+  const stored = await readV2State(page);
+  expect(stored.subjects.matematica.progress.completedSessions.at(-1).abandoned).toBe(true);
 });
 
 test('foco preserva navegação e contexto ao iniciar, retomar e sair no celular', async ({ page }) => {
@@ -345,11 +384,53 @@ test('reinício confirmado apaga progresso sem apagar outras chaves', async ({ p
   await installUnlockedState(page);
   await page.addInitScript(() => localStorage.setItem('preferencia-externa', 'preservar'));
   await page.goto(APP_URL);
-  await page.locator('#caregiver-button').click();
+  await openCaregiver(page);
   await page.locator('#reset-button').click();
   await page.locator('#confirm-reset').click();
   await expect(page.locator('.stage-card').nth(4).locator('.skill-button').first()).toBeDisabled();
   expect(await page.evaluate(() => localStorage.getItem('preferencia-externa'))).toBe('preservar');
+});
+
+test('migração V1 para V2 preserva Matemática, backup e idempotência', async ({ page }) => {
+  const v1 = await installState(page, (state) => {
+    state.preferences.sessionLength = 5;
+    state.progress.manualUnlocked = ['addition.plus-1'];
+    state.profile.currentSkillId = 'addition.plus-1';
+    return state;
+  });
+  await page.goto(APP_URL);
+  const migrated = await readV2State(page);
+  expect(migrated.schemaVersion).toBe(2);
+  expect(migrated.profile.currentSkillBySubject.matematica).toBe(v1.profile.currentSkillId);
+  expect(migrated.subjects.matematica.progress).toEqual(v1.progress);
+  expect(migrated.subjects.matematica.activeSession).toEqual(v1.activeSession);
+  expect(migrated.preferences).toEqual(v1.preferences);
+  expect(migrated.subjects.portugues.activeSession).toBeNull();
+  const backup = await readMigrationRecord(page, 'v1-backup');
+  expect(backup.raw).toBe(JSON.stringify(v1));
+  const sourceV1 = await page.evaluate((key) => localStorage.getItem(key), STORAGE_KEY);
+  await page.reload();
+  expect(await page.evaluate((key) => localStorage.getItem(key), STORAGE_KEY)).toBe(sourceV1);
+  const afterReload = await readV2State(page);
+  expect(afterReload).toEqual(migrated);
+});
+
+test('Português falha fechado sem áudio, imagem ou sessão improvisada', async ({ page }) => {
+  const runtime = watchRuntime(page);
+  await installState(page);
+  await page.goto(APP_URL);
+  await page.locator('#subject-portuguese').click();
+  await expect(page.locator('#subject-portuguese')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByRole('heading', { name: 'Esta missão ainda não está pronta' })).toBeVisible();
+  await expect(page.getByText('Nada será contado como erro')).toBeVisible();
+  await expect(page.locator('#activity-screen')).toBeHidden();
+  const state = await readV2State(page);
+  expect(state.profile.currentSubjectId).toBe('portugues');
+  expect(state.subjects.portugues.contentStatus.state).toBe('blocked-content');
+  expect(state.subjects.portugues.activeSession).toBeNull();
+  expect(state.subjects.portugues.progress.completedSessions).toEqual([]);
+  expect(runtime.errors).toEqual([]);
+  expect(runtime.requests.every((url) => new URL(url).origin === 'http://127.0.0.1:4173')).toBe(true);
 });
 
 test('primeira carga online, atualização segura e sessão offline', async ({ page, context }) => {
@@ -365,10 +446,10 @@ test('primeira carga online, atualização segura e sessão offline', async ({ p
   await startFirstSkill(page);
   await answerFindNumber(page, true);
   await page.locator('#next-question').click();
-  const beforeUpdate = await page.evaluate((key) => localStorage.getItem(key), STORAGE_KEY);
+  const beforeUpdate = await readV2State(page);
   await page.evaluate(async () => { await window.__lumonPwa.registration.update(); });
   await expect.poll(() => page.evaluate(async () => (await caches.keys()).includes('outro-app-cache'))).toBe(true);
-  expect(await page.evaluate((key) => localStorage.getItem(key), STORAGE_KEY)).toBe(beforeUpdate);
+  expect(await readV2State(page)).toEqual(beforeUpdate);
   await page.locator('#update-banner').evaluate((banner) => { banner.hidden = false; });
   await page.getByRole('button', { name: 'Agora não' }).click();
   await expect(page.locator('#update-banner')).toBeHidden();
@@ -383,6 +464,7 @@ test('primeira carga online, atualização segura e sessão offline', async ({ p
 });
 
 test('matriz visual cobre início, atividade, feedback, resultado e responsável', async ({ page }, testInfo) => {
+  test.setTimeout(90_000);
   await installUnlockedState(page);
   const viewports = [
     { width: 360, height: 640 },
@@ -400,8 +482,7 @@ test('matriz visual cobre início, atividade, feedback, resultado e responsável
       body: await page.screenshot({ fullPage: true }), contentType: 'image/png',
     });
 
-    await page.locator('#caregiver-button').click();
-    await expect(page.locator('#caregiver-dialog')).toBeVisible();
+    await openCaregiver(page);
     await expectResponsiveState(page);
     await page.getByRole('button', { name: 'Fechar área do responsável' }).click();
 

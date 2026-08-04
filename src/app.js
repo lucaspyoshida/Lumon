@@ -15,12 +15,11 @@ import {
   moveToNextQuestion,
 } from './core/session.js';
 import {
-  clearLumonData,
-  createDefaultState,
-  importState,
-  loadState,
-  saveState,
-} from './storage/repository.js';
+  importV2State,
+  loadV2State,
+  resetV2State,
+  saveV2State,
+} from './storage/repository-v2.js';
 import { activateWaitingWorker, registerPwa } from './pwa/registration.js';
 
 const elements = Object.fromEntries([
@@ -32,16 +31,26 @@ const elements = Object.fromEntries([
   'caregiver-dialog', 'caregiver-progress', 'session-length', 'reduced-motion', 'high-contrast',
   'record-time', 'unlock-skill', 'unlock-button', 'export-button', 'import-file', 'import-status',
   'reset-button', 'reset-dialog', 'confirm-reset', 'cancel-reset', 'screen-announcer',
-  'update-banner', 'dismiss-update', 'update-button',
+  'update-banner', 'dismiss-update', 'update-button', 'subject-mathematics',
+  'subject-portuguese', 'math-home-content', 'portuguese-home-content', 'home-title',
+  'caregiver-gate-progress',
 ].map((id) => [id, document.getElementById(id)]));
 
-let state = loadState();
+let state = await loadV2State();
 let lastResult = null;
 let lastRegistration = null;
 let updateRequested = false;
+let caregiverTimer = null;
+let caregiverStartedAt = 0;
+let persistenceQueue = Promise.resolve();
+
+const mathematicsState = () => state.subjects.matematica;
 
 function persist() {
-  saveState(state);
+  persistenceQueue = persistenceQueue.then(async () => {
+    state = await saveV2State(state);
+  });
+  return persistenceQueue;
 }
 
 function setPreferences() {
@@ -68,16 +77,18 @@ function showScreen(id, announcement) {
 }
 
 function skillStatus(skillId) {
-  const mastery = state.progress.skillMastery[skillId] ?? evaluateMastery(state.progress, skillId);
+  const progress = mathematicsState().progress;
+  const mastery = progress.skillMastery[skillId] ?? evaluateMastery(progress, skillId);
   if (mastery.mastered) return { label: 'Dominado', className: 'mastered' };
-  if (getReviewItems(state.progress, skillId).length) return { label: 'Revisar', className: 'review' };
-  if (isSkillUnlocked(state.progress, skillId)) return { label: mastery.completedSessions ? 'Em andamento' : 'Disponível', className: '' };
+  if (getReviewItems(progress, skillId).length) return { label: 'Revisar', className: 'review' };
+  if (isSkillUnlocked(progress, skillId)) return { label: mastery.completedSessions ? 'Em andamento' : 'Disponível', className: '' };
   return { label: 'Bloqueado', className: 'locked' };
 }
 
 function stageStatus(stage) {
-  const mastered = stage.skills.filter((skill) => state.progress.skillMastery[skill.id]?.mastered).length;
-  const available = stage.skills.some((skill) => isSkillUnlocked(state.progress, skill.id));
+  const progress = mathematicsState().progress;
+  const mastered = stage.skills.filter((skill) => progress.skillMastery[skill.id]?.mastered).length;
+  const available = stage.skills.some((skill) => isSkillUnlocked(progress, skill.id));
   if (mastered === stage.skills.length) return { label: 'Etapa dominada', className: 'mastered' };
   if (available) return { label: mastered ? `${mastered} de ${stage.skills.length} dominadas` : 'Em andamento', className: '' };
   return { label: 'Aguardando avanço', className: 'locked' };
@@ -85,7 +96,8 @@ function stageStatus(stage) {
 
 function renderTrail() {
   elements.trail.replaceChildren();
-  const currentStage = state.profile.currentSkillId ? getStageForSkill(state.profile.currentSkillId) : STAGES[0];
+  const currentSkillId = state.profile.currentSkillBySubject.matematica;
+  const currentStage = currentSkillId ? getStageForSkill(currentSkillId) : STAGES[0];
 
   STAGES.forEach((stage, stageIndex) => {
     const card = document.createElement('article');
@@ -100,7 +112,14 @@ function renderTrail() {
 
     const number = document.createElement('span');
     number.className = 'stage-number';
-    number.textContent = String(stageIndex + 1);
+    const marker = document.createElement('img');
+    marker.className = 'stage-marker';
+    marker.src = './images/capybara/trail-marker-256.png';
+    marker.alt = '';
+    marker.setAttribute('aria-hidden', 'true');
+    const numberLabel = document.createElement('span');
+    numberLabel.textContent = String(stageIndex + 1);
+    number.append(marker, numberLabel);
     const copy = document.createElement('span');
     const title = document.createElement('h2');
     title.textContent = stage.title;
@@ -128,7 +147,7 @@ function renderTrail() {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'skill-button';
-      button.disabled = !isSkillUnlocked(state.progress, skill.id);
+      button.disabled = !isSkillUnlocked(mathematicsState().progress, skill.id);
       button.setAttribute('aria-label', `${skill.title}. ${statusInfo.label}. ${skill.instruction}`);
       const text = document.createElement('span');
       const label = document.createElement('span');
@@ -153,14 +172,25 @@ function renderTrail() {
 
 function renderHome() {
   setPreferences();
+  const isMathematics = state.profile.currentSubjectId === 'matematica';
+  document.documentElement.dataset.subject = isMathematics ? 'matematica' : 'portugues';
+  elements['subject-mathematics'].setAttribute('aria-pressed', String(isMathematics));
+  elements['subject-portuguese'].setAttribute('aria-pressed', String(!isMathematics));
+  elements['math-home-content'].hidden = !isMathematics;
+  elements['portuguese-home-content'].hidden = isMathematics;
+  elements['home-title'].textContent = isMathematics ? 'Trilha de matemática' : 'Trilha de Português';
+  if (!isMathematics) {
+    showScreen('home-screen', 'Trilha de Português. Conteúdo ainda não disponível.');
+    return;
+  }
   renderTrail();
-  const active = state.activeSession;
+  const active = mathematicsState().activeSession;
   elements['continue-card'].hidden = !active;
   if (active) {
     const skill = getSkill(active.skillId);
     elements['continue-description'].textContent = `${skill.title} — questão ${active.currentIndex + 1} de ${active.questions.length}`;
   }
-  const reviews = getSkillsNeedingReview(state.progress);
+  const reviews = getSkillsNeedingReview(mathematicsState().progress);
   elements['review-button'].disabled = reviews.length === 0;
   elements['review-help'].textContent = reviews.length
     ? `${reviews.reduce((sum, entry) => sum + entry.items.length, 0)} itens estão prontos para uma revisão acolhedora.`
@@ -168,31 +198,31 @@ function renderHome() {
   showScreen('home-screen', 'Trilha de matemática');
 }
 
-function abandonActiveSession() {
-  if (!state.activeSession) return;
-  const abandoned = completeSession(state.activeSession, { abandoned: true });
-  state.progress = recordSession(state.progress, abandoned);
-  state.activeSession = null;
-  persist();
+async function abandonActiveSession() {
+  if (!mathematicsState().activeSession) return;
+  const abandoned = completeSession(mathematicsState().activeSession, { abandoned: true });
+  mathematicsState().progress = recordSession(mathematicsState().progress, abandoned);
+  mathematicsState().activeSession = null;
+  await persist();
 }
 
-function startSession(skillId, { reviewItems = [] } = {}) {
-  if (!isSkillUnlocked(state.progress, skillId)) return;
-  if (state.activeSession) abandonActiveSession();
+async function startSession(skillId, { reviewItems = [] } = {}) {
+  if (!isSkillUnlocked(mathematicsState().progress, skillId)) return;
+  if (mathematicsState().activeSession) await abandonActiveSession();
   const seed = `${skillId}-${Date.now()}`;
-  state.profile.currentSkillId = skillId;
-  state.activeSession = createSession({
+  state.profile.currentSkillBySubject.matematica = skillId;
+  mathematicsState().activeSession = createSession({
     skillId,
     count: state.preferences.sessionLength,
     seed,
     reviewItems,
   });
-  persist();
+  await persist();
   renderActivity();
 }
 
 function resumeSession() {
-  if (state.activeSession) renderActivity();
+  if (mathematicsState().activeSession) renderActivity();
 }
 
 function addDots(container, count, { removed = 0, compact = false } = {}) {
@@ -309,7 +339,7 @@ function showAnsweredState(answerRecord, question) {
     ? 'Muito bem — sua resposta está certa!'
     : `Boa tentativa. A resposta é ${optionLabel(question.answer)}; este item volta na revisão.`;
   elements['next-question'].hidden = false;
-  elements['next-question'].textContent = state.activeSession.currentIndex === state.activeSession.questions.length - 1
+  elements['next-question'].textContent = mathematicsState().activeSession.currentIndex === mathematicsState().activeSession.questions.length - 1
     ? 'Ver resultado'
     : 'Próxima';
   for (const control of elements['response-area'].querySelectorAll('button, input')) control.disabled = true;
@@ -324,14 +354,15 @@ function showAnsweredState(answerRecord, question) {
   elements['next-question'].focus();
 }
 
-function submitAnswer(response) {
-  const session = state.activeSession;
+async function submitAnswer(response) {
+  const session = mathematicsState().activeSession;
   if (!session || session.answers.length > session.currentIndex) return;
   const elapsed = state.preferences.recordResponseTime ? Date.now() - session.questionStartedAt : null;
-  state.activeSession = answerCurrentQuestion(session, response, elapsed);
-  persist();
-  const record = state.activeSession.answers[state.activeSession.currentIndex];
-  showAnsweredState(record, state.activeSession.questions[state.activeSession.currentIndex]);
+  mathematicsState().activeSession = answerCurrentQuestion(session, response, elapsed);
+  await persist();
+  const active = mathematicsState().activeSession;
+  const record = active.answers[active.currentIndex];
+  showAnsweredState(record, active.questions[active.currentIndex]);
 }
 
 function renderChoice(question, answered) {
@@ -484,12 +515,15 @@ function renderSelfAssessment(question, answered) {
 }
 
 function renderActivity() {
-  const session = state.activeSession;
+  const session = mathematicsState().activeSession;
   if (!session) return renderHome();
   const skill = getSkill(session.skillId);
   const stage = getStageForSkill(session.skillId);
   const question = session.questions[session.currentIndex];
-  if (!question) return finishSession();
+  if (!question) {
+    void finishSession();
+    return;
+  }
   elements['stage-label'].textContent = stage.title;
   elements['activity-title'].textContent = skill.title;
   elements['activity-instruction'].textContent = skill.instruction;
@@ -508,15 +542,15 @@ function renderActivity() {
   showScreen('activity-screen', `${skill.title}, questão ${session.currentIndex + 1} de ${session.questions.length}`);
 }
 
-function finishSession() {
-  const session = state.activeSession;
+async function finishSession() {
+  const session = mathematicsState().activeSession;
   if (!session) return;
   const completed = completeSession(session);
-  state.progress = recordSession(state.progress, completed);
-  state.activeSession = null;
-  persist();
+  mathematicsState().progress = recordSession(mathematicsState().progress, completed);
+  mathematicsState().activeSession = null;
+  await persist();
   const correct = completed.answers.filter((answer) => answer.correct).length;
-  const recommendation = getRecommendation(state.progress, completed.skillId);
+  const recommendation = getRecommendation(mathematicsState().progress, completed.skillId);
   lastResult = { skillId: completed.skillId, correct, total: completed.answers.length, recommendation };
   renderResult();
 }
@@ -527,7 +561,7 @@ function renderResult() {
   elements['result-score'].textContent = `${lastResult.correct} de ${lastResult.total} respostas certas`;
   elements['result-skill'].textContent = `Habilidade: ${skill.title}`;
   elements.recommendation.textContent = lastResult.recommendation.message;
-  const reviewItems = getReviewItems(state.progress, lastResult.skillId);
+  const reviewItems = getReviewItems(mathematicsState().progress, lastResult.skillId);
   elements['result-review'].hidden = reviewItems.length === 0;
   showScreen('result-screen', 'Resultado da sessão');
 }
@@ -539,8 +573,8 @@ function renderCaregiver() {
   elements['record-time'].checked = Boolean(state.preferences.recordResponseTime);
   elements['caregiver-progress'].replaceChildren();
   for (const skill of ALL_SKILLS) {
-    const mastery = evaluateMastery(state.progress, skill.id);
-    if (!mastery.completedSessions && !isSkillUnlocked(state.progress, skill.id)) continue;
+    const mastery = evaluateMastery(mathematicsState().progress, skill.id);
+    if (!mastery.completedSessions && !isSkillUnlocked(mathematicsState().progress, skill.id)) continue;
     const row = document.createElement('div');
     row.className = 'progress-row';
     const label = document.createElement('span');
@@ -552,10 +586,18 @@ function renderCaregiver() {
     row.append(label, value);
     elements['caregiver-progress'].append(row);
   }
+  const portugueseRow = document.createElement('div');
+  portugueseRow.className = 'progress-row';
+  const portugueseLabel = document.createElement('span');
+  portugueseLabel.textContent = 'Português — palavra, imagem e som';
+  const portugueseValue = document.createElement('strong');
+  portugueseValue.textContent = 'Conteúdo bloqueado com segurança';
+  portugueseRow.append(portugueseLabel, portugueseValue);
+  elements['caregiver-progress'].append(portugueseRow);
   if (!elements['caregiver-progress'].children.length) elements['caregiver-progress'].textContent = 'A primeira prática ainda não foi concluída.';
 
   elements['unlock-skill'].replaceChildren();
-  ALL_SKILLS.filter((skill) => !isSkillUnlocked(state.progress, skill.id)).forEach((skill) => {
+  ALL_SKILLS.filter((skill) => !isSkillUnlocked(mathematicsState().progress, skill.id)).forEach((skill) => {
     const option = document.createElement('option');
     option.value = skill.id;
     option.textContent = `${getStageForSkill(skill.id).title} — ${skill.title}`;
@@ -569,7 +611,36 @@ function openCaregiver() {
   elements['caregiver-dialog'].showModal();
 }
 
-function savePreferences() {
+function cancelCaregiverGate() {
+  if (caregiverTimer) clearTimeout(caregiverTimer);
+  caregiverTimer = null;
+  caregiverStartedAt = 0;
+  elements['caregiver-button'].classList.remove('caregiver-holding');
+  elements['caregiver-button'].setAttribute('aria-pressed', 'false');
+  elements['caregiver-gate-progress'].textContent = '';
+}
+
+function beginCaregiverGate() {
+  if (caregiverTimer || elements['caregiver-dialog'].open) return;
+  caregiverStartedAt = performance.now();
+  elements['caregiver-button'].classList.add('caregiver-holding');
+  elements['caregiver-button'].setAttribute('aria-pressed', 'true');
+  elements['caregiver-gate-progress'].textContent = 'Mantenha pressionado';
+  caregiverTimer = setTimeout(() => {
+    const heldFor = performance.now() - caregiverStartedAt;
+    cancelCaregiverGate();
+    if (heldFor >= 2950) openCaregiver();
+  }, 3000);
+}
+
+async function switchSubject(subjectId) {
+  if (!['matematica', 'portugues'].includes(subjectId)) return;
+  state.profile.currentSubjectId = subjectId;
+  await persist();
+  renderHome();
+}
+
+async function savePreferences() {
   state.preferences = {
     ...state.preferences,
     sessionLength: Number(elements['session-length'].value),
@@ -577,42 +648,57 @@ function savePreferences() {
     highContrast: elements['high-contrast'].checked,
     recordResponseTime: elements['record-time'].checked,
   };
-  persist();
+  await persist();
   setPreferences();
 }
 
 elements['home-button'].addEventListener('click', () => renderHome());
-elements['caregiver-button'].addEventListener('click', openCaregiver);
+elements['subject-mathematics'].addEventListener('click', () => { void switchSubject('matematica'); });
+elements['subject-portuguese'].addEventListener('click', () => { void switchSubject('portugues'); });
+elements['caregiver-button'].addEventListener('click', (event) => event.preventDefault());
+elements['caregiver-button'].addEventListener('pointerdown', beginCaregiverGate);
+for (const eventName of ['pointerup', 'pointercancel', 'pointerleave']) {
+  elements['caregiver-button'].addEventListener(eventName, cancelCaregiverGate);
+}
+elements['caregiver-button'].addEventListener('keydown', (event) => {
+  if (!event.repeat && (event.key === 'Enter' || event.key === ' ')) {
+    event.preventDefault();
+    beginCaregiverGate();
+  }
+});
+elements['caregiver-button'].addEventListener('keyup', (event) => {
+  if (event.key === 'Enter' || event.key === ' ') cancelCaregiverGate();
+});
 elements['continue-button'].addEventListener('click', resumeSession);
 elements['review-button'].addEventListener('click', () => {
-  const [review] = getSkillsNeedingReview(state.progress);
-  if (review) startSession(review.skillId, { reviewItems: review.items });
+  const [review] = getSkillsNeedingReview(mathematicsState().progress);
+  if (review) void startSession(review.skillId, { reviewItems: review.items });
 });
-elements['exit-session'].addEventListener('click', () => { abandonActiveSession(); renderHome(); });
-elements['next-question'].addEventListener('click', () => {
-  if (!state.activeSession) return;
-  if (state.activeSession.currentIndex === state.activeSession.questions.length - 1) finishSession();
+elements['exit-session'].addEventListener('click', async () => { await abandonActiveSession(); renderHome(); });
+elements['next-question'].addEventListener('click', async () => {
+  if (!mathematicsState().activeSession) return;
+  if (mathematicsState().activeSession.currentIndex === mathematicsState().activeSession.questions.length - 1) await finishSession();
   else {
-    state.activeSession = moveToNextQuestion(state.activeSession);
-    persist();
+    mathematicsState().activeSession = moveToNextQuestion(mathematicsState().activeSession);
     renderActivity();
+    await persist();
   }
 });
 elements['result-review'].addEventListener('click', () => {
-  const items = getReviewItems(state.progress, lastResult.skillId);
-  startSession(lastResult.skillId, { reviewItems: items });
+  const items = getReviewItems(mathematicsState().progress, lastResult.skillId);
+  void startSession(lastResult.skillId, { reviewItems: items });
 });
-elements['result-repeat'].addEventListener('click', () => startSession(lastResult.skillId));
+elements['result-repeat'].addEventListener('click', () => { void startSession(lastResult.skillId); });
 elements['result-home'].addEventListener('click', renderHome);
 
 for (const id of ['session-length', 'reduced-motion', 'high-contrast', 'record-time']) {
-  elements[id].addEventListener('change', savePreferences);
+  elements[id].addEventListener('change', () => { void savePreferences(); });
 }
-elements['unlock-button'].addEventListener('click', () => {
+elements['unlock-button'].addEventListener('click', async () => {
   const skillId = elements['unlock-skill'].value;
   if (!skillId) return;
-  state.progress = manuallyUnlock(state.progress, skillId);
-  persist();
+  mathematicsState().progress = manuallyUnlock(mathematicsState().progress, skillId);
+  await persist();
   renderCaregiver();
   elements['import-status'].textContent = 'Habilidade desbloqueada somente neste dispositivo.';
 });
@@ -629,7 +715,7 @@ elements['import-file'].addEventListener('change', async () => {
   const [file] = elements['import-file'].files;
   if (!file) return;
   try {
-    state = importState(await file.text());
+    state = await importV2State(await file.text(), state);
     setPreferences();
     renderCaregiver();
     elements['import-status'].textContent = 'Backup importado com sucesso.';
@@ -641,19 +727,17 @@ elements['import-file'].addEventListener('change', async () => {
 });
 elements['reset-button'].addEventListener('click', () => elements['reset-dialog'].showModal());
 elements['cancel-reset'].addEventListener('click', () => elements['reset-dialog'].close());
-elements['confirm-reset'].addEventListener('click', () => {
-  clearLumonData();
-  state = createDefaultState();
-  persist();
+elements['confirm-reset'].addEventListener('click', async () => {
+  state = await resetV2State(state);
   elements['reset-dialog'].close();
   elements['caregiver-dialog'].close();
   renderHome();
 });
 
-document.addEventListener('keydown', (event) => {
+document.addEventListener('keydown', async (event) => {
   if (event.key === 'Escape' && !elements['activity-screen'].hidden && !document.querySelector('dialog[open]')) {
     event.preventDefault();
-    abandonActiveSession();
+    await abandonActiveSession();
     renderHome();
   }
 });
@@ -670,7 +754,6 @@ navigator.serviceWorker?.addEventListener('controllerchange', () => {
 });
 
 setPreferences();
-persist();
 renderHome();
 registerPwa({
   onUpdate(registration) {

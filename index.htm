@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#2f6d62">
-  <meta name="description" content="Lumon: prática matemática infantil, progressiva, acessível e offline.">
-  <title>Lumon — Trilha de matemática</title>
+  <meta name="description" content="Lumon: práticas infantis de Matemática e Português, locais e offline.">
+  <title>Lumon — pequenas descobertas</title>
   <link rel="manifest" href="./manifest.json">
-  <link rel="icon" href="./favicon.ico">
+  <link rel="icon" type="image/png" sizes="48x48" href="./images/favicon-48.png">
   <link rel="stylesheet" href="./styles/tokens.css">
   <link rel="stylesheet" href="./styles/base.css">
   <link rel="stylesheet" href="./styles/components.css">
@@ -23,32 +23,61 @@
         <span class="brand-mark" aria-hidden="true">L</span>
         <span>Lumon</span>
       </button>
-      <button class="button button-quiet" id="caregiver-button" type="button">Área do responsável</button>
+      <button class="button button-quiet caregiver-gate" id="caregiver-button" type="button"
+        aria-pressed="false" aria-describedby="caregiver-gate-help">
+        <span>Área do responsável</span>
+        <span class="caregiver-gate-progress" id="caregiver-gate-progress" aria-live="polite"></span>
+      </button>
+      <span class="visually-hidden" id="caregiver-gate-help">Mantenha pressionado por 3 segundos.</span>
     </header>
 
     <main id="conteudo" tabindex="-1">
       <section class="screen active" id="home-screen" aria-labelledby="home-title">
-        <div class="hero">
-          <p class="eyebrow">Aprender no seu ritmo</p>
-          <h1 id="home-title">Trilha de matemática</h1>
-          <p>Práticas curtas, apoio visual e revisão do que precisa de mais carinho.</p>
+        <div class="subject-switcher" role="group" aria-label="Escolher matéria">
+          <button class="subject-option mathematics" id="subject-mathematics" type="button" aria-pressed="true">
+            <span aria-hidden="true">● ▲</span><span>Matemática</span>
+          </button>
+          <button class="subject-option portuguese" id="subject-portuguese" type="button" aria-pressed="false">
+            <span aria-hidden="true">▤ ◖</span><span>Português</span>
+          </button>
         </div>
 
-        <section class="continue-card" id="continue-card" hidden aria-labelledby="continue-title">
+        <div class="hero child-hero">
           <div>
-            <p class="eyebrow">Continuar</p>
-            <h2 id="continue-title">Sessão em andamento</h2>
-            <p id="continue-description"></p>
+            <p class="eyebrow">Pequenas descobertas</p>
+            <h1 id="home-title">Trilha de matemática</h1>
+            <p>Práticas curtas, apoio visual e revisão do que precisa de mais carinho.</p>
           </div>
-          <button class="button button-primary" id="continue-button" type="button">Continuar sessão</button>
-        </section>
-
-        <div class="home-actions">
-          <button class="button button-review" id="review-button" type="button" disabled>Praticar pontos difíceis</button>
-          <p id="review-help">Os itens para revisar aparecem aqui depois das práticas.</p>
+          <img src="./images/capybara/welcome.webp" width="512" height="512" alt="">
         </div>
 
-        <div id="trail" class="trail" aria-label="Cinco etapas da trilha"></div>
+        <div id="math-home-content">
+          <section class="continue-card" id="continue-card" hidden aria-labelledby="continue-title">
+            <div>
+              <p class="eyebrow">Continuar</p>
+              <h2 id="continue-title">Sessão em andamento</h2>
+              <p id="continue-description"></p>
+            </div>
+            <button class="button button-primary" id="continue-button" type="button">Continuar sessão</button>
+          </section>
+
+          <div class="home-actions">
+            <button class="button button-review" id="review-button" type="button" disabled>Praticar pontos difíceis</button>
+            <p id="review-help">Os itens para revisar aparecem aqui depois das práticas.</p>
+          </div>
+
+          <div id="trail" class="trail" aria-label="Cinco etapas da trilha"></div>
+        </div>
+
+        <section class="portuguese-unavailable" id="portuguese-home-content" hidden aria-labelledby="portuguese-status-title">
+          <div class="package-symbol" aria-hidden="true">◌</div>
+          <div>
+            <p class="eyebrow">Etapa 1 — palavra, imagem e som</p>
+            <h2 id="portuguese-status-title">Esta missão ainda não está pronta</h2>
+            <p>Áudios em português e imagens pedagógicas precisam de aprovação antes da primeira atividade.</p>
+            <p class="safe-status"><strong>Nada será contado como erro.</strong> O Lumon não usa internet, voz automática ou conteúdo improvisado para preencher o que falta.</p>
+          </div>
+        </section>
 
         <aside class="privacy-note">
           <span aria-hidden="true">⌂</span>
@@ -78,7 +107,7 @@
       </section>
 
       <section class="screen result-screen" id="result-screen" aria-labelledby="result-title" hidden>
-        <div class="celebration" aria-hidden="true">★</div>
+        <img class="celebration capybara-complete" src="./images/capybara/complete.webp" width="1024" height="768" alt="">
         <p class="eyebrow">Sessão concluída</p>
         <h1 id="result-title">Você praticou com atenção!</h1>
         <p id="result-score" class="result-score"></p>

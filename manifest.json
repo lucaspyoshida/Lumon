@@ -1,14 +1,14 @@
 {
-  "name": "Lumon — Trilha de matemática",
+  "name": "Lumon — pequenas descobertas",
   "short_name": "Lumon",
-  "description": "Prática matemática infantil progressiva, acessível e offline.",
+  "description": "Práticas infantis de Matemática e Português, locais e offline.",
   "lang": "pt-BR",
   "start_url": "./index.htm",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#f5f1e8",
-  "theme_color": "#2f6d62",
+  "background_color": "#fff9f1",
+  "theme_color": "#176b87",
   "categories": ["education", "kids"],
   "icons": [
     {

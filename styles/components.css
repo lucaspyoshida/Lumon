@@ -21,6 +21,16 @@
 .icon-button { min-width: var(--touch-target); min-height: var(--touch-target); border: 0; border-radius: 50%; background: transparent; font-size: 2rem; }
 .button-row, .inline-controls { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
 
+.subject-switcher { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; width: min(100%, 560px); margin-top: .5rem; }
+.subject-option { min-height: 58px; display: flex; align-items: center; justify-content: center; gap: .65rem; padding: .7rem 1rem; border: 2px solid var(--color-line); border-radius: 18px; background: #fff; font-weight: 850; }
+.subject-option.mathematics[aria-pressed="true"] { border-color: #176b87; box-shadow: inset 0 0 0 2px #176b87; }
+.subject-option.portuguese[aria-pressed="true"] { border-color: #8a3d78; box-shadow: inset 0 0 0 2px #8a3d78; }
+.subject-option span:first-child { font-size: 1.35rem; letter-spacing: .1em; }
+.caregiver-gate { position: relative; overflow: hidden; flex-direction: column; gap: 0; }
+.caregiver-gate::after { content: ""; position: absolute; inset: auto 0 0; height: 4px; transform: scaleX(0); transform-origin: left; background: var(--color-accent); }
+.caregiver-gate.caregiver-holding::after { animation: caregiver-hold 3s linear forwards; }
+.caregiver-gate-progress { min-height: 1rem; font-size: .7rem; font-weight: 650; }
+
 .continue-card, .privacy-note, .recommendation {
   display: flex;
   align-items: center;
@@ -38,7 +48,9 @@
 
 .stage-card { overflow: clip; border: 1px solid var(--color-line); border-radius: var(--radius-large); background: var(--color-surface); box-shadow: var(--shadow-soft); }
 .stage-summary { width: 100%; min-height: 96px; display: grid; grid-template-columns: 50px 1fr auto; gap: 1rem; align-items: center; padding: 1rem 1.2rem; border: 0; background: transparent; text-align: left; }
-.stage-number { display: grid; width: 48px; height: 48px; place-items: center; border-radius: 16px; color: #fff; background: var(--stage-color, var(--color-primary)); font: 900 1.25rem var(--font-display); }
+.stage-number { position: relative; display: grid; width: 56px; height: 56px; place-items: center; color: #fff; font: 900 .8rem var(--font-display); }
+.stage-marker { width: 56px; height: 56px; object-fit: contain; }
+.stage-number > span { position: absolute; right: -2px; bottom: -2px; display: grid; width: 24px; height: 24px; place-items: center; border: 2px solid #fff; border-radius: 50%; color: #fff; background: var(--stage-color, var(--color-primary)); }
 .stage-summary h2 { margin: 0 0 .2rem; font-size: 1.25rem; }
 .stage-summary p { margin: 0; color: var(--color-muted); }
 .stage-status { display: inline-flex; align-items: center; gap: .35rem; font-size: .84rem; font-weight: 800; }
@@ -102,3 +114,5 @@ select { min-height: var(--touch-target); max-width: 100%; padding: .55rem .8rem
 .update-banner { position: fixed; z-index: 20; right: 1rem; bottom: 1rem; width: min(calc(100% - 2rem), 480px); display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem; border-radius: 18px; color: #fff; background: var(--color-primary-dark); box-shadow: var(--shadow-soft); }
 .update-banner .button-row { flex-wrap: nowrap; }
 .update-banner .button-quiet { color: #fff; }
+
+@keyframes caregiver-hold { to { transform: scaleX(1); } }
