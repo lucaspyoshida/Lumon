@@ -15,3 +15,17 @@
 - **Impacto:** `implementacao_autorizada` passa a `true`; programador torna-se único próximo papel; toda saída volta a revisão especializada/supervisão antes de novo avanço.
 - **Substitui:** USR-009 apenas quanto ao bloqueio temporal de implementação; demais limites do Norte permanecem.
 - **Commit de publicação:** `d53608bfd77de55e28fcffb19f47080c7d5ad058`.
+
+## USR-039 — Publicar repositório e aplicativo no GitHub Pages
+
+- **Estado:** aprovada
+- **Responsável:** usuário
+- **Data:** 2026-08-04
+- **Decisão explícita:** “Torne o repositório público e me mande o link do GitHub page com o app funcionando pra eu testar.”
+- **Justificativa resumida:** disponibilizar o build aprovado da infraestrutura G4 em uma URL HTTPS pública para teste direto do aplicativo.
+- **Escopo autorizado:** confirmar visibilidade pública de `lucaspyoshida/Lumon`, publicar o conteúdo canônico de `feature/evolucao-pedagogica` no GitHub Pages e executar smoke test do host real.
+- **Impacto de privacidade/rede:** código, histórico, documentação e Issues do repositório ficam públicos; o app continua sem backend, analytics, conta ou transmissão de progresso infantil. GitHub Pages entrega apenas arquivos estáticos.
+- **Limites:** não liberar conteúdo pedagógico inexistente, não alterar Gate G5, não adicionar Firebase/TTS runtime/telemetria e não publicar dados locais do navegador.
+- **Alternativas consideradas:** manter Pages em `main` com versão legada; publicar a branch aprovada; criar infraestrutura externa. Escolhida a branch aprovada no Pages existente, sem novo fornecedor.
+- **Evidências prévias:** varredura do estado atual e histórico sem segredo/credencial detectado; repositório já confirmado público; Pages legado confirmado em `main` antes da troca.
+- **Commit de publicação:** `PENDENTE_PUBLICACAO`.

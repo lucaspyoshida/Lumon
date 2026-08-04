@@ -18,6 +18,15 @@ lease_expires_at: null
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
+publicacao:
+  autorizacao: USR-039
+  repository_url: https://github.com/lucaspyoshida/Lumon
+  repository_visibility: public
+  pages_url: https://lucaspyoshida.github.io/Lumon/
+  source_branch: feature/evolucao-pedagogica
+  source_path: /
+  status: PENDENTE_RECONFIGURACAO
+  verificado_em: 2026-08-04T11:29:39Z
 ultimo_gate_aprovado:
   gate: G4_IMPLEMENTACAO_FATIA_VERTICAL_1
   veredito: OBJETIVO ALCANCADO — APROVADO
