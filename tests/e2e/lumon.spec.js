@@ -1,7 +1,14 @@
 import { test, expect } from '@playwright/test';
 import { ALL_SKILLS, STAGES } from '../../src/config/levels.js';
 import { createProgress, recordSession } from '../../src/core/progression.js';
-import { createDefaultState, STORAGE_KEY } from '../../src/storage/repository.js';
+import {
+  CORRUPT_BACKUP_KEY,
+  LEGACY_BACKUP_KEY,
+  LEGACY_KEY,
+  LUMON_PROGRESS_STORAGE_KEYS,
+  STORAGE_KEY,
+  createDefaultState,
+} from '../../src/storage/repository.js';
 
 const APP_URL = '/Lumon/index.htm';
 
@@ -384,6 +391,7 @@ test('foco preserva navegação e contexto ao iniciar, retomar e sair no celular
 
 test('exclusão adulta apaga V1, backup e progresso V2 sem remigrar', async ({ page }) => {
   await installState(page, (state) => {
+    state.profile.displayName = 'marcador-lumon-state-v1';
     state.progress.manualUnlocked = ALL_SKILLS.map((skill) => skill.id);
     state.progress.completedSessions = [{
       id: 'historico-a-apagar', skillId: 'number.find.1-10', answers: [],
@@ -391,16 +399,33 @@ test('exclusão adulta apaga V1, backup e progresso V2 sem remigrar', async ({ p
     }];
     return state;
   });
-  await page.addInitScript(() => localStorage.setItem('preferencia-externa', 'preservar'));
+  await page.addInitScript(([entries, seedMarker]) => {
+    if (!sessionStorage.getItem(seedMarker)) {
+      for (const [key, value] of entries) localStorage.setItem(key, value);
+      sessionStorage.setItem(seedMarker, 'true');
+    }
+    localStorage.setItem('preferencia-externa', 'preservar');
+  }, [[
+    [CORRUPT_BACKUP_KEY, 'marcador-lumon-corrupt-backup'],
+    [LEGACY_BACKUP_KEY, 'marcador-lumon-legacy-backup'],
+    [LEGACY_KEY, 'marcador-lumon-last-settings'],
+  ], 'lumon-legacy-keys:playwright-seeded']);
   await page.goto(APP_URL);
-  expect(await page.evaluate((key) => localStorage.getItem(key), STORAGE_KEY)).not.toBeNull();
+  const beforeErase = await page.evaluate((keys) => Object.fromEntries(
+    keys.map((key) => [key, localStorage.getItem(key)]),
+  ), LUMON_PROGRESS_STORAGE_KEYS);
+  expect(beforeErase[STORAGE_KEY]).toContain('marcador-lumon-state-v1');
+  expect(beforeErase[CORRUPT_BACKUP_KEY]).toBe('marcador-lumon-corrupt-backup');
+  expect(beforeErase[LEGACY_BACKUP_KEY]).toBe('marcador-lumon-legacy-backup');
+  expect(beforeErase[LEGACY_KEY]).toBe('marcador-lumon-last-settings');
   expect((await readMigrationRecord(page, 'v1-backup')).raw).toContain('historico-a-apagar');
   await openCaregiver(page);
   await page.locator('#reset-button').click();
   await page.locator('#confirm-reset').click();
   await expect(page.locator('.stage-card').nth(4).locator('.skill-button').first()).toBeDisabled();
   expect(await page.evaluate(() => localStorage.getItem('preferencia-externa'))).toBe('preservar');
-  expect(await page.evaluate((key) => localStorage.getItem(key), STORAGE_KEY)).toBeNull();
+  expect(await page.evaluate((keys) => keys.map((key) => localStorage.getItem(key)), LUMON_PROGRESS_STORAGE_KEYS))
+    .toEqual([null, null, null, null]);
   expect(await readMigrationRecord(page, 'v1-backup')).toBeUndefined();
   const journal = await readMigrationRecord(page, 'v1-v2');
   expect(journal.status).toBe('source-erased');
@@ -414,7 +439,8 @@ test('exclusão adulta apaga V1, backup e progresso V2 sem remigrar', async ({ p
   await page.reload();
   erased = await readV2State(page);
   expect(erased.subjects.matematica.progress.completedSessions).toEqual([]);
-  expect(await page.evaluate((key) => localStorage.getItem(key), STORAGE_KEY)).toBeNull();
+  expect(await page.evaluate((keys) => keys.map((key) => localStorage.getItem(key)), LUMON_PROGRESS_STORAGE_KEYS))
+    .toEqual([null, null, null, null]);
   expect(await readMigrationRecord(page, 'v1-backup')).toBeUndefined();
 });
 

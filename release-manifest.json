@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "releaseId": "f48d90822631ef1398cabc872048464603775646f09973626749b67d41788eba",
+  "releaseId": "59c683101a944d656d0904897ea573c85651c7ef740cf9282c1a162f76c70ca3",
   "assets": [
     {
       "path": "./images/capybara/complete.webp",
@@ -88,11 +88,11 @@
     },
     {
       "path": "./src/storage/repository-v2.js",
-      "sha256": "491d29be58c73da6defa935d09c37a0a7ab2b582682b1a24a060c990ca4e9ac6"
+      "sha256": "1a24dbc71bab810412aa469371a939f99ea11db88c62a40062e39d6503699291"
     },
     {
       "path": "./src/storage/repository.js",
-      "sha256": "68ce8f2cee9756b946d533e7b122cfca30a9a774828abf7e98d3bc891515a0de"
+      "sha256": "10b2366c3344a88e44b0b9de52fb199496b89c4d32470b64327ec9bbf5aaa8e5"
     },
     {
       "path": "./src/storage/schema-v2.js",

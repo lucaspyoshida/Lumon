@@ -64,10 +64,18 @@ test('sessão ativa inválida é descartada com recuperação segura', () => {
   assert.equal(storage.getItem(CORRUPT_BACKUP_KEY), JSON.stringify(invalid));
 });
 
-test('exclusão remove somente chaves do Lumon', () => {
-  const storage = new MemoryStorage({ [STORAGE_KEY]: '{}', [LEGACY_KEY]: '{}', outro: 'preservar' });
+test('exclusão remove a allowlist histórica do Lumon e preserva chave externa', () => {
+  const storage = new MemoryStorage({
+    [STORAGE_KEY]: 'state',
+    [CORRUPT_BACKUP_KEY]: 'corrupt',
+    [LEGACY_BACKUP_KEY]: 'legacy-backup',
+    [LEGACY_KEY]: 'legacy',
+    outro: 'preservar',
+  });
   clearLumonData(storage);
   assert.equal(storage.getItem(STORAGE_KEY), null);
+  assert.equal(storage.getItem(CORRUPT_BACKUP_KEY), null);
+  assert.equal(storage.getItem(LEGACY_BACKUP_KEY), null);
   assert.equal(storage.getItem(LEGACY_KEY), null);
   assert.equal(storage.getItem('outro'), 'preservar');
 });

@@ -1,7 +1,7 @@
 importScripts('./src/pwa/release-integrity.js');
 
 const CACHE_PREFIX = 'lumon-shell-';
-const EXPECTED_RELEASE_ID = 'f48d90822631ef1398cabc872048464603775646f09973626749b67d41788eba';
+const EXPECTED_RELEASE_ID = '59c683101a944d656d0904897ea573c85651c7ef740cf9282c1a162f76c70ca3';
 const CACHE_NAME = `${CACHE_PREFIX}${EXPECTED_RELEASE_ID}`;
 const RELEASE_MANIFEST_PATH = './release-manifest.json';
 

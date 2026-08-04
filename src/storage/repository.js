@@ -5,6 +5,12 @@ export const STORAGE_KEY = 'lumon-state-v1';
 export const LEGACY_KEY = 'lumon-last-settings';
 export const LEGACY_BACKUP_KEY = 'lumon-legacy-backup';
 export const CORRUPT_BACKUP_KEY = 'lumon-corrupt-backup';
+export const LUMON_PROGRESS_STORAGE_KEYS = Object.freeze([
+  STORAGE_KEY,
+  CORRUPT_BACKUP_KEY,
+  LEGACY_BACKUP_KEY,
+  LEGACY_KEY,
+]);
 export const SCHEMA_VERSION = 1;
 
 export function createDefaultState(now = () => new Date().toISOString()) {
@@ -108,10 +114,5 @@ export function importState(raw, storage = globalThis.localStorage) {
 }
 
 export function clearLumonData(storage = globalThis.localStorage) {
-  const keys = [];
-  for (let index = 0; index < storage.length; index += 1) {
-    const key = storage.key(index);
-    if (key?.startsWith('lumon-')) keys.push(key);
-  }
-  keys.forEach((key) => storage.removeItem(key));
+  LUMON_PROGRESS_STORAGE_KEYS.forEach((key) => storage.removeItem(key));
 }

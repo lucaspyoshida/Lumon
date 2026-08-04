@@ -1,4 +1,8 @@
-import { STORAGE_KEY, isValidState as isValidV1State } from './repository.js';
+import {
+  LUMON_PROGRESS_STORAGE_KEYS,
+  STORAGE_KEY,
+  isValidState as isValidV1State,
+} from './repository.js';
 import {
   createDefaultV2State,
   createResetV2State,
@@ -219,7 +223,7 @@ export async function eraseAllLumonProgress(current, {
       erasedAt,
     });
     try {
-      storage?.removeItem(STORAGE_KEY);
+      LUMON_PROGRESS_STORAGE_KEYS.forEach((key) => storage?.removeItem(key));
     } catch (error) {
       transaction.abort();
       throw error;
