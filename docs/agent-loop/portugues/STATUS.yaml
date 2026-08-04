@@ -1,20 +1,20 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: EM_REVISAO
+estado: RETRABALHO
 gate_atual: G4_IMPLEMENTACAO_FATIA_VERTICAL_1
 implementacao_autorizada: true
 geracao_visual_autorizada: true
 autoridade_de_avanco: supervisor
 escopo_visual_autorizado: P0a_P0b_P0c_em_sequencia_com_supervisao
 max_concurrency: 1
-agente_ativo: supervisor
+agente_ativo: programador
 proximo_agente_autorizado: null
-proxima_skill: lumon-supervisao-final
-commit_canonico: 0d391df9d7e81e1c3aaf4d5e866e97fbc0f3d908
-run_id: pt-20260804T105004Z-supervisor-g4-retrabalho-0d391df
-idempotency_key: G4_IMPLEMENTACAO_FATIA_VERTICAL_1:supervisor-retrabalho:0d391df9d7e81e1c3aaf4d5e866e97fbc0f3d908
-heartbeat_at: 2026-08-04T10:50:04Z
-lease_expires_at: 2026-08-04T12:50:04Z
+proxima_skill: lumon-programador-pwa
+commit_canonico: df556a08833d86a9decbe1ed523624e2970defbc
+run_id: pt-20260804T105951Z-programador-g4-retrabalho2-df556a0
+idempotency_key: G4_IMPLEMENTACAO_FATIA_VERTICAL_1:programador-retrabalho2:df556a08833d86a9decbe1ed523624e2970defbc
+heartbeat_at: 2026-08-04T10:59:51Z
+lease_expires_at: 2026-08-04T12:59:51Z
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
@@ -26,20 +26,17 @@ ultimo_gate_aprovado:
 ressalvas_ativas:
   - id: P1_EXCLUSAO_COMPLETA_RETEM_HISTORICO
     bloqueia: conformidade de exclusao e privacidade
-    aceite: apagar ou anonimizar todas as copias permitidas pela politica, com teste E2E
-  - id: P1_SHELL_SEM_PROVA_FRIA
-    bloqueia: aprovacao final do shell e release
-    aceite: identidade de release derivada dos bytes, teste anti-mistura e transferencia fria final de no maximo 500000 bytes
+    aceite: remover todas as chaves historicas Lumon allowlisted, preservar chaves externas e comprovar com E2E
   - id: P0_GATE_G5_SEM_PACOTE_EDITORIAL
     bloqueia: Gate G5 e primeira fatia pedagogica de Portugues
     aceite: microcorpus, audio pt-BR e imagens pedagogicas aprovados com autoria, licenca, versao e hashes
 ultima_transicao:
-  de: RETRABALHO
-  para: EM_REVISAO
-  em: 2026-08-04T10:50:04Z
-  motivo: Dois P1 receberam correcoes e evidencias publicadas; claim transferido para nova supervisao independente.
+  de: EM_REVISAO
+  para: RETRABALHO
+  em: 2026-08-04T10:59:51Z
+  motivo: Supervisor fechou coerencia local do release, mas reproduziu retencao em backups legados; exclusao retorna ao mesmo programador.
 bloqueios:
-  - Correcoes de exclusao completa e coerencia local de release aguardam reproducao independente.
+  - Exclusao completa ainda preserva chaves historicas Lumon capazes de conter progresso.
   - Transferencia fria, Content-Encoding e deploy atomico no host final permanecem NAO TESTADO.
   - Microcorpus, audio editorial pt-BR e imagens pedagogicas aprovados estao ausentes; Portugues permanece blocked-content.
   - Sem backend, Firebase, analytics, TTS em runtime, transmissao de dados ou modo tematico online.
