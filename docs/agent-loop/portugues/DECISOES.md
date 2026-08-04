@@ -28,4 +28,4 @@
 - **Limites:** não liberar conteúdo pedagógico inexistente, não alterar Gate G5, não adicionar Firebase/TTS runtime/telemetria e não publicar dados locais do navegador.
 - **Alternativas consideradas:** manter Pages em `main` com versão legada; publicar a branch aprovada; criar infraestrutura externa. Escolhida a branch aprovada no Pages existente, sem novo fornecedor.
 - **Evidências prévias:** varredura do estado atual e histórico sem segredo/credencial detectado; repositório já confirmado público; Pages legado confirmado em `main` antes da troca.
-- **Commit de publicação:** `PENDENTE_PUBLICACAO`.
+- **Commit de publicação:** `af4033b8d185138ac8f61f2dad21491de02283d4`.
