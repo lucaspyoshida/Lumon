@@ -1,20 +1,20 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: RETRABALHO
+estado: EM_REVISAO
 gate_atual: G4_IMPLEMENTACAO_FATIA_VERTICAL_1
 implementacao_autorizada: true
 geracao_visual_autorizada: true
 autoridade_de_avanco: supervisor
 escopo_visual_autorizado: P0a_P0b_P0c_em_sequencia_com_supervisao
 max_concurrency: 1
-agente_ativo: programador
+agente_ativo: supervisor
 proximo_agente_autorizado: null
-proxima_skill: lumon-programador-pwa
-commit_canonico: bc14d32f247b88f0bf6c9ee58eba43895ccc5d78
-run_id: pt-20260804T103728Z-programador-g4-retrabalho-bc14d32
-idempotency_key: G4_IMPLEMENTACAO_FATIA_VERTICAL_1:programador-retrabalho:bc14d32f247b88f0bf6c9ee58eba43895ccc5d78
-heartbeat_at: 2026-08-04T10:37:28Z
-lease_expires_at: 2026-08-04T12:37:28Z
+proxima_skill: lumon-supervisao-final
+commit_canonico: 0d391df9d7e81e1c3aaf4d5e866e97fbc0f3d908
+run_id: pt-20260804T105004Z-supervisor-g4-retrabalho-0d391df
+idempotency_key: G4_IMPLEMENTACAO_FATIA_VERTICAL_1:supervisor-retrabalho:0d391df9d7e81e1c3aaf4d5e866e97fbc0f3d908
+heartbeat_at: 2026-08-04T10:50:04Z
+lease_expires_at: 2026-08-04T12:50:04Z
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
@@ -34,12 +34,12 @@ ressalvas_ativas:
     bloqueia: Gate G5 e primeira fatia pedagogica de Portugues
     aceite: microcorpus, audio pt-BR e imagens pedagogicas aprovados com autoria, licenca, versao e hashes
 ultima_transicao:
-  de: EM_REVISAO
-  para: RETRABALHO
-  em: 2026-08-04T10:37:28Z
-  motivo: Supervisor aprovou a fundacao com ressalvas, mas dois P1 acionaveis impedem aprovacao plena e retornam ao mesmo programador.
+  de: RETRABALHO
+  para: EM_REVISAO
+  em: 2026-08-04T10:50:04Z
+  motivo: Dois P1 receberam correcoes e evidencias publicadas; claim transferido para nova supervisao independente.
 bloqueios:
-  - Exclusao completa ainda retem progresso historico em V1 e backup de migracao.
-  - Identidade manual do cache nao prova coerencia de release; transferencia fria do host final permanece NAO TESTADO.
+  - Correcoes de exclusao completa e coerencia local de release aguardam reproducao independente.
+  - Transferencia fria, Content-Encoding e deploy atomico no host final permanecem NAO TESTADO.
   - Microcorpus, audio editorial pt-BR e imagens pedagogicas aprovados estao ausentes; Portugues permanece blocked-content.
   - Sem backend, Firebase, analytics, TTS em runtime, transmissao de dados ou modo tematico online.
