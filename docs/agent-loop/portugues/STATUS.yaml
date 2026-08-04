@@ -1,42 +1,43 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: EM_REVISAO
-gate_atual: G4_IMPLEMENTACAO_FATIA_VERTICAL_1
+estado: BLOQUEADO
+gate_atual: G5_VALIDACAO_ESPECIALIZADA
 implementacao_autorizada: true
 geracao_visual_autorizada: true
 autoridade_de_avanco: supervisor
 escopo_visual_autorizado: P0a_P0b_P0c_em_sequencia_com_supervisao
 max_concurrency: 1
-agente_ativo: supervisor
+agente_ativo: null
 proximo_agente_autorizado: null
-proxima_skill: lumon-supervisao-final
-commit_canonico: d8feab2aa39986740f07bcaf18c768f54ab004c2
-run_id: pt-20260804T110525Z-supervisor-g4-retrabalho2-d8feab2
-idempotency_key: G4_IMPLEMENTACAO_FATIA_VERTICAL_1:supervisor-retrabalho2:d8feab2aa39986740f07bcaf18c768f54ab004c2
-heartbeat_at: 2026-08-04T11:05:25Z
-lease_expires_at: 2026-08-04T13:05:25Z
+proxima_skill: null
+commit_canonico: fe9b7b00e81d9aef4f9e52d1ca64a33ea4807c8d
+run_id: null
+idempotency_key: null
+heartbeat_at: null
+lease_expires_at: null
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
 ultimo_gate_aprovado:
-  gate: G3_P0C_ICONE_MARCADOR
+  gate: G4_IMPLEMENTACAO_FATIA_VERTICAL_1
   veredito: OBJETIVO ALCANCADO — APROVADO
-  relatorio_commit: 60347fc257c4d07123fd6a831d334b4dba1701d7
-  handoff_commit: d0ae8e4ee0f8c9e9b07059ec04094815a4d58031
+  relatorio_commit: fe9b7b00e81d9aef4f9e52d1ca64a33ea4807c8d
+  handoff_commit: PENDENTE_PUBLICACAO
 ressalvas_ativas:
-  - id: P1_EXCLUSAO_COMPLETA_RETEM_HISTORICO
-    bloqueia: conformidade de exclusao e privacidade
-    aceite: remover todas as chaves historicas Lumon allowlisted, preservar chaves externas e comprovar com E2E
   - id: P0_GATE_G5_SEM_PACOTE_EDITORIAL
     bloqueia: Gate G5 e primeira fatia pedagogica de Portugues
     aceite: microcorpus, audio pt-BR e imagens pedagogicas aprovados com autoria, licenca, versao e hashes
+  - id: NAO_TESTADO_HOST_FINAL
+    bloqueia: Gate G6 e liberacao final do shell
+    aceite: transferencia fria, Content-Encoding e deploy atomico medidos no host final
 ultima_transicao:
-  de: RETRABALHO
-  para: EM_REVISAO
-  em: 2026-08-04T11:05:25Z
-  motivo: Limpeza allowlisted e evidencia de regressao foram publicadas; claim transferido para revisao final independente do P1.
+  de: EM_REVISAO
+  para: BLOQUEADO
+  em: 2026-08-04T11:18:44Z
+  motivo: Infraestrutura G4 aprovada; Gate G5 nao pode validar fatia inexistente sem pacote editorial aprovado.
 bloqueios:
-  - Fechamento da exclusao allowlisted aguarda reproducao independente.
-  - Transferencia fria, Content-Encoding e deploy atomico no host final permanecem NAO TESTADO.
-  - Microcorpus, audio editorial pt-BR e imagens pedagogicas aprovados estao ausentes; Portugues permanece blocked-content.
+  - Microcorpus, audio editorial pt-BR e imagens pedagogicas aprovados estao ausentes; Portugues deve permanecer blocked-content.
+  - Autoria, licenca, versao e hashes do pacote editorial ainda nao foram publicados.
+  - Producao ou incorporacao de audio/imagens pode exigir decisao do usuario sobre fornecedor, custo, licenca, rede ou geracao.
+  - Transferencia fria, Content-Encoding e deploy atomico no host final permanecem NAO TESTADO para o Gate G6.
   - Sem backend, Firebase, analytics, TTS em runtime, transmissao de dados ou modo tematico online.
