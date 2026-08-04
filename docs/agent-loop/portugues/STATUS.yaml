@@ -22,7 +22,7 @@ ultimo_gate_aprovado:
   gate: G4_IMPLEMENTACAO_FATIA_VERTICAL_1
   veredito: OBJETIVO ALCANCADO — APROVADO
   relatorio_commit: fe9b7b00e81d9aef4f9e52d1ca64a33ea4807c8d
-  handoff_commit: PENDENTE_PUBLICACAO
+  handoff_commit: 6f38e95128f20352cc456de61c92763d6fa078da
 ressalvas_ativas:
   - id: P0_GATE_G5_SEM_PACOTE_EDITORIAL
     bloqueia: Gate G5 e primeira fatia pedagogica de Portugues
