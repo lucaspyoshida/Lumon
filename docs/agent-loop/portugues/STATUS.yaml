@@ -25,8 +25,12 @@ publicacao:
   pages_url: https://lucaspyoshida.github.io/Lumon/
   source_branch: feature/evolucao-pedagogica
   source_path: /
-  status: PENDENTE_RECONFIGURACAO
-  verificado_em: 2026-08-04T11:29:39Z
+  status: PUBLICADA_TESTADA
+  build_id: 1131824862
+  build_commit: 1f7c4c10b2b499e5af07b0be62f2a7d137e61109
+  release_id: 59c683101a944d656d0904897ea573c85651c7ef740cf9282c1a162f76c70ca3
+  shell_compressed_bytes: 161052
+  verificado_em: 2026-08-04T11:36:30Z
 ultimo_gate_aprovado:
   gate: G4_IMPLEMENTACAO_FATIA_VERTICAL_1
   veredito: OBJETIVO ALCANCADO — APROVADO
@@ -36,9 +40,9 @@ ressalvas_ativas:
   - id: P0_GATE_G5_SEM_PACOTE_EDITORIAL
     bloqueia: Gate G5 e primeira fatia pedagogica de Portugues
     aceite: microcorpus, audio pt-BR e imagens pedagogicas aprovados com autoria, licenca, versao e hashes
-  - id: NAO_TESTADO_HOST_FINAL
+  - id: NAO_TESTADO_DEPLOY_ATOMICO_HOST_FINAL
     bloqueia: Gate G6 e liberacao final do shell
-    aceite: transferencia fria, Content-Encoding e deploy atomico medidos no host final
+    aceite: troca entre dois releases observada sem shell hibrido no GitHub Pages
 ultima_transicao:
   de: EM_REVISAO
   para: BLOQUEADO
@@ -48,5 +52,5 @@ bloqueios:
   - Microcorpus, audio editorial pt-BR e imagens pedagogicas aprovados estao ausentes; Portugues deve permanecer blocked-content.
   - Autoria, licenca, versao e hashes do pacote editorial ainda nao foram publicados.
   - Producao ou incorporacao de audio/imagens pode exigir decisao do usuario sobre fornecedor, custo, licenca, rede ou geracao.
-  - Transferencia fria, Content-Encoding e deploy atomico no host final permanecem NAO TESTADO para o Gate G6.
+  - Deploy atomico durante troca entre dois releases no GitHub Pages permanece NAO TESTADO para o Gate G6.
   - Sem backend, Firebase, analytics, TTS em runtime, transmissao de dados ou modo tematico online.
