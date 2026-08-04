@@ -1,20 +1,20 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: PRONTO
+estado: EM_EXECUCAO
 gate_atual: G4_IMPLEMENTACAO_FATIA_VERTICAL_1
 implementacao_autorizada: true
 geracao_visual_autorizada: true
 autoridade_de_avanco: supervisor
 escopo_visual_autorizado: P0a_P0b_P0c_em_sequencia_com_supervisao
 max_concurrency: 1
-agente_ativo: null
-proximo_agente_autorizado: programador
+agente_ativo: programador
+proximo_agente_autorizado: null
 proxima_skill: lumon-programador-pwa
-commit_canonico: afa806f61dde8fc6c590e8f1a9982bcb1c68765d
-run_id: null
-idempotency_key: null
-heartbeat_at: null
-lease_expires_at: null
+commit_canonico: d53608bfd77de55e28fcffb19f47080c7d5ad058
+run_id: pt-20260804T100522Z-programador-g4-d53608b
+idempotency_key: G4_IMPLEMENTACAO_FATIA_VERTICAL_1:programador:d53608bfd77de55e28fcffb19f47080c7d5ad058
+heartbeat_at: 2026-08-04T10:05:22Z
+lease_expires_at: 2026-08-04T10:55:22Z
 github_issue:
   number: 1
   url: https://github.com/lucaspyoshida/Lumon/issues/1
@@ -31,10 +31,10 @@ ressalvas_ativas:
     bloqueia: aprovacao futura do shell e build
     aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: AGUARDA_USUARIO
-  para: PRONTO
-  em: 2026-08-04T10:04:24Z
-  motivo: Usuario autorizou explicitamente implementacao do Gate G4; programador e unico proximo papel para menor fatia vertical aprovada.
+  de: PRONTO
+  para: EM_EXECUCAO
+  em: 2026-08-04T10:05:22Z
+  motivo: Claim exclusivo publicado para programador implementar menor fatia vertical aprovada do Gate G4.
 bloqueios:
   - Escopo inicial limitado a menor fatia vertical aprovada; demais etapas nao podem ser antecipadas.
   - Sem backend, Firebase, analytics, TTS em runtime, transmissao de dados ou modo tematico online.

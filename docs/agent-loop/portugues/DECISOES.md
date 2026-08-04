@@ -14,4 +14,4 @@
 - **Evidências:** Norte; contratos G1/G2; plano de engenharia; plano frontend; aprovações e handoffs G1–G3; aprovação P0c v2 `60347fc257c4d07123fd6a831d334b4dba1701d7`.
 - **Impacto:** `implementacao_autorizada` passa a `true`; programador torna-se único próximo papel; toda saída volta a revisão especializada/supervisão antes de novo avanço.
 - **Substitui:** USR-009 apenas quanto ao bloqueio temporal de implementação; demais limites do Norte permanecem.
-- **Commit de publicação:** pendente de fixação no claim imediatamente seguinte.
+- **Commit de publicação:** `d53608bfd77de55e28fcffb19f47080c7d5ad058`.
