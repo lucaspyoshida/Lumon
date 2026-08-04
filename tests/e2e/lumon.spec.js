@@ -8,7 +8,9 @@ const APP_URL = '/Lumon/index.htm';
 async function installState(page, configure = (value) => value) {
   const state = configure(createDefaultState(() => '2026-07-17T00:30:00.000Z'));
   await page.addInitScript(([key, value]) => {
-    if (!localStorage.getItem(key)) localStorage.setItem(key, value);
+    const seedMarker = `${key}:playwright-seeded`;
+    if (!sessionStorage.getItem(seedMarker) && !localStorage.getItem(key)) localStorage.setItem(key, value);
+    sessionStorage.setItem(seedMarker, 'true');
   }, [STORAGE_KEY, JSON.stringify(state)]);
   return state;
 }
@@ -380,15 +382,40 @@ test('foco preserva navegação e contexto ao iniciar, retomar e sair no celular
   }
 });
 
-test('reinício confirmado apaga progresso sem apagar outras chaves', async ({ page }) => {
-  await installUnlockedState(page);
+test('exclusão adulta apaga V1, backup e progresso V2 sem remigrar', async ({ page }) => {
+  await installState(page, (state) => {
+    state.progress.manualUnlocked = ALL_SKILLS.map((skill) => skill.id);
+    state.progress.completedSessions = [{
+      id: 'historico-a-apagar', skillId: 'number.find.1-10', answers: [],
+      startedAt: 'inicio', finishedAt: 'fim', completed: true, abandoned: false,
+    }];
+    return state;
+  });
   await page.addInitScript(() => localStorage.setItem('preferencia-externa', 'preservar'));
   await page.goto(APP_URL);
+  expect(await page.evaluate((key) => localStorage.getItem(key), STORAGE_KEY)).not.toBeNull();
+  expect((await readMigrationRecord(page, 'v1-backup')).raw).toContain('historico-a-apagar');
   await openCaregiver(page);
   await page.locator('#reset-button').click();
   await page.locator('#confirm-reset').click();
   await expect(page.locator('.stage-card').nth(4).locator('.skill-button').first()).toBeDisabled();
   expect(await page.evaluate(() => localStorage.getItem('preferencia-externa'))).toBe('preservar');
+  expect(await page.evaluate((key) => localStorage.getItem(key), STORAGE_KEY)).toBeNull();
+  expect(await readMigrationRecord(page, 'v1-backup')).toBeUndefined();
+  const journal = await readMigrationRecord(page, 'v1-v2');
+  expect(journal.status).toBe('source-erased');
+  expect(journal.sourceSha256).toBeNull();
+  let erased = await readV2State(page);
+  expect(erased.subjects.matematica.progress.completedSessions).toEqual([]);
+  expect(erased.subjects.matematica.progress.manualUnlocked).toEqual([]);
+  expect(erased.migration.status).toBe('source-erased');
+  expect(erased.migration.sourceSha256).toBeNull();
+
+  await page.reload();
+  erased = await readV2State(page);
+  expect(erased.subjects.matematica.progress.completedSessions).toEqual([]);
+  expect(await page.evaluate((key) => localStorage.getItem(key), STORAGE_KEY)).toBeNull();
+  expect(await readMigrationRecord(page, 'v1-backup')).toBeUndefined();
 });
 
 test('migração V1 para V2 preserva Matemática, backup e idempotência', async ({ page }) => {
@@ -443,6 +470,29 @@ test('primeira carga online, atualização segura e sessão offline', async ({ p
   });
   await page.reload();
   await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller))).toBe(true);
+  const releaseAudit = await page.evaluate(async () => {
+    const manifestUrl = new URL('./release-manifest.json', location.href).toString();
+    const manifestResponse = await caches.match(manifestUrl);
+    if (!manifestResponse) return { error: 'manifesto ausente' };
+    const manifest = await manifestResponse.json();
+    const cacheName = `lumon-shell-${manifest.releaseId}`;
+    const cache = await caches.open(cacheName);
+    const mismatches = [];
+    for (const asset of manifest.assets) {
+      const response = await cache.match(new URL(asset.path, manifestUrl).toString());
+      if (!response) {
+        mismatches.push(`${asset.path}:ausente`);
+        continue;
+      }
+      const digest = await crypto.subtle.digest('SHA-256', await response.arrayBuffer());
+      const actual = [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, '0')).join('');
+      if (actual !== asset.sha256) mismatches.push(`${asset.path}:sha`);
+    }
+    return { cacheName, expectedCacheName: `lumon-shell-${manifest.releaseId}`, mismatches };
+  });
+  expect(releaseAudit.error).toBeUndefined();
+  expect(releaseAudit.cacheName).toBe(releaseAudit.expectedCacheName);
+  expect(releaseAudit.mismatches).toEqual([]);
   await startFirstSkill(page);
   await answerFindNumber(page, true);
   await page.locator('#next-question').click();

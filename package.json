@@ -8,6 +8,7 @@
     "lint": "node scripts/lint.mjs",
     "test": "node --test tests/unit/*.test.js tests/integration/*.test.js",
     "build": "node scripts/build.mjs",
+    "release:sync": "node scripts/sync-release.mjs",
     "check": "npm run lint && npm test && npm run build",
     "test:e2e": "playwright test",
     "test:e2e:chromium": "playwright test --project=chromium"

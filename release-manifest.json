@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "f48d90822631ef1398cabc872048464603775646f09973626749b67d41788eba",
+  "assets": [
+    {
+      "path": "./images/capybara/complete.webp",
+      "sha256": "97c95a84eab6e5684fdb38d85a4d7d9696609af83c82c8da23c801f8659e0a60"
+    },
+    {
+      "path": "./images/capybara/trail-marker-256.png",
+      "sha256": "5281e51df7dcdfc0e1f531a520cd7dc905ee6bf83cb0ad7949a514904ae79613"
+    },
+    {
+      "path": "./images/capybara/welcome.webp",
+      "sha256": "7bf4e244dff15570716d0d899f00e4ed19bea8f23a40b7d793caa345604111a0"
+    },
+    {
+      "path": "./images/favicon-48.png",
+      "sha256": "474b80acd536522000689d6d9009bb4434ea997af157e378711668c9583566d0"
+    },
+    {
+      "path": "./images/icon-192x192.png",
+      "sha256": "0137c76297efbbd7914d692da43948bda8a975344ea468b71a8bf463cab3d1d6"
+    },
+    {
+      "path": "./images/icon-512x512.png",
+      "sha256": "c7ba4443b5985f8b598cad6b4741b94c18d6ffea943b8d4f69d2545371ffb93a"
+    },
+    {
+      "path": "./index.htm",
+      "sha256": "ca805f2b1115da6389b5045bf15c6f691fa3514979d6139c283a5c28494411da"
+    },
+    {
+      "path": "./manifest.json",
+      "sha256": "2d3dce3fe0d97f14022108cab34746a39fc5a83ee0c8b8a9da1c7b13fd74965f"
+    },
+    {
+      "path": "./src/app.js",
+      "sha256": "a4f99e1aa83cdc2e8b1c39b3ab702d48b650c226fd06d110d6a7d1337868be8b"
+    },
+    {
+      "path": "./src/config/levels.js",
+      "sha256": "b0200832b51fb6a395432910360bee7ca021a5d870fb9a709168f43b2f2b2411"
+    },
+    {
+      "path": "./src/core/progression.js",
+      "sha256": "e715c4540085d47df159716016009bdadd73d8f0a05250475017d36485c6ec99"
+    },
+    {
+      "path": "./src/core/session.js",
+      "sha256": "1dc12bcea1cb2c70084841b971d8998340f430bb72e1b70355cd40798df9d399"
+    },
+    {
+      "path": "./src/generators/index.js",
+      "sha256": "2ba07054ff9d9e377b28c6914e53a9eb5b18e11f8d3de39b056cc61e5c211d7f"
+    },
+    {
+      "path": "./src/generators/numbers.js",
+      "sha256": "b6df3af92f7835fe841b27b7c15f00fbc539b9fd7cab3418d84dfc81c56f5de3"
+    },
+    {
+      "path": "./src/generators/operations.js",
+      "sha256": "ba76cc20c2d9fde601da7373b2122224ca487d57dda5ea873fd18fbfa4013ec3"
+    },
+    {
+      "path": "./src/generators/options.js",
+      "sha256": "3d8d77102c580f57baf2c24bdda0e11658a06e0e9ede84fe90b97431be69c4d1"
+    },
+    {
+      "path": "./src/generators/random.js",
+      "sha256": "b8e5e820425d9e55f1f297f2e2f2e6b4d8b5f32b200f2484134d2b08d75c4fc2"
+    },
+    {
+      "path": "./src/generators/sequences.js",
+      "sha256": "c3ce01a8bce316565bd47feaeb986306627064b0268e97f5243a5041aa70c47d"
+    },
+    {
+      "path": "./src/media/audio-controller.js",
+      "sha256": "6d30e34111b680a7d7a8d0dbb69923b7ab1fb4303018bf22700a0871cc7a208b"
+    },
+    {
+      "path": "./src/pwa/registration.js",
+      "sha256": "2aa7d9fd3d455b013bdcfc5e608c28f710c41805ebfccdc821bb92975e9cb2ad"
+    },
+    {
+      "path": "./src/pwa/release-integrity.js",
+      "sha256": "e01a1b9663cfc12f06b5bdcb70dc89a63df78e983a062c94796fd84db78f96c4"
+    },
+    {
+      "path": "./src/storage/repository-v2.js",
+      "sha256": "491d29be58c73da6defa935d09c37a0a7ab2b582682b1a24a060c990ca4e9ac6"
+    },
+    {
+      "path": "./src/storage/repository.js",
+      "sha256": "68ce8f2cee9756b946d533e7b122cfca30a9a774828abf7e98d3bc891515a0de"
+    },
+    {
+      "path": "./src/storage/schema-v2.js",
+      "sha256": "ef4ec35cb14cd1ef17fba038e776aedaef098c93d9d9274682b17bd0246a75eb"
+    },
+    {
+      "path": "./src/subjects/portuguese.js",
+      "sha256": "a140dbe60032997e7a0eb1c62f25a37435b9d6ca89343414939c25e23d5e4f52"
+    },
+    {
+      "path": "./src/subjects/registry.js",
+      "sha256": "097bc2666f60b4016ecc072ac9b277a5af2ef7b741940460b174bd001ff4a10e"
+    },
+    {
+      "path": "./styles/accessibility.css",
+      "sha256": "a948f0eb7756943758324f2d6cc3da16d4031d30716f2e2a9325120cc6c48cba"
+    },
+    {
+      "path": "./styles/base.css",
+      "sha256": "40749619ba7a6073ca165c4535d852a73ebdc46d68c7168f810e0f59f6cb114a"
+    },
+    {
+      "path": "./styles/components.css",
+      "sha256": "a8e548d277d018422578b9d4f0dee71054529e16751fcc79bb580747f52095d6"
+    },
+    {
+      "path": "./styles/screens.css",
+      "sha256": "25d3b886cf39da44f00f054eb6c42ee60bf23dd12abcf7992af0cf67c35f978c"
+    },
+    {
+      "path": "./styles/tokens.css",
+      "sha256": "45a7089660f0983f1c5c4c9cf8a64fb3efa5196c18335eefda1a8193620efec5"
+    }
+  ]
+}

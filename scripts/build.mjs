@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { gzipSync } from 'node:zlib';
 import { ALL_SKILLS, STAGES } from '../src/config/levels.js';
 import { generateQuestions } from '../src/generators/index.js';
+import { createReleaseManifest } from './release-manifest.mjs';
 
 const requiredFiles = [
   'index.htm', 'manifest.json', 'service-worker.js',
@@ -10,6 +11,7 @@ const requiredFiles = [
   'images/favicon-48.png', 'images/capybara/welcome.webp',
   'images/capybara/complete.webp', 'images/capybara/trail-marker-256.png',
   'styles/tokens.css', 'styles/base.css', 'styles/components.css', 'styles/screens.css', 'styles/accessibility.css',
+  'release-manifest.json', 'src/pwa/release-integrity.js',
 ];
 await Promise.all(requiredFiles.map((file) => access(file)));
 
@@ -28,17 +30,20 @@ for (const [file, expectedHash] of approvedAssets) {
   if (bytes.length > 150_000) throw new Error(`Asset visual excede 150.000 bytes: ${file}`);
 }
 
+const expectedRelease = await createReleaseManifest();
+const committedRelease = JSON.parse(await readFile('release-manifest.json', 'utf8'));
+if (JSON.stringify(committedRelease) !== JSON.stringify(expectedRelease)) {
+  throw new Error('Manifesto de release obsoleto; execute npm run release:sync');
+}
+const serviceWorker = await readFile('service-worker.js', 'utf8');
+if (!serviceWorker.includes(`const EXPECTED_RELEASE_ID = '${expectedRelease.releaseId}';`)) {
+  throw new Error('Identidade do service worker não corresponde aos bytes; execute npm run release:sync');
+}
+
 const shellFiles = [
-  'index.htm', 'index.htm', 'manifest.json', 'images/favicon-48.png',
-  'images/icon-192x192.png', 'images/icon-512x512.png',
-  'images/capybara/welcome.webp', 'images/capybara/complete.webp', 'images/capybara/trail-marker-256.png',
-  'styles/tokens.css', 'styles/base.css', 'styles/components.css', 'styles/screens.css', 'styles/accessibility.css',
-  'src/app.js', 'src/config/levels.js', 'src/core/progression.js', 'src/core/session.js',
-  'src/generators/index.js', 'src/generators/random.js', 'src/generators/options.js',
-  'src/generators/numbers.js', 'src/generators/sequences.js', 'src/generators/operations.js',
-  'src/storage/repository.js', 'src/storage/schema-v2.js', 'src/storage/repository-v2.js',
-  'src/subjects/portuguese.js', 'src/subjects/registry.js', 'src/media/audio-controller.js',
-  'src/pwa/registration.js',
+  ...expectedRelease.assets.map((asset) => asset.path.slice(2)),
+  'release-manifest.json',
+  'service-worker.js',
 ];
 let compressedShellBytes = 0;
 for (const file of shellFiles) compressedShellBytes += gzipSync(await readFile(file), { level: 9 }).length;

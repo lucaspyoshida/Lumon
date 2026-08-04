@@ -15,9 +15,9 @@ import {
   moveToNextQuestion,
 } from './core/session.js';
 import {
+  eraseAllLumonProgress,
   importV2State,
   loadV2State,
-  resetV2State,
   saveV2State,
 } from './storage/repository-v2.js';
 import { activateWaitingWorker, registerPwa } from './pwa/registration.js';
@@ -728,7 +728,7 @@ elements['import-file'].addEventListener('change', async () => {
 elements['reset-button'].addEventListener('click', () => elements['reset-dialog'].showModal());
 elements['cancel-reset'].addEventListener('click', () => elements['reset-dialog'].close());
 elements['confirm-reset'].addEventListener('click', async () => {
-  state = await resetV2State(state);
+  state = await eraseAllLumonProgress(state);
   elements['reset-dialog'].close();
   elements['caregiver-dialog'].close();
   renderHome();

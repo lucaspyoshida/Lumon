@@ -167,6 +167,66 @@ export async function importV2State(raw, current, options = {}) {
   return saveV2State(candidate, options);
 }
 
-export async function resetV2State(current, options = {}) {
-  return saveV2State(createResetV2State(current), options);
+export async function eraseAllLumonProgress(current, {
+  indexedDBFactory = globalThis.indexedDB,
+  storage = globalThis.localStorage,
+  now = () => new Date().toISOString(),
+} = {}) {
+  if (!isValidV2State(current)) throw new TypeError('Estado V2 do Lumon inválido');
+  const database = await openLumonDatabase(indexedDBFactory);
+  try {
+    const erasedAt = now();
+    const transaction = database.transaction([STATE_STORE, MIGRATION_STORE], 'readwrite');
+    const stateStore = transaction.objectStore(STATE_STORE);
+    const migrationStore = transaction.objectStore(MIGRATION_STORE);
+    const currentRecord = await requestResult(stateStore.get(CURRENT_STATE_ID));
+    const currentRevision = currentRecord?.state?.revision ?? -1;
+    if (currentRevision !== current.revision) {
+      transaction.abort();
+      throw new Error(`Conflito de revisão: esperado ${current.revision}, encontrado ${currentRevision}`);
+    }
+
+    const erased = createResetV2State(current, () => erasedAt);
+    erased.revision = current.revision + 1;
+    erased.updatedAt = erasedAt;
+    erased.migration = {
+      migrationId: 'lumon-v1-to-v2',
+      migratorVersion: 1,
+      sourceKey: null,
+      sourceSchemaVersion: null,
+      sourceSha256: null,
+      targetSchemaVersion: 2,
+      status: 'source-erased',
+      erasedAt,
+    };
+    if (!isValidV2State(erased)) {
+      transaction.abort();
+      throw new TypeError('Estado V2 zerado é inválido');
+    }
+
+    stateStore.put({ id: CURRENT_STATE_ID, state: erased });
+    migrationStore.delete(BACKUP_ID);
+    migrationStore.put({
+      id: JOURNAL_ID,
+      migrationId: 'lumon-v1-to-v2',
+      migratorVersion: 1,
+      sourceKey: null,
+      sourceSha256: null,
+      sourceValid: false,
+      targetSchemaVersion: 2,
+      status: 'source-erased',
+      targetRevision: erased.revision,
+      erasedAt,
+    });
+    try {
+      storage?.removeItem(STORAGE_KEY);
+    } catch (error) {
+      transaction.abort();
+      throw error;
+    }
+    await transactionDone(transaction);
+    return erased;
+  } finally {
+    database.close();
+  }
 }
