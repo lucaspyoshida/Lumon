@@ -1,16 +1,16 @@
 schema_version: 1
 objetivo: portugues-lumon
-estado: AGUARDA_USUARIO
-gate_atual: G3_P0C_ICONE_MARCADOR
-implementacao_autorizada: false
+estado: PRONTO
+gate_atual: G4_IMPLEMENTACAO_FATIA_VERTICAL_1
+implementacao_autorizada: true
 geracao_visual_autorizada: true
 autoridade_de_avanco: supervisor
 escopo_visual_autorizado: P0a_P0b_P0c_em_sequencia_com_supervisao
 max_concurrency: 1
 agente_ativo: null
-proximo_agente_autorizado: null
-proxima_skill: null
-commit_canonico: 27fe24471fdc42c095920c57d998c8c75fb71df5
+proximo_agente_autorizado: programador
+proxima_skill: lumon-programador-pwa
+commit_canonico: afa806f61dde8fc6c590e8f1a9982bcb1c68765d
 run_id: null
 idempotency_key: null
 heartbeat_at: null
@@ -31,12 +31,12 @@ ressalvas_ativas:
     bloqueia: aprovacao futura do shell e build
     aceite: transferencia fria final sem audio com no maximo 500000 bytes e zero shell hibrido
 ultima_transicao:
-  de: APROVADO
-  para: AGUARDA_USUARIO
-  em: 2026-08-02T04:01:40Z
-  motivo: Planejamento e sequencia visual autorizada concluidos; proximo avanco exige autorizacao explicita de implementacao no Gate G4.
+  de: AGUARDA_USUARIO
+  para: PRONTO
+  em: 2026-08-04T10:04:24Z
+  motivo: Usuario autorizou explicitamente implementacao do Gate G4; programador e unico proximo papel para menor fatia vertical aprovada.
 bloqueios:
-  - Implementacao do produto nao autorizada.
-  - Candidatos visuais aprovados nao estao integrados; icones ativos, manifesto, service worker, app e shell permanecem inalterados.
-  - Instalacao, shell frio, integracao runtime e teste infantil permanecem NAO TESTADO.
-  - Gate G4 e programador dependem de autorizacao explicita do usuario.
+  - Escopo inicial limitado a menor fatia vertical aprovada; demais etapas nao podem ser antecipadas.
+  - Sem backend, Firebase, analytics, TTS em runtime, transmissao de dados ou modo tematico online.
+  - Audio ou imagem pedagogica sem aprovacao/proveniencia suficiente deve falhar fechada.
+  - Instalacao, shell frio, integracao runtime e teste infantil permanecem NAO TESTADO ate evidencia do programador e revisores.
