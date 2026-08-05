@@ -1,364 +1,239 @@
+/*
+ * Lumon — estilos.
+ *
+ * Três regras guiam este arquivo:
+ *   1. O ícone é maior que o texto, porque a usuária tem 4 anos e não lê.
+ *   2. Nenhum alvo de toque abaixo de 64 px.
+ *   3. Nada comunica só por cor.
+ */
+
 :root {
-    --cor-primaria: #4a90e2;
-    --cor-secundaria: #50e3c2;
-    --cor-fundo: #f9f9f9;
-    --cor-texto: #333;
-    --cor-branco: #fff;
-    --cor-acerto: #7ed321;
-    --cor-erro: #f5a623;
+  --cor-primaria: #4a90e2;
+  --cor-acerto: #4fba6f;
+  --cor-revisar: #f2a541;
+  --cor-erro: #d95d5d;
+  --cor-fundo: #f7f9fc;
+  --cor-superficie: #ffffff;
+  --cor-texto: #263238;
+  --cor-numeros: #4a90e2;
+  --cor-somas: #3aa76d;
+  --cor-subtracoes: #d98324;
+  --cor-letras: #8e44ad;
+  --cor-vogais: #d1457b;
 
-    /* Nova paleta de cores */
-    --cor-numeros: #4a90e2;
-    --cor-somas: #50e3c2;
-    --cor-subtracoes: #f5a623;
-    --cor-letras: #d0021b;
-
-    /* Nova paleta de cores para o menu de letras */
-    --cor-vogais: #9b59b6;
-    --cor-palavra: #3498db;
-    --cor-intervalo: #e67e22;
-
-    /* Nova paleta de cores para o menu de modo */
-    --cor-sequencial: #2ecc71;
-    --cor-aleatorio: #e74c3c;
+  --raio: 24px;
+  --e1: 4px;
+  --e2: 8px;
+  --e3: 16px;
+  --e4: 24px;
+  --alvo: 64px;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
-    -webkit-tap-highlight-color: transparent; /* Remove o brilho do toque em mobile */
-}
-
-.imgresult {
-    width: 80vw !important;
-    height: auto;
-    border-radius: 20px;
-    box-shadow: 0 0 10px #acacac;
-}
-
+* { box-sizing: border-box; }
 
 html, body {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  overscroll-behavior: none;
 }
 
-body {
-    background-color: var(--cor-fundo);
-    color: var(--cor-texto);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: max(var(--e3), env(safe-area-inset-top)) var(--e3) var(--e4);
+  display: flex;
+  flex-direction: column;
 }
 
-.app-container {
-    width: 100%;
-    height: 100%;
-    max-width: 450px; /* Limita a largura em telas maiores */
-    overflow: hidden;
-    position: relative;
-    background-color: var(--cor-fundo);
+.tela { display: none; flex-direction: column; gap: var(--e3); flex: 1; }
+.tela.ativa { display: flex; }
+.tela h1, .tela h2 { text-align: center; margin: var(--e2) 0; }
+.tela h1 { font-size: clamp(2rem, 9vw, 3rem); letter-spacing: 0.12em; }
+.tela h2 { font-size: clamp(1.25rem, 5vw, 1.75rem); font-weight: 600; }
+.tela h1:focus, .tela h2:focus { outline: none; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
 
-.tela {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    animation: fadeIn 0.5s ease;
+/* --- Botões --------------------------------------------------------------
+   O ícone é o portador do significado; o texto existe para o adulto. */
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: var(--e3);
+  min-height: var(--alvo);
+  padding: var(--e3) var(--e4);
+  border: none;
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  font: inherit;
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(38, 50, 56, 0.12);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.tela.ativa {
-    display: flex;
+.btn:active { transform: scale(0.97); box-shadow: 0 1px 3px rgba(38, 50, 56, 0.16); }
+.btn:focus-visible { outline: 4px solid var(--cor-primaria); outline-offset: 3px; }
+
+.btn__icone { font-size: 2.2rem; line-height: 1; min-width: 2.6rem; text-align: center; }
+.btn__rotulo { flex: 1; }
+
+.grade { display: flex; flex-direction: column; gap: var(--e3); }
+
+.btn--atividade, .btn--modo, .btn--nivel, .btn--fim { color: #fff; }
+.btn--numeros { background: var(--cor-numeros); }
+.btn--somas { background: var(--cor-somas); }
+.btn--subtracoes { background: var(--cor-subtracoes); }
+.btn--letras { background: var(--cor-letras); }
+.btn--vogais { background: var(--cor-vogais); }
+.btn--fim { background: var(--cor-primaria); }
+
+.btn--voltar, .btn--sair, .btn--ouvir {
+  min-height: var(--alvo);
+  min-width: var(--alvo);
+  padding: var(--e2);
+  justify-content: center;
+  background: transparent;
+  box-shadow: none;
+}
+.btn--voltar .btn__rotulo, .btn--sair .btn__rotulo, .btn--ouvir .btn__rotulo { display: none; }
+.btn--voltar .btn__icone, .btn--sair .btn__icone, .btn--ouvir .btn__icone { font-size: 1.9rem; }
+
+/* A área do exercício precisa ocupar toda a altura disponível: assim o
+   enunciado cresce e as alternativas ficam na parte de baixo, ao alcance do
+   polegar de quem segura o aparelho. */
+#area-exercicio { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+
+.barra-topo { display: flex; }
+.barra-info { display: flex; align-items: center; justify-content: space-between; gap: var(--e2); }
+.barra-info__acoes { display: flex; gap: var(--e1); }
+#progresso { font-size: 1.1rem; font-weight: 700; color: #546e7a; }
+
+/* --- Cartão --------------------------------------------------------------- */
+
+.cartao-area { display: flex; flex-direction: column; gap: var(--e4); flex: 1; }
+
+.cartao-container {
+  flex: 1;
+  min-height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  touch-action: pan-y;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
+.cartao {
+  position: relative;
+  width: min(84vw, 340px);
+  aspect-ratio: 3 / 4;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+.cartao.virado { transform: rotateY(180deg); }
+
+.cartao__face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+  box-shadow: 0 6px 20px rgba(38, 50, 56, 0.16);
+  font-size: clamp(4rem, 22vw, 8rem);
+  font-weight: 700;
+}
+.cartao__face--verso { transform: rotateY(180deg); color: var(--cor-primaria); }
+
+.acoes-resposta { display: grid; grid-template-columns: 1fr 1fr; gap: var(--e3); }
+.acoes-resposta .btn { justify-content: center; }
+.acoes-resposta .btn__rotulo { flex: 0; font-size: 0.95rem; }
+.btn--praticar { background: var(--cor-revisar); color: #fff; }
+.btn--acertei { background: var(--cor-acerto); color: #fff; }
+
+/* --- Escolha entre alternativas ------------------------------------------ */
+
+.escolha-area { display: flex; flex-direction: column; gap: var(--e4); flex: 1; }
+
+.escolha__enunciado {
+  flex: 1;
+  min-height: 200px;
+  border: none;
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+  box-shadow: 0 6px 20px rgba(38, 50, 56, 0.16);
+  font: inherit;
+  font-size: clamp(4rem, 20vw, 7rem);
+  font-weight: 700;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.escolha__enunciado--som { color: var(--cor-vogais); animation: pulso 2.4s ease-in-out infinite; }
+.escolha__enunciado:focus-visible { outline: 4px solid var(--cor-primaria); outline-offset: 3px; }
+
+@keyframes pulso {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
 }
 
-h1, h2 {
-    color: var(--cor-primaria);
-    margin-bottom: 40px;
-    text-align: center;
-}
+.escolha__opcoes { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--e3); }
+.btn--opcao { justify-content: center; min-height: 88px; background: var(--cor-superficie); }
+.btn--opcao .btn__icone { font-size: 2.8rem; font-weight: 700; min-width: 0; }
+.btn--opcao .btn__rotulo { display: none; }
 
+/* Certo e errado nunca são indicados só por cor: entram contorno e símbolo. */
+.btn--certo { background: var(--cor-acerto); color: #fff; outline: 4px solid #2e7d4f; }
+.btn--certo::after { content: "✓"; font-size: 1.5rem; }
+.btn--errado { background: var(--cor-erro); color: #fff; outline: 4px dashed #8e2f2f; }
+.btn--errado::after { content: "✗"; font-size: 1.5rem; }
 
-h1 { font-size: 3rem; }
-h2 { font-size: 2rem; }
-
-button, .btn-menu, .btn-modo, .btn-nivel {
-    background-color: var(--cor-primaria);
-    color: var(--cor-branco);
-    border: none;
-    border-radius: 15px;
-    padding: 20px 30px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    margin: 10px;
-    width: 90%;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-button:active {
-    transform: scale(0.95);
-}
-
-.btn-numeros { background-color: var(--cor-numeros); }
-.btn-somas { background-color: var(--cor-somas); }
-.btn-subtracoes { background-color: var(--cor-subtracoes); }
-.btn-letras { background-color: var(--cor-letras); }
-
-.btn-vogais { background-color: var(--cor-vogais); }
-.btn-palavra { background-color: var(--cor-palavra); }
-.btn-intervalo { background-color: var(--cor-intervalo); }
-
-.btn-sequencial { background-color: var(--cor-sequencial); }
-.btn-aleatorio { background-color: var(--cor-aleatorio); }
-
-.btn-voltar, .btn-voltar-menu-principal {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background: transparent;
-    border: none;
-    font-size: 2rem;
-    color: var(--cor-primaria);
-    padding: 0;
-    width: auto;
-    box-shadow: none;
-    z-index: 10;
-}
-
-#niveis-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-}
-
-/* Tela de Atividade */
-#tela-atividade {
-    justify-content: flex-start;
-}
-
-.info-bar {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    font-size: 1.2rem;
-    color: #888;
-}
-
-#card-container {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    perspective: 1000px; /* Essencial para o efeito 3D */
-}
-
-#progresso {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    margin: 10px;
-    background: transparent;
-    border: none;
-    font-size: 2rem;
-    color: #888;
-    padding: 0;
-    width: auto;
-    box-shadow: none;
-    z-index: 10;
-}
-
-#card {
-    width: 80vw;
-    height: 60vw;
-    max-width: 300px;
-    max-height: 225px;
-    position: relative;
-    transform-style: preserve-3d; /* Permite o efeito 3D */
-    transition: transform 0.6s;
-    cursor: grab;
-}
-
-#card.is-flipped {
-    transform: rotateY(180deg);
-}
-
-.card-face {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden; /* Safari */
-    backface-visibility: hidden; /* Esconde o lado de trás do elemento */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--cor-branco);
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    touch-action: none;
-    /* ADICIONE ESTAS LINHAS PARA IMPEDIR A SELEÇÃO DE TEXTO */
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none;    /* Firefox */
-    -ms-user-select: none;     /* IE 10+ e Edge */
-    user-select: none;         /* Padrão */
-
-}
-
-.card-face-back {
-    transform: rotateY(180deg);
-    background-color: var(--cor-secundaria);
-}
-
-#card-text, #card-answer {
-    font-size: 5rem;
-    font-weight: bold;
-}
-#card-text { color: var(--cor-texto); }
-#card-answer { color: var(--cor-branco); }
-
+/* --- Feedback ------------------------------------------------------------- */
 
 .feedback {
-    position: absolute;
-    /* Centraliza na tela de atividade */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 6rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 100; /* Garante que fique na frente de tudo */
-    pointer-events: none; /* Impede que ele capture eventos de clique/toque */
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+.feedback.visivel { opacity: 1; }
+.feedback img { width: min(45vw, 190px); height: auto; }
+
+/* --- Fim ------------------------------------------------------------------ */
+
+.placar { display: flex; justify-content: center; gap: var(--e4); font-size: 2rem; font-weight: 700; margin: 0; }
+.placar__item { display: flex; align-items: center; gap: var(--e2); }
+
+/* --- Preferências do sistema --------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
-.instruction {
-    margin-top: 20px;
-    font-size: 1rem;
-    color: #aaa;
-    text-align: center;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    position: absolute;
-    bottom: 10%;
-    width: 100%;
-}
-.instruction.visible {
-    opacity: 1;
-}
-
-#feedback-acerto { color: var(--cor-acerto); }
-#feedback-erro { color: var(--cor-erro); }
-
-/* Tela de Resumo */
-#tela-resumo p {
-    font-size: 1.5rem;
-    margin: 10px 0;
-}
-#btn-recomecar { background-color: var(--cor-secundaria); }
-
-#btn-treinar-erros {
-    background-color: var(--cor-erro);
-    padding: 22px 30px; /* Um pouco maior para mais destaque */
-    display: none; /* Começa escondido */
-    margin-bottom: 15px; /* Espaçamento extra */
-}
-
-/* Tela de Intervalo Customizado */
-.slider-container {
-    width: 90%;
-    margin: 20px 0;
-}
-
-.slider-container label {
-    font-size: 1.2rem;
-    color: var(--cor-texto);
-    margin-bottom: 10px;
-    display: block;
-}
-
-input[type=range] {
-    -webkit-appearance: none; /* Remove o estilo padrão */
-    appearance: none;
-    width: 100%;
-    height: 15px;
-    background: #ddd;
-    border-radius: 5px;
-    outline: none;
-    opacity: 0.7;
-    transition: opacity .2s;
-}
-
-input[type=range]:hover {
-    opacity: 1;
-}
-
-/* Estilo do "polegar" do slider */
-input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    background: var(--cor-primaria);
-    cursor: pointer;
-    border-radius: 50%;
-}
-
-input[type=range]::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    background: var(--cor-primaria);
-    cursor: pointer;
-    border-radius: 50%;
-}
-
-#btn-iniciar-customizado {
-    background-color: var(--cor-secundaria);
-    margin-top: 20px;
-}
-
-/* Estilos para o menu de Letras */
-#input-palavra {
-    width: 90%;
-    padding: 15px;
-    font-size: 1.2rem;
-    border-radius: 10px;
-    border: 2px solid #ddd;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.letras-intervalo-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 0;
-}
-
-.letras-intervalo-container label {
-    font-size: 1.2rem;
-    margin: 0 10px;
-}
-
-.letras-intervalo-container select {
-    padding: 10px;
-    font-size: 1.2rem;
-    border-radius: 10px;
-    border: 2px solid #ddd;
+@media (min-width: 560px) {
+  .grade { display: grid; grid-template-columns: repeat(2, 1fr); }
 }

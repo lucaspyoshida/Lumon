@@ -1,0 +1,647 @@
+{
+ "versao": 1,
+ "voz": {
+  "motor": "kokoro",
+  "sid": 43,
+  "nome": "pf_dora"
+ },
+ "clipes": {
+  "ui/titulo": {
+   "arquivo": "ui/titulo.m4a",
+   "duracao": 0.585,
+   "sha": "e84854088d2b2877",
+   "origem": "tts",
+   "texto": "Lumon"
+  },
+  "ui/menu-numeros": {
+   "arquivo": "ui/menu-numeros.m4a",
+   "duracao": 0.725,
+   "sha": "130f3ceab2cf3f21",
+   "origem": "tts",
+   "texto": "Números"
+  },
+  "ui/menu-somas": {
+   "arquivo": "ui/menu-somas.m4a",
+   "duracao": 0.704,
+   "sha": "859846fbf118df23",
+   "origem": "tts",
+   "texto": "Somas"
+  },
+  "ui/menu-subtracoes": {
+   "arquivo": "ui/menu-subtracoes.m4a",
+   "duracao": 1.109,
+   "sha": "a5b7c9d3dd3250d6",
+   "origem": "tts",
+   "texto": "Subtrações"
+  },
+  "ui/menu-letras": {
+   "arquivo": "ui/menu-letras.m4a",
+   "duracao": 0.712,
+   "sha": "af505f1fe103cbc3",
+   "origem": "tts",
+   "texto": "Letras"
+  },
+  "ui/menu-vogais": {
+   "arquivo": "ui/menu-vogais.m4a",
+   "duracao": 1.748,
+   "sha": "1d8beecdb9798470",
+   "origem": "tts",
+   "texto": "Ouça e toque na vogal"
+  },
+  "ui/modo-sequencial": {
+   "arquivo": "ui/modo-sequencial.m4a",
+   "duracao": 0.854,
+   "sha": "856177a216d21434",
+   "origem": "tts",
+   "texto": "Em ordem"
+  },
+  "ui/modo-aleatorio": {
+   "arquivo": "ui/modo-aleatorio.m4a",
+   "duracao": 1.146,
+   "sha": "2bbf141908107503",
+   "origem": "tts",
+   "texto": "Embaralhado"
+  },
+  "ui/voltar": {
+   "arquivo": "ui/voltar.m4a",
+   "duracao": 0.784,
+   "sha": "ff89918c22b729dd",
+   "origem": "tts",
+   "texto": "Voltar"
+  },
+  "ui/sair": {
+   "arquivo": "ui/sair.m4a",
+   "duracao": 0.528,
+   "sha": "c1a8d7c0dc167b09",
+   "origem": "tts",
+   "texto": "Sair"
+  },
+  "ui/repetir": {
+   "arquivo": "ui/repetir.m4a",
+   "duracao": 1.216,
+   "sha": "2faf79dd63f1a4f5",
+   "origem": "tts",
+   "texto": "Ouvir de novo"
+  },
+  "ui/instr-cartao": {
+   "arquivo": "ui/instr-cartao.m4a",
+   "duracao": 2.431,
+   "sha": "37a7915bd2eacc85",
+   "origem": "tts",
+   "texto": "Toque no cartão para ver a resposta."
+  },
+  "ui/instr-vogal": {
+   "arquivo": "ui/instr-vogal.m4a",
+   "duracao": 2.21,
+   "sha": "55ff755538b45cfa",
+   "origem": "tts",
+   "texto": "Escute e toque na letra certa."
+  },
+  "ui/instr-swipe": {
+   "arquivo": "ui/instr-swipe.m4a",
+   "duracao": 2.458,
+   "sha": "4a679889a93ab00b",
+   "origem": "tts",
+   "texto": "Arraste para o lado que você quiser."
+  },
+  "ui/instr-escolha": {
+   "arquivo": "ui/instr-escolha.m4a",
+   "duracao": 1.826,
+   "sha": "66cc9b9ba5d7481a",
+   "origem": "tts",
+   "texto": "Toque na resposta certa."
+  },
+  "ui/fb-acerto-1": {
+   "arquivo": "ui/fb-acerto-1.m4a",
+   "duracao": 1.042,
+   "sha": "cb41081baf69616b",
+   "origem": "tts",
+   "texto": "Muito bem!"
+  },
+  "ui/fb-acerto-2": {
+   "arquivo": "ui/fb-acerto-2.m4a",
+   "duracao": 1.081,
+   "sha": "0ecffe8aabfb51a1",
+   "origem": "tts",
+   "texto": "Isso mesmo!"
+  },
+  "ui/fb-acerto-3": {
+   "arquivo": "ui/fb-acerto-3.m4a",
+   "duracao": 1.413,
+   "sha": "c84729b8e1030a1f",
+   "origem": "tts",
+   "texto": "Você conseguiu!"
+  },
+  "ui/fb-acerto-4": {
+   "arquivo": "ui/fb-acerto-4.m4a",
+   "duracao": 0.664,
+   "sha": "7533dd65026735ab",
+   "origem": "tts",
+   "texto": "Boa!"
+  },
+  "ui/fb-erro-1": {
+   "arquivo": "ui/fb-erro-1.m4a",
+   "duracao": 2.42,
+   "sha": "7b128c8c58396b80",
+   "origem": "tts",
+   "texto": "Quase! Vamos tentar de novo."
+  },
+  "ui/fb-erro-2": {
+   "arquivo": "ui/fb-erro-2.m4a",
+   "duracao": 3.6,
+   "sha": "5cf13fb3e618de81",
+   "origem": "tts",
+   "texto": "Essa é difícil. A gente pratica mais."
+  },
+  "ui/fb-erro-3": {
+   "arquivo": "ui/fb-erro-3.m4a",
+   "duracao": 2.184,
+   "sha": "35068e3bba1ae36a",
+   "origem": "tts",
+   "texto": "Tudo bem, vamos ver outra vez."
+  },
+  "ui/fim": {
+   "arquivo": "ui/fim.m4a",
+   "duracao": 2.737,
+   "sha": "92e14cbc951a01da",
+   "origem": "tts",
+   "texto": "Acabou! Você praticou bastante."
+  },
+  "ui/fim-perfeito": {
+   "arquivo": "ui/fim-perfeito.m4a",
+   "duracao": 2.454,
+   "sha": "330a47a44040525f",
+   "origem": "tts",
+   "texto": "Uau! Você acertou tudo!"
+  },
+  "ui/treinar-erros": {
+   "arquivo": "ui/treinar-erros.m4a",
+   "duracao": 1.407,
+   "sha": "03ad7a346d21b251",
+   "origem": "tts",
+   "texto": "Praticar de novo"
+  },
+  "ui/recomecar": {
+   "arquivo": "ui/recomecar.m4a",
+   "duracao": 1.453,
+   "sha": "cce9ae983f850e58",
+   "origem": "tts",
+   "texto": "Jogar outra vez"
+  },
+  "ui/ate": {
+   "arquivo": "ui/ate.m4a",
+   "duracao": 0.696,
+   "sha": "df4a5868b53884c8",
+   "origem": "tts",
+   "texto": "até"
+  },
+  "ui/somar": {
+   "arquivo": "ui/somar.m4a",
+   "duracao": 0.693,
+   "sha": "317b0b7dd96333e4",
+   "origem": "tts",
+   "texto": "somar"
+  },
+  "ui/subtrair": {
+   "arquivo": "ui/subtrair.m4a",
+   "duracao": 0.838,
+   "sha": "1b95c1f9ab328cbc",
+   "origem": "tts",
+   "texto": "subtrair"
+  },
+  "ui/vogais": {
+   "arquivo": "ui/vogais.m4a",
+   "duracao": 0.822,
+   "sha": "a4d4b206aeb53075",
+   "origem": "tts",
+   "texto": "vogais"
+  },
+  "ui/misturado": {
+   "arquivo": "ui/misturado.m4a",
+   "duracao": 1.041,
+   "sha": "3f588abca8971551",
+   "origem": "tts",
+   "texto": "misturado"
+  },
+  "ui/mais": {
+   "arquivo": "ui/mais.m4a",
+   "duracao": 0.718,
+   "sha": "4feb63603e2b07c9",
+   "origem": "tts",
+   "texto": "mais"
+  },
+  "ui/menos": {
+   "arquivo": "ui/menos.m4a",
+   "duracao": 0.777,
+   "sha": "36aa626a9de8d8dd",
+   "origem": "tts",
+   "texto": "menos"
+  },
+  "ui/igual": {
+   "arquivo": "ui/igual.m4a",
+   "duracao": 1.493,
+   "sha": "9a945cc3fa8111b2",
+   "origem": "tts",
+   "texto": "é igual a"
+  },
+  "numero/0": {
+   "arquivo": "numero/0.m4a",
+   "duracao": 0.705,
+   "sha": "642cbff84b0218b4",
+   "origem": "tts",
+   "texto": "zero"
+  },
+  "numero/1": {
+   "arquivo": "numero/1.m4a",
+   "duracao": 0.555,
+   "sha": "dd7d27dab0762e89",
+   "origem": "tts",
+   "texto": "um"
+  },
+  "numero/2": {
+   "arquivo": "numero/2.m4a",
+   "duracao": 0.635,
+   "sha": "5ba5d56f550bdfca",
+   "origem": "tts",
+   "texto": "dois"
+  },
+  "numero/3": {
+   "arquivo": "numero/3.m4a",
+   "duracao": 0.703,
+   "sha": "83b722fc11b345b1",
+   "origem": "tts",
+   "texto": "três"
+  },
+  "numero/4": {
+   "arquivo": "numero/4.m4a",
+   "duracao": 0.773,
+   "sha": "6dd8e34b83e9e583",
+   "origem": "tts",
+   "texto": "quatro"
+  },
+  "numero/5": {
+   "arquivo": "numero/5.m4a",
+   "duracao": 0.746,
+   "sha": "bedc536e5f0ea7c8",
+   "origem": "tts",
+   "texto": "cinco"
+  },
+  "numero/6": {
+   "arquivo": "numero/6.m4a",
+   "duracao": 0.646,
+   "sha": "9b6362fa62669e9d",
+   "origem": "tts",
+   "texto": "seis"
+  },
+  "numero/7": {
+   "arquivo": "numero/7.m4a",
+   "duracao": 0.636,
+   "sha": "edef1fcce48c4b3d",
+   "origem": "tts",
+   "texto": "sete"
+  },
+  "numero/8": {
+   "arquivo": "numero/8.m4a",
+   "duracao": 0.71,
+   "sha": "560b3624c92d886f",
+   "origem": "tts",
+   "texto": "oito"
+  },
+  "numero/9": {
+   "arquivo": "numero/9.m4a",
+   "duracao": 0.538,
+   "sha": "3ceb584953b8b441",
+   "origem": "tts",
+   "texto": "nove"
+  },
+  "numero/10": {
+   "arquivo": "numero/10.m4a",
+   "duracao": 0.597,
+   "sha": "1fcf5111756adc44",
+   "origem": "tts",
+   "texto": "dez"
+  },
+  "numero/11": {
+   "arquivo": "numero/11.m4a",
+   "duracao": 0.645,
+   "sha": "a72515c87ece8ada",
+   "origem": "tts",
+   "texto": "onze"
+  },
+  "numero/12": {
+   "arquivo": "numero/12.m4a",
+   "duracao": 0.663,
+   "sha": "20e2854541520f87",
+   "origem": "tts",
+   "texto": "doze"
+  },
+  "numero/13": {
+   "arquivo": "numero/13.m4a",
+   "duracao": 0.711,
+   "sha": "f12093f8baa7eec6",
+   "origem": "tts",
+   "texto": "treze"
+  },
+  "numero/14": {
+   "arquivo": "numero/14.m4a",
+   "duracao": 0.825,
+   "sha": "7255ed79d290578f",
+   "origem": "tts",
+   "texto": "quatorze"
+  },
+  "numero/15": {
+   "arquivo": "numero/15.m4a",
+   "duracao": 0.732,
+   "sha": "762c10750f1c0ac9",
+   "origem": "tts",
+   "texto": "quinze"
+  },
+  "numero/16": {
+   "arquivo": "numero/16.m4a",
+   "duracao": 1.031,
+   "sha": "959bf11552a54f91",
+   "origem": "tts",
+   "texto": "dezesseis"
+  },
+  "numero/17": {
+   "arquivo": "numero/17.m4a",
+   "duracao": 0.963,
+   "sha": "b71449777e88a809",
+   "origem": "tts",
+   "texto": "dezessete"
+  },
+  "numero/18": {
+   "arquivo": "numero/18.m4a",
+   "duracao": 0.905,
+   "sha": "e78ef81248934cea",
+   "origem": "tts",
+   "texto": "dezoito"
+  },
+  "numero/19": {
+   "arquivo": "numero/19.m4a",
+   "duracao": 0.719,
+   "sha": "cbc54536ca3a5bc1",
+   "origem": "tts",
+   "texto": "dezenove"
+  },
+  "numero/20": {
+   "arquivo": "numero/20.m4a",
+   "duracao": 0.603,
+   "sha": "08e0830de0c8c5a4",
+   "origem": "tts",
+   "texto": "vinte"
+  },
+  "numero/21": {
+   "arquivo": "numero/21.m4a",
+   "duracao": 1.133,
+   "sha": "4f89336ab5e30731",
+   "origem": "tts",
+   "texto": "vinte e um"
+  },
+  "numero/22": {
+   "arquivo": "numero/22.m4a",
+   "duracao": 1.238,
+   "sha": "92afc5104f21de03",
+   "origem": "tts",
+   "texto": "vinte e dois"
+  },
+  "numero/23": {
+   "arquivo": "numero/23.m4a",
+   "duracao": 1.293,
+   "sha": "3f8917daf70931a7",
+   "origem": "tts",
+   "texto": "vinte e três"
+  },
+  "numero/24": {
+   "arquivo": "numero/24.m4a",
+   "duracao": 1.352,
+   "sha": "4d2f01c1c5512747",
+   "origem": "tts",
+   "texto": "vinte e quatro"
+  },
+  "numero/25": {
+   "arquivo": "numero/25.m4a",
+   "duracao": 1.351,
+   "sha": "6450c1378cb3fefe",
+   "origem": "tts",
+   "texto": "vinte e cinco"
+  },
+  "numero/26": {
+   "arquivo": "numero/26.m4a",
+   "duracao": 1.278,
+   "sha": "985a6c389e2a37ec",
+   "origem": "tts",
+   "texto": "vinte e seis"
+  },
+  "numero/27": {
+   "arquivo": "numero/27.m4a",
+   "duracao": 1.195,
+   "sha": "a988fc1692a5b3c0",
+   "origem": "tts",
+   "texto": "vinte e sete"
+  },
+  "numero/28": {
+   "arquivo": "numero/28.m4a",
+   "duracao": 1.223,
+   "sha": "2425edc12245986b",
+   "origem": "tts",
+   "texto": "vinte e oito"
+  },
+  "numero/29": {
+   "arquivo": "numero/29.m4a",
+   "duracao": 1.245,
+   "sha": "be4476a7295bd99a",
+   "origem": "tts",
+   "texto": "vinte e nove"
+  },
+  "numero/30": {
+   "arquivo": "numero/30.m4a",
+   "duracao": 0.809,
+   "sha": "ef52cbbaa80962b0",
+   "origem": "tts",
+   "texto": "trinta"
+  },
+  "letra/A": {
+   "arquivo": "letra/A.m4a",
+   "duracao": 0.526,
+   "sha": "01c3ba3e40e87c78",
+   "origem": "tts",
+   "texto": "a"
+  },
+  "letra/B": {
+   "arquivo": "letra/B.m4a",
+   "duracao": 0.573,
+   "sha": "af830543debd0062",
+   "origem": "tts",
+   "texto": "bê"
+  },
+  "letra/C": {
+   "arquivo": "letra/C.m4a",
+   "duracao": 0.59,
+   "sha": "14194b2e477165cf",
+   "origem": "tts",
+   "texto": "cê"
+  },
+  "letra/D": {
+   "arquivo": "letra/D.m4a",
+   "duracao": 0.603,
+   "sha": "d36c6522c593a729",
+   "origem": "tts",
+   "texto": "dê"
+  },
+  "letra/E": {
+   "arquivo": "letra/E.m4a",
+   "duracao": 0.954,
+   "sha": "4d0a41faf3a18f27",
+   "origem": "tts",
+   "texto": "é"
+  },
+  "letra/F": {
+   "arquivo": "letra/F.m4a",
+   "duracao": 0.592,
+   "sha": "94f63cf13071e854",
+   "origem": "tts",
+   "texto": "éfe"
+  },
+  "letra/G": {
+   "arquivo": "letra/G.m4a",
+   "duracao": 0.599,
+   "sha": "fac06359b818dc10",
+   "origem": "tts",
+   "texto": "gê"
+  },
+  "letra/H": {
+   "arquivo": "letra/H.m4a",
+   "duracao": 0.631,
+   "sha": "382a03bb663e4dc2",
+   "origem": "tts",
+   "texto": "agá"
+  },
+  "letra/I": {
+   "arquivo": "letra/I.m4a",
+   "duracao": 0.571,
+   "sha": "74152bdba8031090",
+   "origem": "tts",
+   "texto": "i"
+  },
+  "letra/J": {
+   "arquivo": "letra/J.m4a",
+   "duracao": 0.879,
+   "sha": "0538cad37086f6f3",
+   "origem": "tts",
+   "texto": "jota"
+  },
+  "letra/K": {
+   "arquivo": "letra/K.m4a",
+   "duracao": 0.597,
+   "sha": "c03f103502012111",
+   "origem": "tts",
+   "texto": "cá"
+  },
+  "letra/L": {
+   "arquivo": "letra/L.m4a",
+   "duracao": 0.548,
+   "sha": "1c39a992d88324a4",
+   "origem": "tts",
+   "texto": "éle"
+  },
+  "letra/M": {
+   "arquivo": "letra/M.m4a",
+   "duracao": 0.603,
+   "sha": "b0f31ff45714e2f8",
+   "origem": "tts",
+   "texto": "ême"
+  },
+  "letra/N": {
+   "arquivo": "letra/N.m4a",
+   "duracao": 0.601,
+   "sha": "e17296e3c40e89cf",
+   "origem": "tts",
+   "texto": "êne"
+  },
+  "letra/O": {
+   "arquivo": "letra/O.m4a",
+   "duracao": 0.946,
+   "sha": "d6fb945d78c37913",
+   "origem": "tts",
+   "texto": "ó"
+  },
+  "letra/P": {
+   "arquivo": "letra/P.m4a",
+   "duracao": 0.573,
+   "sha": "03386f1a373f010f",
+   "origem": "tts",
+   "texto": "pê"
+  },
+  "letra/Q": {
+   "arquivo": "letra/Q.m4a",
+   "duracao": 0.593,
+   "sha": "790dad771b7bf88b",
+   "origem": "tts",
+   "texto": "quê"
+  },
+  "letra/R": {
+   "arquivo": "letra/R.m4a",
+   "duracao": 0.6,
+   "sha": "f0f1b81579699aec",
+   "origem": "tts",
+   "texto": "érre"
+  },
+  "letra/S": {
+   "arquivo": "letra/S.m4a",
+   "duracao": 0.474,
+   "sha": "4383aed3a3053fd3",
+   "origem": "tts",
+   "texto": "ésse"
+  },
+  "letra/T": {
+   "arquivo": "letra/T.m4a",
+   "duracao": 0.589,
+   "sha": "c718613dc106823d",
+   "origem": "tts",
+   "texto": "tê"
+  },
+  "letra/U": {
+   "arquivo": "letra/U.m4a",
+   "duracao": 0.566,
+   "sha": "a48e559e7756cd64",
+   "origem": "tts",
+   "texto": "u"
+  },
+  "letra/V": {
+   "arquivo": "letra/V.m4a",
+   "duracao": 0.562,
+   "sha": "2380bf3dc487fd80",
+   "origem": "tts",
+   "texto": "vê"
+  },
+  "letra/W": {
+   "arquivo": "letra/W.m4a",
+   "duracao": 0.884,
+   "sha": "2add61b2bb70bb41",
+   "origem": "tts",
+   "texto": "dáblio"
+  },
+  "letra/X": {
+   "arquivo": "letra/X.m4a",
+   "duracao": 0.614,
+   "sha": "908e659dc380b182",
+   "origem": "tts",
+   "texto": "xis"
+  },
+  "letra/Y": {
+   "arquivo": "letra/Y.m4a",
+   "duracao": 0.968,
+   "sha": "17a28f8447894027",
+   "origem": "tts",
+   "texto": "ípsilon"
+  },
+  "letra/Z": {
+   "arquivo": "letra/Z.m4a",
+   "duracao": 0.549,
+   "sha": "8d1008e1f9010142",
+   "origem": "tts",
+   "texto": "zê"
+  }
+ }
+}

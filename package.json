@@ -1,0 +1,12 @@
+{
+  "name": "lumon",
+  "version": "1.0.0",
+  "description": "Aplicativo infantil de prática de números, letras e sons.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node --test",
+    "serve": "python3 -m http.server 8080",
+    "audio": "python3 scripts/build_audio.py"
+  }
+}

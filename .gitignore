@@ -1,0 +1,7 @@
+# Modelo de voz do Kokoro (~350 MB). Baixado sob demanda pelo build de áudio —
+# ver instruções no cabeçalho de scripts/build_audio.py.
+.models/
+
+node_modules/
+.DS_Store
+audio/.tmp/

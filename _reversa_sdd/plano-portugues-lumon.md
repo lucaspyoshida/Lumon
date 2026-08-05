@@ -49,8 +49,45 @@ Três consequências diretas:
 | Ordem de trabalho | Fundação técnica (Bloco 1) antes de qualquer conteúdo de português |
 | Escopo do app | Português e Matemática no mesmo aplicativo, como trilhas irmãs |
 | Vocabulário | Definido neste documento, seção 7 |
+| Usuária | **Uma criança, 4 anos**, 5 em novembro de 2026. Perfil único — ver 3.1 |
+| Hospedagem | `https://lucaspyoshida.github.io/Lumon/` — caminho base `/Lumon/` |
 | Timbre | **Voz feminina** |
 | Serviço de síntese | Kokoro v1.0 local + eSpeak NG para fonemas — ver seção 5 |
+
+### 3.1 Recalibração pela idade
+
+Saber que a usuária tem 4 anos muda o desenho, não só os parâmetros.
+
+- **Sessões de 5 a 8 questões**, de três a cinco minutos. As 15 questões do código atual
+  são longas demais para essa idade.
+- **P1 e P2 são o escopo real dos próximos doze meses.** P3 a P5 continuam no plano como
+  destino, mas não como meta de curto prazo. Aos 4 anos, o trabalho é consciência
+  fonológica e reconhecimento — som inicial, rima, identificação de letra — e a fusão
+  silábica vem depois, quando vier.
+- **O ditado da P4 sai do escopo previsível.** Digitar exige leitura, coordenação fina e
+  memória de trabalho que não estão disponíveis nessa faixa. Fica registrado como
+  atividade de reavaliação futura, não como requisito.
+- **Alvos de toque de 64 px**, não os 48 px do padrão adulto. Coordenação motora fina aos
+  4 anos é limitada, e errar o alvo é lido pela criança como erro dela.
+- **Nada de cronômetro, contagem regressiva ou pressão por velocidade.**
+- **Perfil único.** Só uma criança usa o aplicativo, então o schema v1 guarda um único
+  perfil e não há seletor. A estrutura fica aninhada sob `profile` para que a introdução
+  de perfis múltiplos no futuro seja aditiva, mas nenhuma interface de seleção é
+  construída agora.
+
+### 3.2 Consequência de "a criança não sabe ler": ícones e som em tudo
+
+Este é o princípio mais estruturante do projeto e precisa aparecer em cada tela.
+
+- **Todo botão tem um ícone grande e um rótulo falado.** O texto continua na tela para o
+  adulto, mas nunca é o único portador do significado.
+- **Tocar em um botão de menu fala o nome dele** antes de navegar. É assim que a criança
+  navega sozinha e, de quebra, associa som e escrita sem que isso seja uma lição.
+- **Toda instrução de atividade é falada automaticamente ao abrir a tela**, com botão de
+  repetir sempre visível.
+- **O feedback é sonoro além de visual**, com falas variadas para não cansar.
+- **Nenhuma ação crítica depende de ler.** Sair, voltar e repetir são ícones
+  reconhecíveis, sempre na mesma posição.
 
 ## 4. Estrutura da trilha
 
@@ -461,10 +498,29 @@ player com unlock de iOS, manifesto de áudio, pipeline de geração, tipo de pr
 
 | # | Questão | Por que trava |
 |---|---|---|
-| B1 | **Um perfil ou vários?** | O título sorteia quatro nomes. Se mais de uma criança usa o app, perfis precisam existir no schema desde a v1; adicionar depois é migração de dados com progresso real dentro. Já pendente no plano de Matemática, seção 17 |
-| B2 | **Idade da criança** | Define tamanho de sessão, se o ditado da P4 é viável, se P1 começa em letras ou já em sílabas. É a variável mais importante do desenho pedagógico e não está registrada em lugar nenhum |
-| B3 | **URL de hospedagem** | `script.js:5` registra `/Lumon/service-worker.js` em caminho absoluto, `manifest.json` usa `index.htm` relativo, e o worker mistura `''`, `'index.htm'` e `/images/...`. Sem a URL base não dá para corrigir o escopo, e o carregamento de áudio por etapa depende disso. Pendente desde o plano de Matemática, seção 17 |
-| B4 | **`index.htm` ou `index.html`?** | O GitHub Pages procura `index.html` ao servir a raiz de um diretório. Com apenas `index.htm`, a raiz tende a devolver 404 e o `start_url` do manifesto quebra junto com o escopo do service worker |
+| B1 | Um perfil ou vários? | ✅ **Resolvido:** uma criança, perfil único |
+| B2 | Idade da criança | ✅ **Resolvido:** 4 anos. Ver a recalibração em 3.1 |
+| B3 | URL de hospedagem | ✅ **Resolvido:** `https://lucaspyoshida.github.io/Lumon/`. Ver 11.5 |
+| B4 | `index.htm` ou `index.html`? | ⏳ Aguarda teste: a URL com barra final carrega ou dá 404? |
+
+### 11.5 Bug encontrado ao confirmar a URL base
+
+Com o caminho base `/Lumon/` confirmado, o `service-worker.js` está **quebrado hoje**:
+
+```js
+const urlsToCache = [ '', 'index.htm', ..., '/images/feliz.png', '/images/triste.png' ];
+```
+
+`/images/feliz.png` é caminho absoluto e resolve para
+`lucaspyoshida.github.io/images/feliz.png` — fora do `/Lumon/`, onde o arquivo não
+existe. E `cache.addAll()` **rejeita inteiro se um único item falhar**, o que rejeita o
+`event.waitUntil()` do `install` e faz o service worker nunca instalar.
+
+Consequência: **o modo offline provavelmente nunca funcionou.** O aplicativo carrega
+normalmente porque, sem service worker, tudo vem da rede — a falha é silenciosa e só
+aparece sem internet.
+
+Correção: caminhos relativos em toda a lista de pré-cache.
 
 ### 11.2 Decisões técnicas assumidas
 
