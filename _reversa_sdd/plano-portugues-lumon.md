@@ -33,13 +33,19 @@ Três consequências diretas:
 - **A fundação técnica da Fase 1 do plano de Matemática é pré-requisito.** Não é
   possível construir "ouvir → escolher entre três" sobre o `script.js` atual. Essa
   fundação é compartilhada pelas duas trilhas e só precisa ser feita uma vez.
+- **A criança não sabe ler as instruções.** Isso é óbvio e por isso mesmo passa
+  despercebido: em um aplicativo de alfabetização, o usuário é, por definição, alguém
+  que ainda não lê. Nenhuma tela pode depender de texto lido para ser compreendida.
+  Toda instrução precisa existir como **áudio + ícone**, com o texto presente apenas
+  para o adulto que acompanha. Isso vale igualmente para as telas de Matemática, que
+  hoje dependem de rótulos escritos.
 
 ## 3. Decisões tomadas
 
 | Tema | Decisão |
 |---|---|
 | Origem do áudio | 100% sintetizado na primeira versão |
-| Substituição futura | Gravações humanas, trocadas arquivo a arquivo, sem alterar código — ver ponto aberto na seção 10 |
+| Substituição futura | **A mãe grava.** Substituição por bloco fechado, nunca clipe solto — ver 5.5 |
 | Ordem de trabalho | Fundação técnica (Bloco 1) antes de qualquer conteúdo de português |
 | Escopo do app | Português e Matemática no mesmo aplicativo, como trilhas irmãs |
 | Vocabulário | Definido neste documento, seção 7 |
@@ -207,7 +213,7 @@ refletir essa distinção em vez de forçar "o som isolado de cada letra".
 | Letras: nome + som quando aplicável | ~50 |
 | Fonemas contínuos isolados | ~12 |
 | Sílabas: simples, dígrafos, travadas | ~220 |
-| Palavras | ~180 |
+| Palavras | 168 |
 | Frases da P5 | ~60 |
 | Instruções e feedback da interface | ~40 |
 | **Total** | **~560 clipes** |
@@ -218,6 +224,38 @@ frases da P5.
 
 Formato: WAV mestre fora do repositório → **`.m4a` AAC mono** versionado. AAC por
 compatibilidade universal; Opus é menor mas o suporte no Safari é irregular.
+
+### 5.5 Protocolo de regravação humana
+
+A mãe grava. A voz sintética é o andaime que permite a trilha existir antes das
+gravações — não é a versão final pretendida.
+
+**Regra inegociável: substituir por bloco fechado, nunca clipe solto.** Um bloco é uma
+categoria inteira (todos os fonemas, ou todas as instruções da interface, ou todas as
+sílabas de uma família). Trocar clipes avulsos faz a trilha alternar entre voz humana e
+sintética dentro do mesmo exercício, o que é pior que usar só sintético.
+
+**Ordem de prioridade**, por impacto pedagógico decrescente:
+
+1. os ~12 fonemas contínuos — hoje vêm do eSpeak, de timbre visivelmente pior;
+2. as ~40 instruções e falas de feedback da interface — são o que a criança mais ouve;
+3. as sílabas da P2 — o núcleo da fusão;
+4. as palavras da P3;
+5. o resto, se houver ânimo.
+
+Parar em qualquer ponto da lista deixa o app coerente, desde que o bloco tenha sido
+concluído.
+
+**Especificação de captura:** WAV 48 kHz mono, 16 bits; ambiente silencioso e sem eco;
+distância constante do microfone; ~0,3 s de silêncio antes e depois de cada item. O
+celular serve — a diferença entre celular e microfone dedicado é irrelevante perto da
+diferença entre voz humana e sintética.
+
+**Fluxo:** o `build-audio.mjs` gera um roteiro numerado a partir do `corpus.json`, com o
+id e o texto de cada item na ordem de gravação. A mãe grava tudo em um arquivo contínuo
+por bloco; o script fatia pelos silêncios, confere se a contagem bate com o roteiro,
+normaliza o volume e marca `origem: "humano"` no manifesto. Divergência na contagem
+falha o build em vez de desalinhar os clipes silenciosamente.
 
 ---
 
@@ -286,9 +324,12 @@ Reaproveita o contrato já definido em `plano-evolucao-lumon.md` seção 5.4. O 
 
 ### 6.5 Imagens
 
-A etapa P3 precisa de ~180 imagens. Fonte: **OpenMoji** (CC BY-SA) ou **Noto Emoji**
-(Apache 2.0). Cobrem quase todo o vocabulário concreto da seção 7, com estilo
-consistente e licença limpa. O mapeamento palavra → imagem fica em `palavras.json`.
+A etapa P3 precisa de 168 imagens. Fonte adotada: **Noto Emoji, Apache 2.0** — cobre
+quase todo o vocabulário concreto da seção 7, com estilo consistente. Foi preferida ao
+OpenMoji, que é CC BY-SA e exigiria atribuição e compartilhamento igual das derivadas.
+O mapeamento palavra → imagem fica em `palavras.json`, e as palavras sem emoji
+correspondente precisarão de desenho próprio ou de substituição no vocabulário —
+levantar quais na hora de montar o `palavras.json`.
 
 ---
 
@@ -298,11 +339,16 @@ Critérios: duas sílabas no padrão CV-CV sempre que possível; substantivo con
 representável por imagem; do universo infantil; usando apenas sílabas já ensinadas na
 posição em que a palavra aparece na trilha.
 
+Contagem fechada: **97 palavras únicas na P3, 73 na P4, 168 no total.** Palavras
+aparecem de propósito em mais de uma família — *casa* reforça `C`, `S` e `Z`; *luva*
+reforça `L` e `V` — porque a repetição em contexto novo é o que consolida. Isso é
+desenho, não duplicata.
+
 ### P3 — palavras CV-CV, agrupadas pela consoante nova
 
 | Família | Palavras |
 |---|---|
-| P | pato, pipa, pena, pote, pele, pipa, capa, sopa |
+| P | pato, pipa, pena, pote, pele, mapa, capa, sopa |
 | B | bola, bota, boca, bebê, bala, bode, bule, bico |
 | T | tatu, teto, tia, tela, mato, pato, gato, fita |
 | D | dado, dedo, dama, doce, roda, moda, nada, vida |
@@ -404,11 +450,47 @@ player com unlock de iOS, manifesto de áudio, pipeline de geração, tipo de pr
 - **Volume do repositório.** ~3 MB de áudio versionado é aceitável; se crescer muito
   além disso, avaliar Git LFS.
 - **Sotaque e variação regional.** O corpus assume português brasileiro padrão.
-- **Quem regrava depois.** A voz sintética escolhida é feminina, mas a intenção inicial
-  era regravar com a voz do pai. Substituir clipe a clipe faria a trilha alternar entre
-  timbre feminino e masculino sem critério, o que confunde a criança. Três saídas:
-  a mãe regrava; o pai regrava e a voz sintética passa a ser masculina desde já; ou a
-  regravação acontece só por bloco fechado — uma etapa inteira de cada vez, nunca
-  clipes soltos. **Decisão pendente.**
 - **A definir com a criança:** quantas questões por sessão em P2 e P3, e se o ditado
   da P4 é motivador ou frustrante nesta idade.
+
+---
+
+## 11. Prontidão para implantação
+
+### 11.1 Bloqueadores — impedem começar o Bloco 1
+
+| # | Questão | Por que trava |
+|---|---|---|
+| B1 | **Um perfil ou vários?** | O título sorteia quatro nomes. Se mais de uma criança usa o app, perfis precisam existir no schema desde a v1; adicionar depois é migração de dados com progresso real dentro. Já pendente no plano de Matemática, seção 17 |
+| B2 | **Idade da criança** | Define tamanho de sessão, se o ditado da P4 é viável, se P1 começa em letras ou já em sílabas. É a variável mais importante do desenho pedagógico e não está registrada em lugar nenhum |
+| B3 | **URL de hospedagem** | `script.js:5` registra `/Lumon/service-worker.js` em caminho absoluto, `manifest.json` usa `index.htm` relativo, e o worker mistura `''`, `'index.htm'` e `/images/...`. Sem a URL base não dá para corrigir o escopo, e o carregamento de áudio por etapa depende disso. Pendente desde o plano de Matemática, seção 17 |
+| B4 | **`index.htm` ou `index.html`?** | O GitHub Pages procura `index.html` ao servir a raiz de um diretório. Com apenas `index.htm`, a raiz tende a devolver 404 e o `start_url` do manifesto quebra junto com o escopo do service worker |
+
+### 11.2 Decisões técnicas assumidas
+
+Assumidas por padrão. Ficam registradas para poderem ser contestadas, não para
+travarem o início.
+
+| # | Decisão | Consequência |
+|---|---|---|
+| T1 | Módulos ES nativos, sem bundler | **Abrir `index.htm` por `file://` deixa de funcionar.** Módulos são bloqueados por CORS nesse protocolo; passa a ser necessário um servidor local para testar |
+| T2 | `node --test` para testes | Embutido no Node 22, sem dependências. `jsdom` apenas onde houver DOM |
+| T3 | Criar `package.json` | Necessário para os scripts de áudio e testes. Não implica bundler nem build do app |
+| T4 | Noto Emoji para as imagens | Apache 2.0, sem exigência de atribuição |
+| T5 | AAC 48 kbps mono | 4 MB para o banco completo |
+| T6 | A atividade `letras` atual permanece intacta | Só é aposentada quando a P1 estiver pronta. A criança já a usa; retirar antes seria uma regressão percebida |
+| T7 | Depois do Bloco 1, Português tem prioridade sobre Matemática | A trilha de Matemática fica congelada no que já existe até a P3. A janela de alfabetização é mais estreita que a de aritmética |
+
+### 11.3 O que já está resolvido
+
+Trilha e progressão pedagógica · vocabulário fechado em 168 palavras · serviço de
+síntese verificado por execução real · voz feminina escolhida · tratamento de fonemas ·
+formato, peso e estratégia de cache do áudio · protocolo de regravação humana ·
+arquitetura da camada de áudio e do pipeline · ordem de trabalho do Bloco 1.
+
+### 11.4 Veredito
+
+**O Bloco 1 pode começar assim que B1 e B2 forem respondidos.** B3 e B4 só travam a
+etapa de PWA e áudio sob demanda, que vem no Bloco 2 — mas convém resolvê-los antes,
+porque são cinco minutos de verificação e evitam retrabalho de caminhos em três
+arquivos.
