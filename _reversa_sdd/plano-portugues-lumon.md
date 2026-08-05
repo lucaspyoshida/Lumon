@@ -39,11 +39,12 @@ Três consequências diretas:
 | Tema | Decisão |
 |---|---|
 | Origem do áudio | 100% sintetizado na primeira versão |
-| Substituição futura | Gravações do pai, trocadas arquivo a arquivo, sem alterar código |
+| Substituição futura | Gravações humanas, trocadas arquivo a arquivo, sem alterar código — ver ponto aberto na seção 10 |
 | Ordem de trabalho | Fundação técnica (Bloco 1) antes de qualquer conteúdo de português |
 | Escopo do app | Português e Matemática no mesmo aplicativo, como trilhas irmãs |
 | Vocabulário | Definido neste documento, seção 7 |
-| Serviço de síntese | Piper TTS local + eSpeak NG para fonemas — ver seção 5 |
+| Timbre | **Voz feminina** |
+| Serviço de síntese | Kokoro v1.0 local + eSpeak NG para fonemas — ver seção 5 |
 
 ## 4. Estrutura da trilha
 
@@ -134,43 +135,53 @@ Atividades:
 
 | Ferramenta | Resultado |
 |---|---|
-| `piper-tts` 1.6.0 via pip | ✅ instalou e sintetizou pt-BR |
-| Voz `pt-br-edresson-low` | ✅ baixada e funcional (16 kHz) |
-| `espeak-ng` 1.51 | ✅ pt-BR, IPA e fonemas isolados sustentados |
+| `sherpa-onnx` 1.13.4 via pip | ✅ instalou |
+| Kokoro v1.0 multi-lang, voz `pf_dora` | ✅ **feminina, português, 24 kHz** |
+| `piper-tts` 1.6.0 + `pt-br-edresson-low` | ✅ funcional, mas voz masculina de 16 kHz |
+| `espeak-ng` 1.51 | ✅ pt-BR, IPA, fonemas sustentados e variantes femininas (`pt-br+f3`) |
 | `ffmpeg` 6.1.1 | ✅ conversão para AAC/`.m4a` |
-| Custo por clipe | 5,5 KB em AAC 64 kbps mono |
+| Custo medido por clipe | 9,9 KB a 64 kbps · 7,9 KB a 48 kbps |
 
-### Decisão: Piper TTS local, com eSpeak NG para fonemas isolados
+### Decisão: Kokoro v1.0 local, com eSpeak NG para fonemas isolados
+
+O Piper foi a escolha inicial, mas **nenhuma voz feminina pt-BR do Piper é alcançável**
+sem o HuggingFace: as femininas (`dii`) só existem lá, e o espelho no GitHub tem apenas
+vozes masculinas. O Kokoro resolve isso e ainda melhora a qualidade.
 
 **Motivos:**
 
-1. **Não exige conta, cartão, chave de API ou cota.** Roda inteiramente offline. É a
-   única opção que pode ser construída e executada de ponta a ponta sem nenhuma etapa
-   manual de configuração externa.
-2. **Licença limpa.** Piper é MIT; os modelos de voz são CC BY 4.0 ou MIT. O app pode
-   ser publicado sem restrição — diferente do free tier da Azure, que **não concede
-   direito de uso comercial** das vozes prebuilt.
-3. **Reprodutível e versionável.** O corpus fica em JSON no repositório e o script
-   regenera tudo com um comando. O áudio deixa de ser um conjunto de arquivos opacos e
-   passa a ser build de um conteúdo versionado.
-4. **Voz masculina**, coerente com a substituição futura pelas gravações do pai.
+1. **Tem voz feminina em português** — `pf_dora`, o requisito que motivou a troca.
+2. **24 kHz** contra 16 kHz do Piper alcançável aqui. Qualidade sensivelmente melhor.
+3. **Não exige conta, cartão, chave de API ou cota.** Roda offline, de ponta a ponta,
+   sem nenhuma etapa manual de configuração externa.
+4. **Apache 2.0** — licença limpa, o app pode ser publicado sem restrição. Diferente do
+   free tier da Azure, que **não concede direito de uso comercial** das vozes prebuilt.
+5. **Reprodutível e versionável.** O corpus fica em JSON no repositório e o script
+   regenera tudo com um comando.
+
+Custo: o modelo tem 350 MB, mas isso é peso de build. Nada disso vai para o aplicativo.
 
 **Por que não Google Cloud TTS**, apesar da qualidade superior: exige criar projeto,
 ativar billing, gerar chave de service account e trazer essa credencial para dentro do
 fluxo. É melhor som, mas não é autônomo. Fica documentado como upgrade opcional — o
-script terá backend plugável, e trocar `--engine piper` por `--engine google` regenera
+script terá backend plugável, e trocar `--engine kokoro` por `--engine google` regenera
 o mesmo corpus com voz melhor sem tocar no app.
 
 ### Qual voz usar
 
-| Voz | Qualidade | Observação |
+| Voz | `sid` | Observação |
 |---|---|---|
-| `pt_BR-faber-medium` | 22 kHz, boa | **Recomendada.** Baixar no Mac |
-| `pt-br-edresson-low` | 16 kHz, fraca | Único alcançável do container remoto; usar só como fallback |
+| `pf_dora` | 43 | **Recomendada.** Feminina, português |
+| `pm_alex` | 44 | Masculina |
+| `pm_santa` | 45 | Masculina |
 
-As vozes `medium` estão no HuggingFace, bloqueado pela política de egresso desta
-sessão remota, mas acessível normalmente da máquina local. A amostra enviada usou a
-`edresson-low` — é o piso de qualidade, não o teto.
+O modelo expõe 53 vozes; só essas três são portuguesas. A velocidade de síntese usa
+`speed=0.85` para itens curtos (letras e sílabas, que precisam ser articulados devagar)
+e `0.95` para frases.
+
+⚠️ **A confirmar por escuta:** se a `pf_dora` soa como português brasileiro ou europeu.
+O prefixo `p` do Kokoro indica pt-BR, mas isso precisa passar pelo ouvido antes de virar
+560 clipes.
 
 ### O problema dos fonemas, e por que ele é menor do que parece
 
@@ -181,7 +192,8 @@ podem ser pronunciadas isoladamente por ninguém** — nem por um TTS, nem por u
 Não existe /b/ puro; sai sempre "bê" ou "buh". Logo:
 
 - **Contínuas** (`F S M N L V Z R J X CH`) podem ser sustentadas. `espeak-ng` gera com
-  notação de fonema: `espeak-ng -v pt-br "[[f::::]]"`. São ~12 clipes.
+  notação de fonema, em variante feminina para casar com a voz principal:
+  `espeak-ng -v pt-br+f3 "[[f::::]]"`. São ~12 clipes.
 - **Oclusivas** (`P B T D C G Q`) devem ser ensinadas **sempre em contexto silábico**
   — "**P** de **PA**-to" — porque é assim que funcionam de verdade.
 
@@ -198,10 +210,14 @@ refletir essa distinção em vez de forçar "o som isolado de cada letra".
 | Palavras | ~180 |
 | Frases da P5 | ~60 |
 | Instruções e feedback da interface | ~40 |
-| **Total** | **~560 clipes ≈ 3,1 MB** |
+| **Total** | **~560 clipes** |
 
-Formato: WAV mestre fora do repositório → **`.m4a` AAC 64 kbps mono** versionado. AAC
-por compatibilidade universal; Opus é menor mas o suporte no Safari é irregular.
+Peso medido, não estimado: **5 MB a 64 kbps** ou **4 MB a 48 kbps**. Para fala mono de
+voz única, 48 kbps é suficiente — é o padrão adotado, com 64 kbps reservado para as
+frases da P5.
+
+Formato: WAV mestre fora do repositório → **`.m4a` AAC mono** versionado. AAC por
+compatibilidade universal; Opus é menor mas o suporte no Safari é irregular.
 
 ---
 
@@ -243,7 +259,7 @@ scripts/
 ```
 
 Regras: idempotente (só regera o que mudou, por hash do texto), backend selecionável
-(`piper` | `espeak` | `google`), e falha explícita se um id do corpus não tiver áudio.
+(`kokoro` | `espeak` | `google`), e falha explícita se um id do corpus não tiver áudio.
 
 ### 6.3 Contrato de questão
 
@@ -378,7 +394,9 @@ player com unlock de iOS, manifesto de áudio, pipeline de geração, tipo de pr
 ## 10. Riscos e pontos em aberto
 
 - **Qualidade da voz sintética.** Definida por escuta, não por especificação. Se a
-  `faber-medium` não convencer, o caminho é Google Cloud TTS pelo backend plugável.
+  `pf_dora` não convencer, o caminho é Google Cloud TTS pelo backend plugável.
+- **Descasamento de timbre nos fonemas.** As ~12 consoantes contínuas vêm do eSpeak, com
+  timbre diferente do Kokoro. São, por isso, as primeiras candidatas à regravação humana.
 - **Fadiga de repetição.** Áudio idêntico a cada repetição cansa mais rápido que
   estímulo visual. Mitigação: variar a frase de instrução entre três alternativas.
 - **Uso sem som.** O app precisa continuar utilizável no mudo, com apoio visual, para
@@ -386,5 +404,11 @@ player com unlock de iOS, manifesto de áudio, pipeline de geração, tipo de pr
 - **Volume do repositório.** ~3 MB de áudio versionado é aceitável; se crescer muito
   além disso, avaliar Git LFS.
 - **Sotaque e variação regional.** O corpus assume português brasileiro padrão.
+- **Quem regrava depois.** A voz sintética escolhida é feminina, mas a intenção inicial
+  era regravar com a voz do pai. Substituir clipe a clipe faria a trilha alternar entre
+  timbre feminino e masculino sem critério, o que confunde a criança. Três saídas:
+  a mãe regrava; o pai regrava e a voz sintética passa a ser masculina desde já; ou a
+  regravação acontece só por bloco fechado — uma etapa inteira de cada vez, nunca
+  clipes soltos. **Decisão pendente.**
 - **A definir com a criança:** quantas questões por sessão em P2 e P3, e se o ditado
   da P4 é motivador ou frustrante nesta idade.
