@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <!-- `user-scalable=no` foi removido: impedia ampliar a tela, o que exclui
+         quem precisa de zoom para enxergar. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Lumon</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#4a90e2"/>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+
+    <div class="app">
+
+        <section id="tela-inicio" class="tela ativa">
+            <h1 id="titulo-principal">Lumon</h1>
+            <div id="atividades-container" class="grade"></div>
+        </section>
+
+        <section id="tela-modo" class="tela">
+            <div id="voltar-modo" class="barra-topo"></div>
+            <h2 id="modo-titulo"></h2>
+            <div id="modos-container" class="grade"></div>
+        </section>
+
+        <section id="tela-nivel" class="tela">
+            <div id="voltar-nivel" class="barra-topo"></div>
+            <h2 id="nivel-titulo"></h2>
+            <div id="niveis-container" class="grade"></div>
+        </section>
+
+        <section id="tela-atividade" class="tela">
+            <div class="barra-info">
+                <span id="progresso" aria-live="polite"></span>
+                <div id="acoes-atividade" class="barra-info__acoes"></div>
+            </div>
+            <div id="area-exercicio"></div>
+        </section>
+
+        <section id="tela-fim" class="tela">
+            <h2>Fim!</h2>
+            <p class="placar">
+                <span class="placar__item"><span aria-hidden="true">✅</span> <span id="resumo-acertos">0</span></span>
+                <span class="placar__item"><span aria-hidden="true">🔁</span> <span id="resumo-erros">0</span></span>
+            </p>
+            <div id="acoes-fim" class="grade"></div>
+        </section>
+
+    </div>
+
+    <script type="module" src="src/app.js"></script>
+</body>
+</html>

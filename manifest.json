@@ -1,6 +1,8 @@
 {
   "short_name": "Lumon",
   "name": "Lumon",
+  "description": "Prática de números, letras e sons para crianças.",
+  "lang": "pt-BR",
   "icons": [
     {
       "src": "images/icon-192x192.png",
@@ -13,8 +15,10 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "index.htm",
-  "background_color": "#f9f9f9",
+  "start_url": "./",
+  "scope": "./",
+  "background_color": "#f7f9fc",
   "display": "standalone",
+  "orientation": "portrait",
   "theme_color": "#4a90e2"
 }
