@@ -116,3 +116,65 @@ select { min-height: var(--touch-target); max-width: 100%; padding: .55rem .8rem
 .update-banner .button-quiet { color: #fff; }
 
 @keyframes caregiver-hold { to { transform: scaleX(1); } }
+
+/* --- Português: ouvir e encontrar ---------------------------------------
+   O botão de som é o maior elemento da tela porque é a única pista: a
+   criança não lê a palavra, ela a escuta. As figuras ficam abaixo, ao
+   alcance do polegar. */
+
+.pt-som {
+  display: block;
+  width: 100%;
+  min-height: 180px;
+  border: none;
+  border-radius: var(--radius-card, 24px);
+  background: var(--surface, #fff);
+  box-shadow: 0 6px 20px rgba(38, 50, 56, 0.16);
+  font-size: clamp(3.5rem, 16vw, 6rem);
+  cursor: pointer;
+}
+
+.pt-som:focus-visible { outline: 4px solid currentColor; outline-offset: 3px; }
+
+.pt-figuras {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.pt-figura {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 96px;
+  padding: 12px;
+  border: 3px solid transparent;
+  border-radius: var(--radius-card, 24px);
+  background: var(--surface, #fff);
+  box-shadow: 0 2px 6px rgba(38, 50, 56, 0.12);
+  cursor: pointer;
+}
+
+.pt-figura img { width: 100%; max-width: 88px; height: auto; }
+.pt-figura:focus-visible { outline: 4px solid currentColor; outline-offset: 3px; }
+.pt-figura[disabled] { cursor: default; }
+
+/* Certo e errado nunca só por cor: entram borda e símbolo. */
+.pt-figura.correct { border-color: #2e7d4f; background: #e6f4ec; }
+.pt-figura.correct::after { content: "✓"; font-size: 1.5rem; color: #2e7d4f; }
+.pt-figura.incorrect { border-style: dashed; border-color: #8e2f2f; background: #fbeaea; }
+.pt-figura.incorrect::after { content: "✗"; font-size: 1.5rem; color: #8e2f2f; }
+
+.portuguese-ready {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 24px;
+  border-radius: var(--radius-card, 24px);
+  background: var(--surface, #fff);
+  box-shadow: 0 2px 6px rgba(38, 50, 56, 0.12);
+}
+
+.portuguese-ready .package-symbol { font-size: 2.5rem; }
+.portuguese-ready #portuguese-start { margin-top: 16px; }

@@ -1,7 +1,11 @@
 {
   "schemaVersion": 1,
-  "releaseId": "59c683101a944d656d0904897ea573c85651c7ef740cf9282c1a162f76c70ca3",
+  "releaseId": "b678735fc699b8eb27147c0e9dfa2a7e7dd4251889d921aeadb0f9e8d7cadf3b",
   "assets": [
+    {
+      "path": "./content/portugues/etapa-1/package.json",
+      "sha256": "416ec3c4ab54207c125e2beb3d112087247418ea41bebe496b56868732f76ac2"
+    },
     {
       "path": "./images/capybara/complete.webp",
       "sha256": "97c95a84eab6e5684fdb38d85a4d7d9696609af83c82c8da23c801f8659e0a60"
@@ -28,7 +32,7 @@
     },
     {
       "path": "./index.htm",
-      "sha256": "ca805f2b1115da6389b5045bf15c6f691fa3514979d6139c283a5c28494411da"
+      "sha256": "6d62f3e6dcd1b59fb84d023657f8092da0a4cb492f47c7f0818d7b709e69019a"
     },
     {
       "path": "./manifest.json",
@@ -36,7 +40,7 @@
     },
     {
       "path": "./src/app.js",
-      "sha256": "a4f99e1aa83cdc2e8b1c39b3ab702d48b650c226fd06d110d6a7d1337868be8b"
+      "sha256": "d1f3668cf6cf9c6e345f465dcfe5d69d7e62ebb8a7083800845deb24d1aeb166"
     },
     {
       "path": "./src/config/levels.js",
@@ -96,7 +100,15 @@
     },
     {
       "path": "./src/storage/schema-v2.js",
-      "sha256": "ef4ec35cb14cd1ef17fba038e776aedaef098c93d9d9274682b17bd0246a75eb"
+      "sha256": "eab3b833c8fb0be7f40427c1c3df2531a224c7713c5d422753e923dcb90fc3cc"
+    },
+    {
+      "path": "./src/subjects/portuguese-content.js",
+      "sha256": "8808acd568cd922c2d62de6100811b28414908e718522ccb7711da50706f6ccf"
+    },
+    {
+      "path": "./src/subjects/portuguese-session.js",
+      "sha256": "0627359470534e9d16e2339ccb35ab3fcd886c85a41123c3cbc56eb476995a9d"
     },
     {
       "path": "./src/subjects/portuguese.js",
@@ -105,6 +117,10 @@
     {
       "path": "./src/subjects/registry.js",
       "sha256": "097bc2666f60b4016ecc072ac9b277a5af2ef7b741940460b174bd001ff4a10e"
+    },
+    {
+      "path": "./src/ui/portuguese-ui.js",
+      "sha256": "3d5b398c5c741ec54260c7ac811d5b3c6a5290152e83c30762aa9cb26b18dcfa"
     },
     {
       "path": "./styles/accessibility.css",
@@ -116,7 +132,7 @@
     },
     {
       "path": "./styles/components.css",
-      "sha256": "a8e548d277d018422578b9d4f0dee71054529e16751fcc79bb580747f52095d6"
+      "sha256": "a193ddc3f7601c5ab690dacbf1907a83260291aa29e2e373b65326fc5e9cb5be"
     },
     {
       "path": "./styles/screens.css",

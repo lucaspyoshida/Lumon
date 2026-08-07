@@ -99,8 +99,11 @@ export function isValidV2State(value) {
     portuguese
     && portuguese.progressSchemaVersion === 1
     && portuguese.moduleContractVersion === 1
-    && portuguese.activeSession === null
-    && portuguese.contentStatus?.state === 'blocked-content'
+    // O estado de conteúdo deixou de ser sempre "bloqueado": a Etapa 1 tem
+    // pacote publicado. Os dois valores continuam válidos porque o aparelho
+    // da criança já tem estado salvo com "blocked-content", e recusá-lo aqui
+    // apagaria o progresso de matemática junto.
+    && ['blocked-content', 'ready'].includes(portuguese.contentStatus?.state)
     && Array.isArray(portuguese.contentStatus.reasons)
     && Array.isArray(portuguese.progress?.completedSessions)
     && Array.isArray(portuguese.progress?.reviewQueue)

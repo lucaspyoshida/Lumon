@@ -69,13 +69,25 @@
           <div id="trail" class="trail" aria-label="Cinco etapas da trilha"></div>
         </div>
 
-        <section class="portuguese-unavailable" id="portuguese-home-content" hidden aria-labelledby="portuguese-status-title">
-          <div class="package-symbol" aria-hidden="true">◌</div>
-          <div>
-            <p class="eyebrow">Etapa 1 — palavra, imagem e som</p>
-            <h2 id="portuguese-status-title">Esta missão ainda não está pronta</h2>
-            <p>Áudios em português e imagens pedagógicas precisam de aprovação antes da primeira atividade.</p>
-            <p class="safe-status"><strong>Nada será contado como erro.</strong> O Lumon não usa internet, voz automática ou conteúdo improvisado para preencher o que falta.</p>
+        <section id="portuguese-home-content" hidden aria-labelledby="portuguese-status-title">
+          <div class="portuguese-ready" id="portuguese-ready" hidden>
+            <div class="package-symbol" aria-hidden="true">🔊</div>
+            <div>
+              <p class="eyebrow">Etapa 1 — palavra, imagem e som</p>
+              <h2 id="portuguese-status-title">Ouvir e encontrar</h2>
+              <p>Escute a palavra e toque na figura certa.</p>
+              <p class="safe-status" id="portuguese-mastery"></p>
+              <button class="button button-primary" id="portuguese-start" type="button">Começar</button>
+            </div>
+          </div>
+          <div class="portuguese-unavailable" id="portuguese-blocked" hidden>
+            <div class="package-symbol" aria-hidden="true">◌</div>
+            <div>
+              <p class="eyebrow">Etapa 1 — palavra, imagem e som</p>
+              <h2>Esta missão ainda não está pronta</h2>
+              <p>O pacote de conteúdo em português não está disponível neste aparelho.</p>
+              <p class="safe-status"><strong>Nada será contado como erro.</strong> O Lumon não improvisa conteúdo para preencher o que falta.</p>
+            </div>
           </div>
         </section>
 

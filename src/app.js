@@ -21,6 +21,10 @@ import {
   saveV2State,
 } from './storage/repository-v2.js';
 import { activateWaitingWorker, registerPwa } from './pwa/registration.js';
+import { AudioController } from './media/audio-controller.js';
+import { loadPortugueseContent } from './subjects/portuguese-content.js';
+import { evaluatePortugueseMastery } from './subjects/portuguese.js';
+import { createPortugueseUi } from './ui/portuguese-ui.js';
 
 const elements = Object.fromEntries([
   'home-screen', 'activity-screen', 'result-screen', 'home-button', 'trail', 'continue-card',
@@ -33,7 +37,8 @@ const elements = Object.fromEntries([
   'reset-button', 'reset-dialog', 'confirm-reset', 'cancel-reset', 'screen-announcer',
   'update-banner', 'dismiss-update', 'update-button', 'subject-mathematics',
   'subject-portuguese', 'math-home-content', 'portuguese-home-content', 'home-title',
-  'caregiver-gate-progress',
+  'caregiver-gate-progress', 'portuguese-ready', 'portuguese-blocked', 'portuguese-mastery',
+  'portuguese-start',
 ].map((id) => [id, document.getElementById(id)]));
 
 let state = await loadV2State();
@@ -45,6 +50,34 @@ let caregiverStartedAt = 0;
 let persistenceQueue = Promise.resolve();
 
 const mathematicsState = () => state.subjects.matematica;
+const portugueseState = () => state.subjects.portugues;
+
+const portugueseAudio = new AudioController();
+const portugueseUi = createPortugueseUi({
+  elements,
+  audio: portugueseAudio,
+  showScreen,
+  onExit: () => renderHome(),
+  getSessionLength: () => state.preferences.sessionLength,
+  async persistSession(sessao) {
+    const progresso = portugueseState().progress;
+    progresso.completedSessions = [...progresso.completedSessions, {
+      skillId: sessao.skillId,
+      completed: true,
+      source: 'lumon',
+      startedAt: sessao.startedAt,
+      finishedAt: sessao.finishedAt,
+      packageVersion: sessao.packageVersion,
+      contentVersion: sessao.contentVersion,
+      attempts: sessao.attempts,
+    }].slice(-20);
+    progresso.skillMastery[sessao.skillId] = evaluatePortugueseMastery(
+      progresso.completedSessions,
+      sessao.skillId,
+    );
+    await persist();
+  },
+});
 
 function persist() {
   persistenceQueue = persistenceQueue.then(async () => {
@@ -180,7 +213,18 @@ function renderHome() {
   elements['portuguese-home-content'].hidden = isMathematics;
   elements['home-title'].textContent = isMathematics ? 'Trilha de matemática' : 'Trilha de Português';
   if (!isMathematics) {
-    showScreen('home-screen', 'Trilha de Português. Conteúdo ainda não disponível.');
+    const pronto = portugueseState().contentStatus?.state === 'ready';
+    elements['portuguese-ready'].hidden = !pronto;
+    elements['portuguese-blocked'].hidden = pronto;
+    if (pronto) {
+      const dominio = portugueseState().progress.skillMastery['P1.oral-vocabulary'];
+      elements['portuguese-mastery'].textContent = dominio?.mastered
+        ? 'Etapa dominada. Dá para praticar de novo quando quiser.'
+        : `Praticado ${dominio?.completedSessions ?? 0} de 3 vezes seguidas.`;
+    }
+    showScreen('home-screen', pronto
+      ? 'Trilha de Português. Ouvir e encontrar disponível.'
+      : 'Trilha de Português. Conteúdo ainda não disponível.');
     return;
   }
   renderTrail();
@@ -674,8 +718,17 @@ elements['review-button'].addEventListener('click', () => {
   const [review] = getSkillsNeedingReview(mathematicsState().progress);
   if (review) void startSession(review.skillId, { reviewItems: review.items });
 });
-elements['exit-session'].addEventListener('click', async () => { await abandonActiveSession(); renderHome(); });
+elements['portuguese-start'].addEventListener('click', () => {
+  const concluidas = portugueseState().progress.completedSessions.length;
+  portugueseUi.comecar(concluidas);
+});
+elements['exit-session'].addEventListener('click', async () => {
+  if (portugueseUi.emSessao()) return void portugueseUi.sair();
+  await abandonActiveSession();
+  renderHome();
+});
 elements['next-question'].addEventListener('click', async () => {
+  if (portugueseUi.emSessao()) return void portugueseUi.proxima();
   if (!mathematicsState().activeSession) return;
   if (mathematicsState().activeSession.currentIndex === mathematicsState().activeSession.questions.length - 1) await finishSession();
   else {
@@ -755,6 +808,18 @@ navigator.serviceWorker?.addEventListener('controllerchange', () => {
 
 setPreferences();
 renderHome();
+
+// O estado de conteúdo é resolvido a cada abertura, nunca confiando só no
+// que está salvo: se o pacote sumir ou for despublicado, a etapa volta a
+// ficar bloqueada em vez de tentar tocar áudio que não existe mais.
+loadPortugueseContent().then(async ({ contentStatus, pacote }) => {
+  portugueseUi.setPacote(pacote);
+  const anterior = portugueseState().contentStatus?.state;
+  portugueseState().contentStatus = contentStatus;
+  if (anterior !== contentStatus.state) await persist();
+  if (state.profile.currentSubjectId === 'portugues') renderHome();
+});
+
 registerPwa({
   onUpdate(registration) {
     lastRegistration = registration;

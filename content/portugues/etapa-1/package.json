@@ -1,0 +1,800 @@
+{
+  "packageId": "portugues-etapa-1",
+  "packageVersion": "1.0.0",
+  "contentVersion": "pt-e1-v1",
+  "stageId": "palavra-imagem-som",
+  "audioBasePath": "audio/pt",
+  "voice": {
+    "engine": "kokoro-v1.0",
+    "voice": "pf_dora",
+    "language": "pt-BR",
+    "origin": "sintetizado",
+    "license": "Apache-2.0"
+  },
+  "images": {
+    "source": "Noto Emoji",
+    "license": "Apache-2.0",
+    "url": "https://github.com/googlefonts/noto-emoji"
+  },
+  "ui": {
+    "instrucao": "ui/instrucao",
+    "repetir": "ui/repetir",
+    "celebrate-1": "ui/celebrate-1",
+    "celebrate-2": "ui/celebrate-2",
+    "celebrate-3": "ui/celebrate-3",
+    "retry-1": "ui/retry-1",
+    "retry-2": "ui/retry-2",
+    "hint": "ui/hint",
+    "fim": "ui/fim"
+  },
+  "items": [
+    {
+      "id": "P1-oral-bola",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "core",
+      "word": "bola",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/bola"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "bola",
+            "image": "images/pt/bola.png",
+            "label": "bola"
+          },
+          {
+            "id": "casa",
+            "image": "images/pt/casa.png",
+            "label": "casa"
+          },
+          {
+            "id": "luva",
+            "image": "images/pt/luva.png",
+            "label": "luva"
+          }
+        ]
+      },
+      "answer": "bola"
+    },
+    {
+      "id": "P1-oral-pato",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "core",
+      "word": "pato",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/pato"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "coco",
+            "image": "images/pt/coco.png",
+            "label": "coco"
+          },
+          {
+            "id": "fada",
+            "image": "images/pt/fada.png",
+            "label": "fada"
+          },
+          {
+            "id": "pato",
+            "image": "images/pt/pato.png",
+            "label": "pato"
+          }
+        ]
+      },
+      "answer": "pato"
+    },
+    {
+      "id": "P1-oral-gato",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "core",
+      "word": "gato",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/gato"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "copo",
+            "image": "images/pt/copo.png",
+            "label": "copo"
+          },
+          {
+            "id": "foca",
+            "image": "images/pt/foca.png",
+            "label": "foca"
+          },
+          {
+            "id": "gato",
+            "image": "images/pt/gato.png",
+            "label": "gato"
+          }
+        ]
+      },
+      "answer": "gato"
+    },
+    {
+      "id": "P1-oral-sapo",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "core",
+      "word": "sapo",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/sapo"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "dado",
+            "image": "images/pt/dado.png",
+            "label": "dado"
+          },
+          {
+            "id": "rato",
+            "image": "images/pt/rato.png",
+            "label": "rato"
+          },
+          {
+            "id": "sapo",
+            "image": "images/pt/sapo.png",
+            "label": "sapo"
+          }
+        ]
+      },
+      "answer": "sapo"
+    },
+    {
+      "id": "P1-oral-vaca",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "core",
+      "word": "vaca",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/vaca"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "mala",
+            "image": "images/pt/mala.png",
+            "label": "mala"
+          },
+          {
+            "id": "rosa",
+            "image": "images/pt/rosa.png",
+            "label": "rosa"
+          },
+          {
+            "id": "vaca",
+            "image": "images/pt/vaca.png",
+            "label": "vaca"
+          }
+        ]
+      },
+      "answer": "vaca"
+    },
+    {
+      "id": "P1-oral-luva",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "core",
+      "word": "luva",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/luva"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "cama",
+            "image": "images/pt/cama.png",
+            "label": "cama"
+          },
+          {
+            "id": "chave",
+            "image": "images/pt/chave.png",
+            "label": "chave"
+          },
+          {
+            "id": "luva",
+            "image": "images/pt/luva.png",
+            "label": "luva"
+          }
+        ]
+      },
+      "answer": "luva"
+    },
+    {
+      "id": "P1-oral-fada",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "core",
+      "word": "fada",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/fada"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "casa",
+            "image": "images/pt/casa.png",
+            "label": "casa"
+          },
+          {
+            "id": "fada",
+            "image": "images/pt/fada.png",
+            "label": "fada"
+          },
+          {
+            "id": "lua",
+            "image": "images/pt/lua.png",
+            "label": "lua"
+          }
+        ]
+      },
+      "answer": "fada"
+    },
+    {
+      "id": "P1-oral-foca",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "core",
+      "word": "foca",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/foca"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "bota",
+            "image": "images/pt/bota.png",
+            "label": "bota"
+          },
+          {
+            "id": "coco",
+            "image": "images/pt/coco.png",
+            "label": "coco"
+          },
+          {
+            "id": "foca",
+            "image": "images/pt/foca.png",
+            "label": "foca"
+          }
+        ]
+      },
+      "answer": "foca"
+    },
+    {
+      "id": "P1-oral-dado",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "core",
+      "word": "dado",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/dado"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "copo",
+            "image": "images/pt/copo.png",
+            "label": "copo"
+          },
+          {
+            "id": "dado",
+            "image": "images/pt/dado.png",
+            "label": "dado"
+          },
+          {
+            "id": "sino",
+            "image": "images/pt/sino.png",
+            "label": "sino"
+          }
+        ]
+      },
+      "answer": "dado"
+    },
+    {
+      "id": "P1-oral-mala",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "core",
+      "word": "mala",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/mala"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "mala",
+            "image": "images/pt/mala.png",
+            "label": "mala"
+          },
+          {
+            "id": "rato",
+            "image": "images/pt/rato.png",
+            "label": "rato"
+          },
+          {
+            "id": "uva",
+            "image": "images/pt/uva.png",
+            "label": "uva"
+          }
+        ]
+      },
+      "answer": "mala"
+    },
+    {
+      "id": "P1-oral-cama",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "core",
+      "word": "cama",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/cama"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "cama",
+            "image": "images/pt/cama.png",
+            "label": "cama"
+          },
+          {
+            "id": "pipa",
+            "image": "images/pt/pipa.png",
+            "label": "pipa"
+          },
+          {
+            "id": "rosa",
+            "image": "images/pt/rosa.png",
+            "label": "rosa"
+          }
+        ]
+      },
+      "answer": "cama"
+    },
+    {
+      "id": "P1-oral-casa",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "core",
+      "word": "casa",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/casa"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "bolo",
+            "image": "images/pt/bolo.png",
+            "label": "bolo"
+          },
+          {
+            "id": "casa",
+            "image": "images/pt/casa.png",
+            "label": "casa"
+          },
+          {
+            "id": "chave",
+            "image": "images/pt/chave.png",
+            "label": "chave"
+          }
+        ]
+      },
+      "answer": "casa"
+    },
+    {
+      "id": "P1-oral-coco",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "core",
+      "word": "coco",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/coco"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "coco",
+            "image": "images/pt/coco.png",
+            "label": "coco"
+          },
+          {
+            "id": "lua",
+            "image": "images/pt/lua.png",
+            "label": "lua"
+          },
+          {
+            "id": "peixe",
+            "image": "images/pt/peixe.png",
+            "label": "peixe"
+          }
+        ]
+      },
+      "answer": "coco"
+    },
+    {
+      "id": "P1-oral-copo",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "core",
+      "word": "copo",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/copo"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "bola",
+            "image": "images/pt/bola.png",
+            "label": "bola"
+          },
+          {
+            "id": "bota",
+            "image": "images/pt/bota.png",
+            "label": "bota"
+          },
+          {
+            "id": "copo",
+            "image": "images/pt/copo.png",
+            "label": "copo"
+          }
+        ]
+      },
+      "answer": "copo"
+    },
+    {
+      "id": "P1-oral-rato",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "core",
+      "word": "rato",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/rato"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "pato",
+            "image": "images/pt/pato.png",
+            "label": "pato"
+          },
+          {
+            "id": "rato",
+            "image": "images/pt/rato.png",
+            "label": "rato"
+          },
+          {
+            "id": "sino",
+            "image": "images/pt/sino.png",
+            "label": "sino"
+          }
+        ]
+      },
+      "answer": "rato"
+    },
+    {
+      "id": "P1-oral-rosa",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "core",
+      "word": "rosa",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/rosa"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "gato",
+            "image": "images/pt/gato.png",
+            "label": "gato"
+          },
+          {
+            "id": "rosa",
+            "image": "images/pt/rosa.png",
+            "label": "rosa"
+          },
+          {
+            "id": "uva",
+            "image": "images/pt/uva.png",
+            "label": "uva"
+          }
+        ]
+      },
+      "answer": "rosa"
+    },
+    {
+      "id": "P1-oral-chave",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "transfer-candidate",
+      "word": "chave",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/chave"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "chave",
+            "image": "images/pt/chave.png",
+            "label": "chave"
+          },
+          {
+            "id": "pipa",
+            "image": "images/pt/pipa.png",
+            "label": "pipa"
+          },
+          {
+            "id": "sapo",
+            "image": "images/pt/sapo.png",
+            "label": "sapo"
+          }
+        ]
+      },
+      "answer": "chave"
+    },
+    {
+      "id": "P1-oral-lua",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "transfer-candidate",
+      "word": "lua",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/lua"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "bolo",
+            "image": "images/pt/bolo.png",
+            "label": "bolo"
+          },
+          {
+            "id": "lua",
+            "image": "images/pt/lua.png",
+            "label": "lua"
+          },
+          {
+            "id": "vaca",
+            "image": "images/pt/vaca.png",
+            "label": "vaca"
+          }
+        ]
+      },
+      "answer": "lua"
+    },
+    {
+      "id": "P1-oral-bota",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "transfer-candidate",
+      "word": "bota",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/bota"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "bota",
+            "image": "images/pt/bota.png",
+            "label": "bota"
+          },
+          {
+            "id": "luva",
+            "image": "images/pt/luva.png",
+            "label": "luva"
+          },
+          {
+            "id": "peixe",
+            "image": "images/pt/peixe.png",
+            "label": "peixe"
+          }
+        ]
+      },
+      "answer": "bota"
+    },
+    {
+      "id": "P1-oral-sino",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "transfer-candidate",
+      "word": "sino",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/sino"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "bola",
+            "image": "images/pt/bola.png",
+            "label": "bola"
+          },
+          {
+            "id": "fada",
+            "image": "images/pt/fada.png",
+            "label": "fada"
+          },
+          {
+            "id": "sino",
+            "image": "images/pt/sino.png",
+            "label": "sino"
+          }
+        ]
+      },
+      "answer": "sino"
+    },
+    {
+      "id": "P1-oral-uva",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "transfer-candidate",
+      "word": "uva",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/uva"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "foca",
+            "image": "images/pt/foca.png",
+            "label": "foca"
+          },
+          {
+            "id": "pato",
+            "image": "images/pt/pato.png",
+            "label": "pato"
+          },
+          {
+            "id": "uva",
+            "image": "images/pt/uva.png",
+            "label": "uva"
+          }
+        ]
+      },
+      "answer": "uva"
+    },
+    {
+      "id": "P1-oral-pipa",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "transfer-candidate",
+      "word": "pipa",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/pipa"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "dado",
+            "image": "images/pt/dado.png",
+            "label": "dado"
+          },
+          {
+            "id": "gato",
+            "image": "images/pt/gato.png",
+            "label": "gato"
+          },
+          {
+            "id": "pipa",
+            "image": "images/pt/pipa.png",
+            "label": "pipa"
+          }
+        ]
+      },
+      "answer": "pipa"
+    },
+    {
+      "id": "P1-oral-bolo",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "transfer-candidate",
+      "word": "bolo",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/bolo"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "bolo",
+            "image": "images/pt/bolo.png",
+            "label": "bolo"
+          },
+          {
+            "id": "mala",
+            "image": "images/pt/mala.png",
+            "label": "mala"
+          },
+          {
+            "id": "sapo",
+            "image": "images/pt/sapo.png",
+            "label": "sapo"
+          }
+        ]
+      },
+      "answer": "bolo"
+    },
+    {
+      "id": "P1-oral-peixe",
+      "skillId": "P1.oral-vocabulary",
+      "approvalState": "approved",
+      "transferRole": "transfer-candidate",
+      "word": "peixe",
+      "prompt": {
+        "type": "audio",
+        "audioId": "palavra/peixe"
+      },
+      "response": {
+        "type": "choice",
+        "options": [
+          {
+            "id": "cama",
+            "image": "images/pt/cama.png",
+            "label": "cama"
+          },
+          {
+            "id": "peixe",
+            "image": "images/pt/peixe.png",
+            "label": "peixe"
+          },
+          {
+            "id": "vaca",
+            "image": "images/pt/vaca.png",
+            "label": "vaca"
+          }
+        ]
+      },
+      "answer": "peixe"
+    }
+  ]
+}

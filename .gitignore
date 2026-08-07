@@ -3,3 +3,6 @@ test-results/
 playwright-report/
 .DS_Store
 .reversa/config.user.toml
+
+# Modelo de voz do Kokoro (~350 MB), baixado sob demanda pelo build de conteúdo.
+.models/

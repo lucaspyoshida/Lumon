@@ -29,5 +29,9 @@ export const NORMATIVE_SHELL_FILES = Object.freeze([
   'src/subjects/registry.js',
   'src/media/audio-controller.js',
   'src/pwa/registration.js',
+  'src/subjects/portuguese-content.js',
+  'src/subjects/portuguese-session.js',
+  'src/ui/portuguese-ui.js',
+  'content/portugues/etapa-1/package.json',
   'src/pwa/release-integrity.js',
 ].sort());
